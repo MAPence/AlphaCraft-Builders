@@ -1,0 +1,36 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.alpha-form {
+
+    background-color: #04364A;
+    border-radius: 20px;
+    padding: 30px;
+    color: white;
+    font-weight: 500;
+}
+
+.form-btn {
+    width: 100%;
+}
+
+#nav-custom {
+    background-color: #04364A;
+    /*display: none;*/
+}
