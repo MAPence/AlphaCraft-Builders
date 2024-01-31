@@ -19,17 +19,36 @@ namespace ACB.Controllers
             builder.AddJsonFile("appsettings.json");
             var configuration = builder.Build();
 
-            
             var connString = configuration.GetConnectionString("alphacraftdb");
-
-            
 
             return connString;
 
-
         }
-        
-     
+
+        public static List<string> PopulateDropDown(string table, int column)
+        {
+            // new list that will be retunred for drop down menu
+            List<string> list = new List<string>();
+
+            // query table for values to populate list using column and table parameters
+            SqlConnection sqlconn = new SqlConnection(conn);
+            string sqlquery = $"select * from {table}";
+            SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
+            sqlconn.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter(sqlcomm);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                // add value to list
+                list.Add(dt.Rows[i][column].ToString()!);
+
+            }
+            sqlconn.Close();
+            return list;
+        }
+
+
 
         public static void Insert(string insertQuery)
         {

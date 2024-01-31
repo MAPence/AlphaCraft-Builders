@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\timeg\\ACB\\ACB.csproj": {}
+    "C:\\Users\\timeg\\AlphaCraft-Builders\\ACB\\ACB.csproj": {}
   },
   "projects": {
-    "C:\\Users\\timeg\\ACB\\ACB.csproj": {
+    "C:\\Users\\timeg\\AlphaCraft-Builders\\ACB\\ACB.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\timeg\\ACB\\ACB.csproj",
+        "projectUniqueName": "C:\\Users\\timeg\\AlphaCraft-Builders\\ACB\\ACB.csproj",
         "projectName": "ACB",
-        "projectPath": "C:\\Users\\timeg\\ACB\\ACB.csproj",
+        "projectPath": "C:\\Users\\timeg\\AlphaCraft-Builders\\ACB\\ACB.csproj",
         "packagesPath": "C:\\Users\\timeg\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\timeg\\ACB\\obj\\",
+        "outputPath": "C:\\Users\\timeg\\AlphaCraft-Builders\\ACB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

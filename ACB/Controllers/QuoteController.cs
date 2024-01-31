@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ACB.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ACB.Controllers
 {
@@ -7,6 +8,7 @@ namespace ACB.Controllers
     {
         public IActionResult QuoteForm()
         {
+            ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
             return View();
         }
 
