@@ -11,15 +11,20 @@ namespace ACB.Controllers
 {
     public static class Query
     {
-        private static string conn = "Server=tcp:pruv.database.windows.net,1433;Initial Catalog=AlphaCraftDB;Persist Security Info=False;User ID=CloudSAb0e3e238;Password=alphaCraft24;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        
         public static string GetConnectionString()
         {
-            var builder = new ConfigurationBuilder();
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.Development.json", optional: false);
 
-            builder.AddJsonFile("appsettings.json");
-            var configuration = builder.Build();
+            
+            IConfiguration configuration = builder.Build();
+
+            
 
             var connString = configuration.GetConnectionString("alphacraftdb");
+
+            System.Diagnostics.Debug.WriteLine("HELLLOOOOOO!!!!" + connString);
 
             return connString;
 
@@ -31,7 +36,7 @@ namespace ACB.Controllers
             List<string> list = new List<string>();
 
             // query table for values to populate list using column and table parameters
-            SqlConnection sqlconn = new SqlConnection(conn);
+            SqlConnection sqlconn = new SqlConnection(GetConnectionString());
             string sqlquery = $"select * from {table}";
             SqlCommand sqlcomm = new SqlCommand(sqlquery, sqlconn);
             sqlconn.Open();
@@ -52,9 +57,9 @@ namespace ACB.Controllers
 
         public static void Insert(string insertQuery)
         {
-            System.Diagnostics.Debug.WriteLine(GetConnectionString());
+            
 
-            SqlConnection sqlconn = new SqlConnection(conn);
+            SqlConnection sqlconn = new SqlConnection(GetConnectionString());
             SqlCommand sqlquery = new SqlCommand(insertQuery, sqlconn);
             sqlconn.Open();
             sqlquery.ExecuteNonQuery();
