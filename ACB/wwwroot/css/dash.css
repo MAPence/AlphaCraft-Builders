@@ -6,12 +6,19 @@
     #side-btn:hover {
         background-color: #04364A;
         color: white;
+        border: none;
+    }
+
+    #side-btn:focus{
+        border: none;
     }
 
 .side-menu {
     background-color: #176B87;
     height: 100vh;
     z-index: 1;
+    border: none;
+    transition: 0.5s;
 }
 
 .dense {
@@ -75,6 +82,22 @@
     border-top: 1px solid lightgrey;
 }
 
+#contractor-name {
+    font-size: 1.5rem;
+    transition: 1.0s;
+
+}
+
+.sb-list-item{
+    font-size: 2rem;
+    transition: 1.0s;
+}
+
+.sb-list-item * {
+    font-size: 1.5rem;
+    color: white;
+    margin-left: 10px;
+}
 
 
 .table-w {
@@ -113,4 +136,17 @@
 
 .q-photo {
     height: 45vh;
+}
+
+.close {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#close-menu {
+    height: 25px;
+    width: 25px;
+    transition: 0.6s;
+    border: none;
+    background-color: #176B87;
 }

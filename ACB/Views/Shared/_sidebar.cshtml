@@ -54,7 +54,7 @@
 
     <div class="container-fluid ">
 
-        <div class="menu-box row container-fluid over-lay">
+        <div class=" row over-lay">
 
             <div class=" col-1 dense ">
 
@@ -132,11 +132,13 @@
                             </div>
                         </li>
 
+                        <button onclick="closeNav()">X</button>
+
                     </ul>
 
                 </div>
 
-                <button class="btn btn-toggle d-inline-flex align-items-center border-0 collapsed menu-txt col-1 side-menu" id="side-btn" data-bs-toggle="collapse" data-bs-target="#sb-dash" aria-expanded="true">
+                <button class="btn btn-toggle d-inline-flex align-items-center border-0 collapsed menu-txt col-1 side-menu" id="side-btn" @* data-bs-toggle="collapse" *@ onclick="openNav()" data-bs-target="#sb-dash" aria-expanded="true">
                     |||
                 </button>
 
@@ -171,6 +173,23 @@
             &copy; 2024 - ACB - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <script>
+        function openNav() {
+            document.getElementById("sb-dash").style.width = "280px";
+            document.getElementById("sb-dash").style.display = "block";
+            document.getElementById("side-btn").style.width = "30px";
+        }
+        function closeNav() {
+            document.getElementById("sb-dash").style.width = "0px";
+            var width = document.getElementById('sb-dash').width;
+            while (width > 0) {
+                width -= .0001;
+            }
+            document.getElementById("sb-dash").style.display = "none";
+        }
+    </script>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
