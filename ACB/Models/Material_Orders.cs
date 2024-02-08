@@ -7,6 +7,5 @@
         public int? case_id { get; set; }
         public int? total { get; set; }
         public DateTime? created { get; set; }
-     
     }
 }
