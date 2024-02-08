@@ -39,11 +39,12 @@ The following instructions explain how to set up a development environment to de
 ## License
 
 This project is licensed under the MIT license. See [LICENSE](LICENSE) for more information.
+Commercial or Propreitary
 
 ## Contributors
 
 - [Garrett Effers](https://github.com/Gamesshadow)
-- [Morgen Pence](https://github.com/MAPence))
+- [Morgen Pence](https://github.com/MAPence)
 - [Tim Eggenberger](https://github.com/Teggenberg)
 
 ## Project Status  
