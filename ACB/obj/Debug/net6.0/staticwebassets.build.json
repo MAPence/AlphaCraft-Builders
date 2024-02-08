@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "r4SJhlkCBLbG9qWj80dC7PSTIbrnhWoFE8ZsJQFe/X4=",
+  "Hash": "UtZUIDVe++RI/Mufb9U1GhORJQrttfH1ogsVyv2mVmc=",
   "Source": "ACB",
   "BasePath": "_content/ACB",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\timeg\\AlphaCraft-Builders\\ACB\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\ACB.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\timeg\\AlphaCraft-Builders\\ACB\\wwwroot\\css\\dash.css",
+      "SourceId": "ACB",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\timeg\\AlphaCraft-Builders\\ACB\\wwwroot\\",
+      "BasePath": "_content/ACB",
+      "RelativePath": "css/dash.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\dash.css"
     },
     {
       "Identity": "C:\\Users\\timeg\\AlphaCraft-Builders\\ACB\\wwwroot\\css\\home.css",
