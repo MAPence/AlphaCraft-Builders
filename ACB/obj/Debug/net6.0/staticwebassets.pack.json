@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\ACB.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\timeg\\AlphaCraft-Builders\\ACB\\wwwroot\\css\\dash.css",
+      "PackagePath": "staticwebassets\\css\\dash.css"
+    },
+    {
       "Id": "C:\\Users\\timeg\\AlphaCraft-Builders\\ACB\\wwwroot\\css\\home.css",
       "PackagePath": "staticwebassets\\css\\home.css"
     },
