@@ -84,13 +84,13 @@
 
 #contractor-name {
     font-size: 1.5rem;
-    transition: 1.0s;
+    transition: 0.6s;
 
 }
 
 .sb-list-item{
     font-size: 2rem;
-    transition: 1.0s;
+    transition: 0.6s;
 }
 
 .sb-list-item * {
