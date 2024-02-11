@@ -53,4 +53,4 @@ This project is currently in development and expected to have an official 1.0.0 
 
 ## Support
 
-For support, please open an issue on the GitHub repository or send an email to support@project.com
+For support, please open an issue on the GitHub repository or send an email to alphacraftbuilders@gmail.com.
