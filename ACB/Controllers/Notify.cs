@@ -19,6 +19,8 @@ namespace ACB.Controllers
 
             return password;
 
+            
+
         }
 
         public static void QuoteSuccessful(Quote quote)
