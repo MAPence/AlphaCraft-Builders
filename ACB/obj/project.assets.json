@@ -11405,7 +11405,10 @@
       "Microsoft.AspNet.Identity.EntityFramework >= 2.2.4",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 6.0.26",
       "Microsoft.AspNetCore.Identity.UI >= 6.0.26",
+<<<<<<< HEAD
       "Microsoft.EntityFrameworkCore >= 6.0.26",
+=======
+>>>>>>> 574eabdc8752e65c20a770993ee86971bfa3dd61
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.26",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.26",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.16",
@@ -11413,34 +11416,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\timeg\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
-    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\effer\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\timeg\\AlphaCraft-Builders\\ACB\\ACB.csproj",
+      "projectUniqueName": "C:\\Users\\effer\\Source\\Repos\\AlphaCraft-Builders\\ACB\\ACB.csproj",
       "projectName": "ACB",
-      "projectPath": "C:\\Users\\timeg\\AlphaCraft-Builders\\ACB\\ACB.csproj",
-      "packagesPath": "C:\\Users\\timeg\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\timeg\\AlphaCraft-Builders\\ACB\\obj\\",
+      "projectPath": "C:\\Users\\effer\\Source\\Repos\\AlphaCraft-Builders\\ACB\\ACB.csproj",
+      "packagesPath": "C:\\Users\\effer\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\effer\\Source\\Repos\\AlphaCraft-Builders\\ACB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
-        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\timeg\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\effer\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -11471,10 +11472,13 @@
             "target": "Package",
             "version": "[6.0.26, )"
           },
+<<<<<<< HEAD
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[6.0.26, )"
           },
+=======
+>>>>>>> 574eabdc8752e65c20a770993ee86971bfa3dd61
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
             "version": "[6.0.26, )"

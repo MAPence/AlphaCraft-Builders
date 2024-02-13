@@ -11,7 +11,10 @@
           "Microsoft.AspNet.Identity.EntityFramework": "2.2.4",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.26",
           "Microsoft.AspNetCore.Identity.UI": "6.0.26",
+<<<<<<< HEAD
           "Microsoft.EntityFrameworkCore": "6.0.26",
+=======
+>>>>>>> 574eabdc8752e65c20a770993ee86971bfa3dd61
           "Microsoft.EntityFrameworkCore.SqlServer": "6.0.26",
           "Microsoft.EntityFrameworkCore.Tools": "6.0.26",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.16",
