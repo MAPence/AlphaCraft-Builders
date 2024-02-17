@@ -20,6 +20,11 @@
             margin-top: 20px;
         }
 
+        .center-form {
+            display: flex;
+            justify-content: center;
+        }
+
         .contact-form input[type="text"],
         .contact-form input[type="email"],
         .contact-form textarea {
@@ -46,29 +51,37 @@
     </style>
     </head>
 <body class="cu-bg">
-    <div class="container">
+    <div class="container ">
+        <div class="center-form">
+
+            <section class="contact-form alpha-form col-10">
+                <h2>Contact Us</h2>
+                <form action="#" method="POST">
+                    <input type="text" name="name" placeholder="Your Name" required><br>
+                    <input type="email" name="email" placeholder="Your Email" required><br>
+                    <textarea name="message" placeholder="Your Message" rows="4" required></textarea><br>
+                    <input type="submit" value="Send Message">
+                </form>
+            </section>
+
+        </div>
+        <div class="center-form">
+
+            <section id="about" class="my-5 col-10">
+                <h1>About Us</h1>
+                <p>
+                    AlphaCraft Builders was conceived with a singular purpose – to empower construction professionals and businesses with a transformative tool that redefines the landscape of construction management. Our purpose is rooted in the recognition of the challenges faced by industry experts, from the complexity of project coordination to the fragmentation of essential tasks across various tools. AlphaCraft Builders seeks to streamline and consolidate these processes, offering a comprehensive platform that unifies order management, scheduling, lead generation, CRM, HR, payroll, and more.
+                </p>
+                <p>
+                    At the core of our purpose is the commitment to efficiency and innovation in construction operations. We aim to simplify the intricate workflows of construction projects, enabling professionals to focus on what they do best – building. By providing an all-encompassing solution, AlphaCraft Builders endeavors to elevate the construction industry by fostering collaboration, enhancing communication, and ultimately driving success for every project, whether big or small.
+                </p>
+                <p>
+                    Beyond functionality, our purpose extends to creating a community where contractors and users can connect seamlessly, fostering a collaborative ecosystem. AlphaCraft Builders is not just a tool; it's a catalyst for positive change, a driving force behind the modernization of construction practices, and a testament to our dedication to advancing the construction industry into a new era of efficiency, innovation, and excellence.
+                </p>
+            </section>
+
+        </div>
         
-        <section class="contact-form alpha-form">
-            <h2>Contact Us</h2>
-            <form action="#" method="POST">
-                <input type="text" name="name" placeholder="Your Name" required><br>
-                <input type="email" name="email" placeholder="Your Email" required><br>
-                <textarea name="message" placeholder="Your Message" rows="4" required></textarea><br>
-                <input type="submit" value="Send Message">
-            </form>
-        </section>
-        <section id="about" class="my-5">
-            <h1>About Us</h1>
-            <p>
-                AlphaCraft Builders was conceived with a singular purpose – to empower construction professionals and businesses with a transformative tool that redefines the landscape of construction management. Our purpose is rooted in the recognition of the challenges faced by industry experts, from the complexity of project coordination to the fragmentation of essential tasks across various tools. AlphaCraft Builders seeks to streamline and consolidate these processes, offering a comprehensive platform that unifies order management, scheduling, lead generation, CRM, HR, payroll, and more.
-            </p>
-            <p>
-                At the core of our purpose is the commitment to efficiency and innovation in construction operations. We aim to simplify the intricate workflows of construction projects, enabling professionals to focus on what they do best – building. By providing an all-encompassing solution, AlphaCraft Builders endeavors to elevate the construction industry by fostering collaboration, enhancing communication, and ultimately driving success for every project, whether big or small.
-            </p>
-            <p>
-                Beyond functionality, our purpose extends to creating a community where contractors and users can connect seamlessly, fostering a collaborative ecosystem. AlphaCraft Builders is not just a tool; it's a catalyst for positive change, a driving force behind the modernization of construction practices, and a testament to our dedication to advancing the construction industry into a new era of efficiency, innovation, and excellence.
-            </p>
-        </section>
     </div>
 </body>
 </html>
