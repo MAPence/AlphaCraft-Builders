@@ -18,9 +18,10 @@ namespace ACB.Controllers
             ([Bind("client_first_name,client_last_name,client_email,details,zip")] Quote quote)
         {
             Query.NewQuote(quote);
+            Notify.QuoteSuccessful(quote);
 
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
-            return View("QuoteForm");
+            return View("../Home/Index");
         }
     }
 }

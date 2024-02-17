@@ -22,7 +22,7 @@ namespace ACB.Controllers
 
             
 
-            var connString = configuration.GetConnectionString("alphacraftdb");
+            var connString = configuration.GetConnectionString("InterserverSQL");
 
             System.Diagnostics.Debug.WriteLine("HELLLOOOOOO!!!!" + connString);
 

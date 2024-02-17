@@ -1,0 +1,152 @@
+﻿#side-btn {
+    width: 30px;
+    border-radius: 0px;
+}
+
+    #side-btn:hover {
+        background-color: #04364A;
+        color: white;
+        border: none;
+    }
+
+    #side-btn:focus{
+        border: none;
+    }
+
+.side-menu {
+    background-color: #176B87;
+    height: 100vh;
+    z-index: 1;
+    border: none;
+    transition: 0.5s;
+}
+
+.dense {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: -25px;
+}
+
+.menu-txt {
+    color: #DAFFFB;
+}
+
+.over-lay {
+    z-index: 1;
+}
+
+.p-value {
+    background-color: white;
+    border-top: 2px solid lightgray;
+    border-right: 3px solid #04364A;
+    color: black;
+    text-align: left;
+    padding-left: 20pt;
+    font-size: 1.4rem;
+}
+
+.p-section {
+    text-align: right;
+    font-size: 1.4rem;
+}
+
+.p-bottom {
+    /* height: 15px; */
+    border-bottom: 5px solid #04364A;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.dash-table {
+}
+
+.dash-header {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background-color: #04364A;
+    color: white;
+    /* padding: 5px; */
+    text-align: center;
+    font-size: 2rem;
+    width: 80vw;
+}
+
+.dash-row {
+    border: 2px solid #04364A;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    width: 80vw;
+}
+
+.line {
+    border-top: 1px solid lightgrey;
+}
+
+#contractor-name {
+    font-size: 1.5rem;
+    transition: 0.6s;
+
+}
+
+.sb-list-item{
+    font-size: 2rem;
+    transition: 0.6s;
+}
+
+.sb-list-item * {
+    font-size: 1.5rem;
+    color: white;
+    margin-left: 10px;
+}
+
+
+.table-w {
+    width: 70vw;
+}
+
+.filter-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 2px solid #04364A;
+    border-radius: 10px;
+    padding: 20px;
+    width: 80vw;
+}
+
+.new-val {
+    z-index: 1;
+}
+
+.lowes-button {
+    margin-top: 30px;
+    font-size: 3rem;
+    border-radius: 10px;
+    background-color: #04364A;
+}
+
+.lowes {
+    height: 80px;
+}
+
+.or {
+    text-align: center;
+    font-size: 2rem;
+}
+
+.q-photo {
+    height: 45vh;
+}
+
+.close {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#close-menu {
+    height: 25px;
+    width: 25px;
+    transition: 0.6s;
+    border: none;
+    background-color: #176B87;
+}
