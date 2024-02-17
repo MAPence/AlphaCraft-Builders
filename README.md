@@ -1,7 +1,5 @@
 # AlphaCraft Builders
 
-Introduction paragraph - 1-2 sentences on what the project is and why it is useful.
-
 AlphaCraft Builders was conceived with a singular purpose – to empower construction professionals and businesses with a transformative tool that redefines the landscape of construction management. Our purpose is rooted in the recognition of the challenges faced by industry experts, from the complexity of project coordination to the fragmentation of essential tasks across various tools. AlphaCraft Builders seeks to streamline and consolidate these processes, offering a comprehensive platform that unifies order management, scheduling, lead generation, CRM, HR, payroll, and more.
 
 At the core of our purpose is the commitment to efficiency and innovation in construction operations. We aim to simplify the intricate workflows of construction projects, enabling professionals to focus on what they do best – building. By providing an all-encompassing solution, AlphaCraft Builders endeavors to elevate the construction industry by fostering collaboration, enhancing communication, and ultimately driving success for every project, whether big or small.
@@ -22,9 +20,7 @@ Beyond functionality, our purpose extends to creating a community where contract
 
 ## Installation
 
-1. Step 1 to install
-2. Step 2 to get dependencies 
-3. Step 3 to configure and customize
+As this is a web application, there is no install required. Simply navigate to alphacraftbuilders.com.
 
 ## Development Setup 
 
