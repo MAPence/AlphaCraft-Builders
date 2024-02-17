@@ -43,8 +43,8 @@ Commercial or Propreitary
 
 ## Contributors
 
-- [Garrett Effers](https://github.com/Gamesshadow)
 - [Morgen Pence](https://github.com/MAPence)
+- [Garrett Effers](https://github.com/Gamesshadow)
 - [Tim Eggenberger](https://github.com/Teggenberg)
 
 ## Project Status  
