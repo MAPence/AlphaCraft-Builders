@@ -15,22 +15,30 @@ Beyond functionality, our purpose extends to creating a community where contract
   
 ## Technologies
 
-- Microsoft Visual Studios Version 17.8.6
-- SQL Server Management Studio 19
+- Microsoft Visual Studios Version 17.8.6+
+- SQL Server Management Studio 19+
+- SQL Server 2019+
+- .NET 6
 
 ## Installation
 
-As this is a web application, there is no install required. Simply navigate to alphacraftbuilders.com.
+As this is a web application, there is no install required for end users. Simply navigate to alphacraftbuilders.com in your web browser to access the live site. 
+For contributors looking to run the application locally, follow the development setup instructions below.
 
 ## Development Setup 
 
 The following instructions explain how to set up a development environment to develop and test the software.
 
-1. Clone the repository
-2. Install dependencies with `npm install`  
-3. Configure environment variables
-4. Build first with `npm run build` 
-5. Run tests with `npm test`
+1. Install prerequisites:
+- .NET 6 SDK
+- SQL Server 2019+ and SQL Server Management Studio
+2. Clone the repository: https://github.com/MAPence/AlphaCraft-Builders.git
+3. Navigate into project folder
+4. Restore dependencies:
+    dotnet restore
+5. Configure environment variables by creating a .env file
+6. Build application
+7. Run application locally
 
 ## License
 
