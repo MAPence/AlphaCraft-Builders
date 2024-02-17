@@ -21,7 +21,7 @@ namespace ACB.Controllers
             Notify.QuoteSuccessful(quote);
 
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
-            return View("QuoteForm");
+            return View("../Home/Index");
         }
     }
 }
