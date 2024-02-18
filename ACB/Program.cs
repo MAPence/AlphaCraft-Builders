@@ -56,7 +56,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 //Most require a Developer account to get the ClientId and ClientSecret
 //To customize the login buttons -->https://github.com/dotnet/AspNetCore.Docs/issues/10563
 
-/*
+
 builder.Services.AddAuthentication()
    .AddGoogle(options =>
    {
@@ -83,7 +83,7 @@ builder.Services.AddAuthentication()
        twitterOptions.ConsumerSecret = config["Authentication:Twitter:ConsumerSecret"];
        twitterOptions.RetrieveUserDetails = true;
    });
-*/
+
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
