@@ -58,6 +58,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 /*
 builder.Services.AddAuthentication()
+    
    .AddGoogle(options =>
    {
        IConfigurationSection googleAuthNSection =
@@ -65,13 +66,15 @@ builder.Services.AddAuthentication()
        options.ClientId = googleAuthNSection["ClientId"];
        options.ClientSecret = googleAuthNSection["ClientSecret"];
    })
+    
    .AddFacebook(options =>
    {
        IConfigurationSection FBAuthNSection =
        config.GetSection("Authentication:FB");
        options.ClientId = FBAuthNSection["ClientId"];
        options.ClientSecret = FBAuthNSection["ClientSecret"];
-   })
+   }) 
+    
    .AddMicrosoftAccount(microsoftOptions =>
    {
        microsoftOptions.ClientId = config["Authentication:Microsoft:ClientId"];
@@ -83,7 +86,7 @@ builder.Services.AddAuthentication()
        twitterOptions.ConsumerSecret = config["Authentication:Twitter:ConsumerSecret"];
        twitterOptions.RetrieveUserDetails = true;
    });
-*/
+    */
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
