@@ -5,7 +5,7 @@ using ACB.Areas.Identity.Data;
 
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("ACBContextConnection") ?? throw new InvalidOperationException("Connection string 'ACBContextConnection' not found.");
+var connectionString = builder.Configuration.GetConnectionString("InterserverSQL") ?? throw new InvalidOperationException("Connection string 'ACBContextConnection' not found.");
 
 builder.Services.AddDbContext<ACBContext>(options =>
     options.UseSqlServer(connectionString));
