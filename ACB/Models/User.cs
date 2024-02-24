@@ -31,23 +31,23 @@ namespace ACB.Models
         public string? ConfirmPassword { get; set; }
 
         [PersonalData]
-        public string? FirstName { get; set; }
+        public string FirstName { get; set; }
         [PersonalData]
-        public string? LastName { get; set; }
+        public string LastName { get; set; }
         [PersonalData]
-        public string? Address { get; set; }
+        public string Address { get; set; }
         [PersonalData]
-        public string? City { get; set; }
+        public string City { get; set; }
         [PersonalData]
-        public string? State { get; set; }
+        public string State { get; set; }
         [PersonalData]
-        public string? Zip { get; set; }
+        public string Zip { get; set; }
         [PersonalData]
         public string? Country { get; set; }
         [PersonalData]
-        public string? Phone { get; set; }
+        public string Phone { get; set; }
         [PersonalData]
-        public string? Company { get; set; }
+        public string Company { get; set; }
         [PersonalData]
         public string? Title { get; set; }
 

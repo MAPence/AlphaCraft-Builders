@@ -1,5 +1,7 @@
 ﻿using ACB.Areas.Identity.Data;
 using ACB.Data;
+using ACB.Models;
+///using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -20,6 +22,31 @@ namespace ACB.Controllers
             this._signInManager = signInManager;
         }
 
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                //login
+                var result = await _signInManager.PasswordSignInAsync(model.Username!, model.Password!, model.RememberMe, false);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Home", "Dashboard");
+                }
+
+                ModelState.AddModelError("", "Invalid login attempt");
+                return View(model);
+            }
+            return View(model);
+        }
+
         // GET: UserController
         public ActionResult Register()
         {
@@ -27,34 +54,26 @@ namespace ACB.Controllers
             return View();
         }
 
-        // GET: UserController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: UserController/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+        
 
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterNew(ACB.Models.User userInfo)
         {
+            //setting values for required fields to generic while in dev
             userInfo.Title = "Owner";
             userInfo.Country = "USA";
 
             if (ModelState.IsValid)
             {
+                //bypassing email confirmation requirement for now
                 ACBUser user = new()
                 {
                     FirstName = userInfo.FirstName,
                     LastName = userInfo.LastName, Email = userInfo.Email, Country = userInfo.Country, Title = userInfo.Title,
                     Address = userInfo.Address, City = userInfo.City, Zip = userInfo.Zip, State = userInfo.State,
-                    Company = userInfo.Company, Phone = userInfo.Phone, UserName = userInfo.Company
+                    Company = userInfo.Company, Phone = userInfo.Phone, UserName = userInfo.Email, EmailConfirmed = true
 
                 };
 
@@ -63,7 +82,8 @@ namespace ACB.Controllers
 
                 if (result.Succeeded)
                 {
-                    return View("../Dashboard/Home");
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("../Dashboard/Home");
 
                 }
 
