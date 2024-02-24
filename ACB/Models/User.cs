@@ -20,10 +20,37 @@ namespace ACB.Models
 
         [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
+
         [Required]
         [DataType(DataType.Password)]
         public string? Password { get; set; }
 
-        public ACBUser Info { get; set; }
+        [Compare("Password", ErrorMessage = "Passwords don't match.")]
+        [Display(Name = "Confirm Password")]
+        [DataType(DataType.Password)]
+        public string? ConfirmPassword { get; set; }
+
+        [PersonalData]
+        public string? FirstName { get; set; }
+        [PersonalData]
+        public string? LastName { get; set; }
+        [PersonalData]
+        public string? Address { get; set; }
+        [PersonalData]
+        public string? City { get; set; }
+        [PersonalData]
+        public string? State { get; set; }
+        [PersonalData]
+        public string? Zip { get; set; }
+        [PersonalData]
+        public string? Country { get; set; }
+        [PersonalData]
+        public string? Phone { get; set; }
+        [PersonalData]
+        public string? Company { get; set; }
+        [PersonalData]
+        public string? Title { get; set; }
+
+
     }
 }

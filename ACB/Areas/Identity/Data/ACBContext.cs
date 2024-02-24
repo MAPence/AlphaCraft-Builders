@@ -12,6 +12,8 @@ public class ACBContext : IdentityDbContext<ACBUser>
     {
     }
 
+    public DbSet<ACB.Areas.Identity.Data.ACBUser>? aCBUsers { get; set; }
+
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);

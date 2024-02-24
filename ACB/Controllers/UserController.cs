@@ -1,13 +1,29 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ACB.Areas.Identity.Data;
+using ACB.Data;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ACB.Controllers
 {
     public class UserController : Controller
     {
+
+        private readonly ACBContext _context;
+        private readonly UserManager<ACBUser> _userManager;
+        private readonly SignInManager<ACBUser> _signInManager;
+
+        public UserController(UserManager<ACBUser> userManager,
+            SignInManager<ACBUser> signInManager)
+        {
+            this._userManager = userManager;
+            this._signInManager = signInManager;
+        }
+
         // GET: UserController
         public ActionResult Register()
         {
+            
             return View();
         }
 
@@ -26,8 +42,34 @@ namespace ACB.Controllers
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> RegisterNew(ACB.Models.User userInfo)
         {
+            userInfo.Title = "Owner";
+            userInfo.Country = "USA";
+
+            if (ModelState.IsValid)
+            {
+                ACBUser user = new()
+                {
+                    FirstName = userInfo.FirstName,
+                    LastName = userInfo.LastName, Email = userInfo.Email, Country = userInfo.Country, Title = userInfo.Title,
+                    Address = userInfo.Address, City = userInfo.City, Zip = userInfo.Zip, State = userInfo.State,
+                    Company = userInfo.Company, Phone = userInfo.Phone, UserName = userInfo.Company
+
+                };
+
+                
+                var result = await _userManager.CreateAsync(user, userInfo.Password!);
+
+                if (result.Succeeded)
+                {
+                    return View("../Dashboard/Home");
+
+                }
+
+                return View("Register");
+                
+            }
             try
             {
                 return RedirectToAction(nameof(Index));
