@@ -17,6 +17,8 @@ namespace ACB.Controllers
         public async Task<IActionResult> Create
             ([Bind("service,client_first_name,client_last_name,client_email,details,city,state,zip")] Quote quote, string? service)
         {
+
+            quote.service = Query.GetDBId(service, "contractor_service");
             Query.NewQuote(quote);
             Notify.QuoteSuccessful(quote, service);
 
