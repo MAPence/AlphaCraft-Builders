@@ -50,17 +50,18 @@
           }
     </style>
     </head>
+    @model ACB.Models.ContactSubmission 
 <body class="cu-bg">
     <div class="container ">
         <div class="center-form">
 
             <section class="contact-form alpha-form col-10">
                 <h2>Contact Us</h2>
-                <form action="#" method="POST">
-                    <input type="text" name="name" placeholder="Your Name" required><br>
-                    <input type="email" name="email" placeholder="Your Email" required><br>
-                    <textarea name="message" placeholder="Your Message" rows="4" required></textarea><br>
-                    <input type="submit" value="Send Message">
+                <form asp-action="ContactUs" method="POST">
+                    <input asp-for="name" name="name" placeholder="Your Name" required><br>
+                    <input asp-for="email" type="email" name="email" placeholder="Your Email" required><br>
+                    <textarea asp-for="message" name="message" placeholder="Your Message" rows="4" required></textarea><br>
+                    <input type="submit"  value="Send Message">
                 </form>
             </section>
 
@@ -81,17 +82,7 @@
             </section>
 
         </div>
-        @* <script>
-            function SuccessPrompt() {
-                alert("Thank you for submitting your request! Someone will reach out to you within 48 hours!");
-            }
-        </script>
-
-        @section Scripts {
-            @{
-                await Html.RenderPartialAsync("_ValidationScriptsPartial");
-            }
-        } *@
+       
     </div>
 </body>
 

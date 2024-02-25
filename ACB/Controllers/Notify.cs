@@ -41,5 +41,25 @@ namespace ACB.Controllers
             smtp.EnableSsl = true;
             smtp.Send(mail);
         }
+
+        public static void ContactForm(ContactSubmission contactform)
+        {
+            MailMessage mail = new MailMessage();
+
+            mail.To.Add("support@alphacraftbuilders.com");
+            mail.From = new MailAddress(contactform.email, contactform.name);
+            mail.CC.Add(new MailAddress(contactform.email));
+            mail.Subject = "Contact Submission";
+            string Body = contactform.message;
+            mail.Body = Body;
+            mail.IsBodyHtml = true;
+            SmtpClient smtp = new SmtpClient();
+            smtp.Host = "smtp.gmail.com";
+            smtp.Port = 587;
+            smtp.UseDefaultCredentials = false;
+            smtp.Credentials = new System.Net.NetworkCredential("alphacraftbuilders", GetPassword()); // Enter senders User name and password       
+            smtp.EnableSsl = true;
+            smtp.Send(mail);
+        }
     }
 }

@@ -33,5 +33,11 @@ namespace ACB.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        [HttpPost]
+        public IActionResult ContactUs(ContactSubmission submission)
+        {
+            Notify.ContactForm(submission);
+            return View("Index");
+        }
     }
 }
