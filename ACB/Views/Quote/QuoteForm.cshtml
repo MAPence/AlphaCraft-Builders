@@ -16,7 +16,7 @@
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 Service
-                @Html.DropDownList("Service", ViewBag.Services, "Select Service", new { id="locs", @class="form-control"})
+                @Html.DropDownList("Service", ViewBag.Services, "Select Service", new { id="service", @class="form-control"})
                 
                 <div class="form-group">
                     <label asp-for="client_first_name" class="control-label">First Name</label>

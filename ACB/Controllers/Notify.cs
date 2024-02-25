@@ -1,4 +1,5 @@
 ﻿using ACB.Models;
+using System.Data.SqlClient;
 using System.Net.Mail;
 
 namespace ACB.Controllers
@@ -23,17 +24,17 @@ namespace ACB.Controllers
 
         }
 
-        public static void QuoteSuccessful(Quote quote)
+        public static void QuoteSuccessful(Quote quote,string? service)
         {
             MailMessage mail = new MailMessage();
             
             mail.To.Add(quote.client_email);
             mail.From = new MailAddress("alphaCraftBuilders@gmail.com");
             mail.Subject = "Your Quote";
-           
+
             string Body = $@"<p>Hey {quote.client_first_name}!</p> 
 
-                <p>Thank you for your quote request for {quote.service} in {quote.city}, {quote.state} {quote.zip}.</p>
+                <p>Thank you for your quote request for {service} in {quote.city}, {quote.state} {quote.zip}.</p>
 
                 <h3>Project Details</h3>
                 <p>
