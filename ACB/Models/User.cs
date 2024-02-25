@@ -30,8 +30,10 @@ namespace ACB.Models
         [DataType(DataType.Password)]
         public string? ConfirmPassword { get; set; }
 
+        [Required]
         [PersonalData]
         public string FirstName { get; set; }
+        [Required]
         [PersonalData]
         public string LastName { get; set; }
         [PersonalData]
