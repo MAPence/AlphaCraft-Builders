@@ -69,11 +69,26 @@ namespace ACB.Controllers
 
         public static void NewQuote(Quote quote)
         {
-            string query = $"insert into quote (client_first_name, client_last_name, client_email, details, job_zip)" +
+            string query = $"insert into quote (client_first_name, client_last_name, client_email, details, job_zip, job_type)" +
                 $"\r\n values ('{quote.client_first_name}' ,'{quote.client_last_name}', '{quote.client_email}'," +
-                $"\r\n '{quote.details}','{quote.zip}');";
+                $"\r\n '{quote.details}','{quote.zip}', {quote.service});";
             System.Diagnostics.Debug.WriteLine(query);
             Insert(query);
+        }
+
+        public static int GetDBId(string name, string table)
+        {
+            SqlConnection sqlconn2 = new SqlConnection(GetConnectionString());
+            string sqlquery2 = $"select * from {table} where Name = '{name}'";
+            System.Diagnostics.Debug.WriteLine(sqlquery2);
+            SqlCommand sqlcomm2 = new SqlCommand(sqlquery2, sqlconn2);
+            sqlconn2.Open();
+            SqlDataAdapter adapter2 = new SqlDataAdapter(sqlcomm2);
+            DataTable dt2 = new DataTable();
+            adapter2.Fill(dt2);
+            sqlconn2.Close();
+            return int.Parse(dt2.Rows[0][0].ToString()!);
+
         }
 
 

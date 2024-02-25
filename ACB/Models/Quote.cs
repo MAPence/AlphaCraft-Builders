@@ -1,4 +1,6 @@
-﻿namespace ACB.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ACB.Models
 {
     public class Quote
     {
@@ -9,6 +11,7 @@
         public DateTime? created { get; set; }
         public string? details { get; set; }
         public string? address { get; set; }
+        
         public int zip { get; set; }
 
         public string? city { get; set; }
