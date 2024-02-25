@@ -31,6 +31,8 @@ namespace ACB.Areas.Identity.Pages.Account
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
+        public ACBUser ACBUser { get; set; }
+
         public RegisterModel(
             UserManager<ACBUser> userManager,
             IUserStore<ACBUser> userStore,
