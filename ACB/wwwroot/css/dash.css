@@ -21,6 +21,10 @@
     transition: 0.5s;
 }
 
+#sb-dash{
+    padding: 5px;
+}
+
 .dense {
     display: flex;
     justify-content: flex-start;
