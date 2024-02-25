@@ -81,7 +81,20 @@
             </section>
 
         </div>
-        
+        @* <script>
+            function SuccessPrompt() {
+                alert("Thank you for submitting your request! Someone will reach out to you within 48 hours!");
+            }
+        </script>
+
+        @section Scripts {
+            @{
+                await Html.RenderPartialAsync("_ValidationScriptsPartial");
+            }
+        } *@
     </div>
 </body>
+
+
+
 </html>
