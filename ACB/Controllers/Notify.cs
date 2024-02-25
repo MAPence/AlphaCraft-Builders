@@ -30,9 +30,8 @@ namespace ACB.Controllers
             mail.To.Add(quote.client_email);
             mail.From = new MailAddress("alphaCraftBuilders@gmail.com");
             mail.Subject = "Your Quote";
-            string Body = "Thank You, your quote has been sent to contractors in your area!";
-
-            string body = $@"<p>Hey {quote.client_first_name}!</p> 
+           
+            string Body = $@"<p>Hey {quote.client_first_name}!</p> 
 
                 <p>Thank you for your quote request for {quote.service} in {quote.city}, {quote.state} {quote.zip}.</p>
 
@@ -72,16 +71,18 @@ namespace ACB.Controllers
             mail.Subject = $"{contactform.name} sent a message from the contact form";
             string Body = $@"<p>Hey {contactform.name}!</p> 
 
-                <p>Thank you for your message. We will get back to you as soon as possible.</p>
+                <p>Thank you for you for reaching out. A representative will get back to you as soon as possible.</p>
 
-                <h3>Message</h3>
+                <h3>Your Submission</h3>
                 <p>
                 {contactform.message}
                 </p>
 
                 <p>Best Regards,
                 <br/>  
-                The AlphaCraft Builders Team
+                AlphaCraft Builders Support Team
+                <br/>
+                support@alphacraftbuilders.com
                 <br/>
                 www.AlphaCraftBuilders.com
                 </p>";
