@@ -83,7 +83,7 @@ namespace ACB.Controllers
                 if (result.Succeeded)
                 {
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("../Dashboard/Home");
+                    return RedirectToAction("Home", "Dashboard");
 
                 }
 

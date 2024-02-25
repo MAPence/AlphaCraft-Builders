@@ -188,20 +188,50 @@
 
     <script>
         function openNav() {
+
+            
             
             const element = document.getElementById("sb-dash");
-            
-            element.style.width = "280px";
-            element.style.padding = "5px";
 
-            var elements = document.getElementsByClassName("sb-list-item");
+            if (element.style.width == 0) {
 
-            for (var i = 0; i < elements.length; i++) {
+                element.style.width = "280px";
+                element.style.padding = "5px";
 
-                //set font size to dissappear
-                element.getElementsByClassName("sb-list-item")[i].style.fontSize = "2rem";
+                var elements = document.getElementsByClassName("sb-list-item");
+
+                for (var i = 0; i < elements.length; i++) {
+
+                    //set font size to dissappear
+                    element.getElementsByClassName("sb-list-item")[i].style.fontSize = "2rem";
+
+                }
+
 
             }
+
+            else {
+
+                element.style.width = "0px";
+                element.style.padding = "0";
+
+                var elements = document.getElementsByClassName("sb-list-item");
+
+                for (var i = 0; i < elements.length; i++) {
+
+                    //set font size to dissappear
+                    element.getElementsByClassName("sb-list-item")[i].style.fontSize = "0rem";
+
+                }
+
+
+                document.getElementById("close-menu").style.display = "none";
+
+                document.getElementById("contractor-name").style.fontSize = "0rem";
+
+            }
+            
+            
 
             
             document.getElementById("close-menu").style.display = "block";
