@@ -13,6 +13,6 @@
 
         public string? city { get; set; }
         public string? state { get; set; }
-        public object service { get; internal set; }
+        public object service { get; set; }
     }
 }

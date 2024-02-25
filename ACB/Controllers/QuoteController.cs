@@ -15,7 +15,7 @@ namespace ACB.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create
-            ([Bind("client_first_name,client_last_name,client_email,details,zip")] Quote quote)
+            ([Bind("service,client_first_name,client_last_name,client_email,details,city,state,zip")] Quote quote)
         {
             Query.NewQuote(quote);
             Notify.QuoteSuccessful(quote);
