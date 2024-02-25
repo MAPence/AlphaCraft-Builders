@@ -30,7 +30,27 @@ namespace ACB.Controllers
             mail.To.Add(quote.client_email);
             mail.From = new MailAddress("alphaCraftBuilders@gmail.com");
             mail.Subject = "Your Quote";
-            string Body = "Thank You, your quote has been sent to contractors in your area.";
+            string Body = "Thank You, your quote has been sent to contractors in your area!";
+
+            string body = $@"<p>Hey {quote.client_first_name}!</p> 
+
+                <p>Thank you for your quote request for {quote.service} in {quote.city}, {quote.state} {quote.zip}.</p>
+
+                <h3>Project Details</h3>
+                <p>
+                Description: {quote.details}
+                </p>
+
+                <p> Your request has been sent to contractors in your area. We will notify you when they respond with bids. Feel free to reach out with any other questions.</p>
+
+
+                <p>Best Regards,
+                <br/>  
+                The AlphaCraft Builders Team
+                <br/>
+                www.AlphaCraftBuilders.com
+                </p>";
+
             mail.Body = Body;
             mail.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient();
@@ -49,8 +69,23 @@ namespace ACB.Controllers
             mail.To.Add("support@alphacraftbuilders.com");
             mail.From = new MailAddress(contactform.email, contactform.name);
             mail.CC.Add(new MailAddress(contactform.email));
-            mail.Subject = "Contact Submission";
-            string Body = contactform.message;
+            mail.Subject = $"{contactform.name} sent a message from the contact form";
+            string Body = $@"<p>Hey {contactform.name}!</p> 
+
+                <p>Thank you for your message. We will get back to you as soon as possible.</p>
+
+                <h3>Message</h3>
+                <p>
+                {contactform.message}
+                </p>
+
+                <p>Best Regards,
+                <br/>  
+                The AlphaCraft Builders Team
+                <br/>
+                www.AlphaCraftBuilders.com
+                </p>";
+
             mail.Body = Body;
             mail.IsBodyHtml = true;
             SmtpClient smtp = new SmtpClient();

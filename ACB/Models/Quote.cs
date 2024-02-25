@@ -11,7 +11,8 @@
         public string? address { get; set; }
         public int zip { get; set; }
 
-
-
+        public string? city { get; set; }
+        public string? state { get; set; }
+        public object service { get; internal set; }
     }
 }
