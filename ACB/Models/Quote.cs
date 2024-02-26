@@ -11,9 +11,7 @@ namespace ACB.Models
         public DateTime? created { get; set; }
         public string? details { get; set; }
         public string? address { get; set; }
-        
         public int zip { get; set; }
-
         public string? city { get; set; }
         public string? state { get; set; }
         public int? service { get; set; }
