@@ -17,5 +17,6 @@ namespace ACB.Models
         public string? city { get; set; }
         public string? state { get; set; }
         public int? service { get; set; }
+        public byte[] image { get; set; }
     }
 }
