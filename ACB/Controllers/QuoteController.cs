@@ -18,7 +18,7 @@ namespace ACB.Controllers
             ([Bind("service,client_first_name,client_last_name,client_email,details,city,state,zip")] Quote quote, string? service)
         {
 
-            quote.service = Query.GetDBId(service, "contractor_service");
+            quote.service = Query.GetDBId(service, "contractor_service", "service_type");
             Query.NewQuote(quote);
             Notify.QuoteSuccessful(quote, service);
 

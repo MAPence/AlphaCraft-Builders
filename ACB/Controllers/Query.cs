@@ -76,10 +76,10 @@ namespace ACB.Controllers
             Insert(query);
         }
 
-        public static int GetDBId(string name, string table)
+        public static int GetDBId(string name, string table, string field)
         {
             SqlConnection sqlconn2 = new SqlConnection(GetConnectionString());
-            string sqlquery2 = $"select * from {table} where Name = '{name}'";
+            string sqlquery2 = $"select * from {table} where {field} = '{name}'";
             System.Diagnostics.Debug.WriteLine(sqlquery2);
             SqlCommand sqlcomm2 = new SqlCommand(sqlquery2, sqlconn2);
             sqlconn2.Open();
