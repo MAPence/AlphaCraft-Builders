@@ -55,26 +55,32 @@ namespace ACB.Controllers
 
 
 
-        public static void Insert(string insertQuery)
+        public static int Insert(string insertQuery)
         {
-            
-
+            int test =0;
+            //open db connection and run passed in query
             SqlConnection sqlconn = new SqlConnection(GetConnectionString());
             SqlCommand sqlquery = new SqlCommand(insertQuery, sqlconn);
             sqlconn.Open();
-            sqlquery.ExecuteNonQuery();
+            //sqlquery.ExecuteNonQuery();
+            //return the id of the inserted row for foreign key use
+            test = Convert.ToInt32(sqlquery.ExecuteScalar());
+            System.Diagnostics.Debug.WriteLine("Correct Quote Id?????" + test);
             sqlconn.Close();
+            return test;
 
         }
 
-        public static void NewQuote(Quote quote)
+        public static int NewQuote(Quote quote)
         {
-            string query = $"insert into quote (client_first_name, client_last_name, client_email, details, job_zip, job_type)" +
-                $"\r\n values ('{quote.client_first_name}' ,'{quote.client_last_name}', '{quote.client_email}'," +
-                $"\r\n '{quote.details}','{quote.zip}', {quote.service});";
+            
+            string query = $"insert into quote (client_first_name, client_last_name, client_email, details, job_zip, job_type) " +
+                $"\r\noutput inserted.id " +
+                $"\r\nvalues ('{quote.client_first_name}' ,'{quote.client_last_name}', '{quote.client_email}'," +
+                $"\r\n'{quote.details}','{quote.zip}', {quote.service});";
             System.Diagnostics.Debug.WriteLine(query);
-            Insert(query);
-        }
+            return Insert(query);
+        } 
 
         public static int GetDBId(string name, string table, string field)
         {
