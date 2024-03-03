@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Marker</title>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChApDFEzmpCEBP6xfQPCHwucDuC5Z8Bzo&callback=console.debug&libraries=maps,marker&v=beta">
+    </script>
+    <style>
+        gmp-map {
+            height: 100%;
+        }
+
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <gmp-map center="33.85321807861328,-98.75296020507812" zoom="14" map-id="DEMO_MAP_ID">
+        <gmp-advanced-marker position="33.85321807861328,-98.75296020507812" title="My location"></gmp-advanced-marker>
+    </gmp-map>
+</body>
+</html>

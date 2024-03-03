@@ -1,0 +1,113 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"
+    <title> </title>
+    <style>
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            backdrop-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-form {
+            margin-top: 20px;
+        }
+
+        .location-form {
+            display: flex;
+            justify-content: center;
+        }
+
+            .location-form input[type="text"],
+            .location-form input[type="email"],
+            .location-form textarea {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+
+            .location-form input[type="submit"] {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+                .location-form input[type="submit"]:hover {
+                    background-color: #0056b3;
+                }
+    </style>
+</head>
+    @model Location
+<body class="cu-bg">
+    <div class="container ">
+        <div class="center-form">
+
+            <section class="location-form alpha-form col-10">
+                <h2>Find Your Contractor</h2>
+                <form asp-action="ContactUs" method="POST">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label">Your Name</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Address" class="control-label">Your Address</label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="City" class="control-label">City</label>
+                        <input asp-for="City" class="form-control" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>State:</label>
+                        @Html.DropDownListFor(model => model.State, GetStates(), new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Zip" class="control-label">Zip Code</label>
+                        <input asp-for="Zip" class="form-control" />
+                        <span asp-validation-for="Zip" class="text-danger"></span>
+                    </div>
+                    <input type="submit" value="Send Message">
+                </form>
+            </section>
+
+        </div>
+    </div>
+</body>
+
+
+
+</html>
+
+@functions {
+    public SelectList GetStates()
+    {
+        string[] stateAbbreviations = new string[]
+        {
+            "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA",
+            "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+            "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+            "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
+            "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"
+        };
+
+        return new SelectList(stateAbbreviations);
+    }
+}
