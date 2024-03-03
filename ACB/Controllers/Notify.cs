@@ -6,7 +6,6 @@ namespace ACB.Controllers
 {
     public static class Notify
     {
-
         public static string GetPassword()
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
@@ -18,10 +17,7 @@ namespace ACB.Controllers
 
             System.Diagnostics.Debug.WriteLine("HELLLOOOOOO!!!!" + password);
 
-            return password;
-
-            
-
+            return password;          
         }
 
         public static void QuoteSuccessful(Quote quote,string? service)
