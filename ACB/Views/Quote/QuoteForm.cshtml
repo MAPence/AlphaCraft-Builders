@@ -93,8 +93,14 @@
 
 <script>
     function SuccessPrompt() {
-        alert("Success! Your quote request has been send to local contractors");
+        var serviceDropdown = document.getElementById("service");
+        if (serviceDropdown.value !== "Select Service" || null) {
+            alert("Success! Your quote request has been sent to local contractors");
+        } else {
+            alert("Please select a service");
+        }
     }
+
 </script>
 
 @section Scripts {
