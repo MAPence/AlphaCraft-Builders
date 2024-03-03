@@ -35,7 +35,12 @@ namespace ACB.Controllers
 
         public static bool IsSupportedImageType(string contentType)
         {
-            return contentType.StartsWith("image/");
+            if (contentType.StartsWith("image/"))
+            {
+                return true;
+            }
+            else
+            {return false;}
         }
     }
 }
