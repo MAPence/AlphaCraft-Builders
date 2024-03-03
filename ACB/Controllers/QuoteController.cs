@@ -1,6 +1,7 @@
 ﻿using ACB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace ACB.Controllers
 {
@@ -68,7 +69,8 @@ namespace ACB.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create
-            ([Bind("service,client_first_name,client_last_name,client_email,details,city,state,zip")] Quote quote, string? service)
+            ([Bind("service,client_first_name,client_last_name,client_email,details,city,state,zip")] Quote quote, 
+            string? service, List<IFormFile> imageFile)
         {
 
 
@@ -76,7 +78,13 @@ namespace ACB.Controllers
 
             
 
-            Query.NewQuote(quote);
+            int fk = Query.NewQuote(quote);
+
+            foreach (var image in imageFile)
+            {
+                Query.AddImageToDB(fk, ImageHandler.ConvertImageFile(image));
+                System.Diagnostics.Debug.WriteLine(fk);
+            }
             Notify.QuoteSuccessful(quote, service);
 
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));

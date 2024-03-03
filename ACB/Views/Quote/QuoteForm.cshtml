@@ -13,7 +13,7 @@
     <div calss="row">
 
         <div class="col-6 alpha-form">
-            <form asp-action="Create">
+            <form asp-action="Create" enctype="multipart/form-data" AllowMultiple="true" runat="server">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 Service
                 @Html.DropDownList("Service", ViewBag.Services, "Select Service", new { id="service", @class="form-control"})
