@@ -57,33 +57,38 @@ namespace ACB.Controllers
 
         public static int Insert(string insertQuery)
         {
-            int test =0;
+            //var to store new id upon inserted row
+            int newId;
+
             //open db connection and run passed in query
             SqlConnection sqlconn = new SqlConnection(GetConnectionString());
             SqlCommand sqlquery = new SqlCommand(insertQuery, sqlconn);
             sqlconn.Open();
-            //sqlquery.ExecuteNonQuery();
-            //return the id of the inserted row for foreign key use
-            test = Convert.ToInt32(sqlquery.ExecuteScalar());
-            System.Diagnostics.Debug.WriteLine("Correct Quote Id?????" + test);
+            
+            //execute query statement, return new id
+            newId = Convert.ToInt32(sqlquery.ExecuteScalar());
+            System.Diagnostics.Debug.WriteLine("New ID : " + newId);
             sqlconn.Close();
-            return test;
+            return newId;
 
         }
 
         public static int NewQuote(Quote quote)
         {
-            
+            //create query statement, insert quote and return new id
             string query = $"insert into quote (client_first_name, client_last_name, client_email, details, job_zip, job_type) " +
                 $"\r\noutput inserted.id " +
                 $"\r\nvalues ('{quote.client_first_name}' ,'{quote.client_last_name}', '{quote.client_email}'," +
                 $"\r\n'{quote.details}','{quote.zip}', {quote.service});";
+
+            //check query statement in output window
             System.Diagnostics.Debug.WriteLine(query);
             return Insert(query);
         } 
 
         public static int GetDBId(string name, string table, string field)
         {
+            //query table for specific row, return the id of that row
             SqlConnection sqlconn2 = new SqlConnection(GetConnectionString());
             string sqlquery2 = $"select * from {table} where {field} = '{name}'";
             System.Diagnostics.Debug.WriteLine(sqlquery2);
