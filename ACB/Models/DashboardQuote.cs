@@ -1,9 +1,8 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ACB.Models
+﻿namespace ACB.Models
 {
-    public class Quote
+    public class DashboardQuote
     {
+        //Displays a list of Quotes on the Dashboard
         public int id { get; set; }
         public string? client_first_name { get; set; }
         public string? client_last_name { get; set; }
@@ -12,9 +11,13 @@ namespace ACB.Models
         public string? details { get; set; }
         public string? address { get; set; }
         public int zip { get; set; }
+
         public string? city { get; set; }
         public string? state { get; set; }
         public int? service { get; set; }
-        public byte[]? image { get; set; }
+
+        // Usage to show list
+        public IList<Quote> Quotes { get; set; }
+
     }
 }
