@@ -14,12 +14,11 @@ namespace ACB.Models
         public int zip { get; set; }
         public string? city { get; set; }
         public string? state { get; set; }
-        [Required(ErrorMessage = "Service is required")]
-        [NotEqual("Select Service", ErrorMessage = "Please select a valid service")]
+        
         public int? service { get; set; }
         public byte[]? image { get; set; }
     }
-    public class NotEqualAttribute : ValidationAttribute
+    /*public class NotEqualAttribute : ValidationAttribute
     {
         private readonly string _invalidValue;
 
@@ -37,5 +36,5 @@ namespace ACB.Models
 
             return ValidationResult.Success;
         }
-    }
+    }*/
 }

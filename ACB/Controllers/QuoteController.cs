@@ -72,7 +72,11 @@ namespace ACB.Controllers
             ([Bind("service,client_first_name,client_last_name,client_email,details,city,state,zip")] Quote quote, 
             string? service, List<IFormFile> imageFile)
         {
-
+             if(service == null)
+            {
+                ModelState.AddModelError(nameof(Quote.service), "Please select a valid service type");
+                return View(quote);
+            }
 
             quote.service = Query.GetDBId(service, "contractor_service", "service_type");
 
