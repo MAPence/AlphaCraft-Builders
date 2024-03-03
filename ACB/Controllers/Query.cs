@@ -6,30 +6,25 @@ using System.Data;
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Configuration;
+using NuGet.Protocol.Plugins;
 
 namespace ACB.Controllers
 {
     public static class Query
     {
-        
+        //Get connection string from Appsettings.Development.Json file and return
         public static string GetConnectionString()
         {
             var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
                 .AddJsonFile("appsettings.Development.json", optional: false);
-
-            
             IConfiguration configuration = builder.Build();
 
-            
-
             var connString = configuration.GetConnectionString("InterserverSQL");
-
-            System.Diagnostics.Debug.WriteLine("HELLLOOOOOO!!!!" + connString);
-
             return connString;
 
         }
 
+        //return list of strings from all rows in a table
         public static List<string> PopulateDropDown(string table, int column)
         {
             // new list that will be retunred for drop down menu
@@ -54,7 +49,7 @@ namespace ACB.Controllers
         }
 
 
-
+        //insert into any table, and return id of new row
         public static int Insert(string insertQuery)
         {
             //var to store new id upon inserted row
@@ -72,7 +67,7 @@ namespace ACB.Controllers
             return newId;
 
         }
-
+        //insert a new customer generated quote request
         public static int NewQuote(Quote quote)
         {
             //create query statement, insert quote and return new id
@@ -86,6 +81,7 @@ namespace ACB.Controllers
             return Insert(query);
         } 
 
+        //get the id of a row in a table wih a unique string value
         public static int GetDBId(string name, string table, string field)
         {
             //query table for specific row, return the id of that row
