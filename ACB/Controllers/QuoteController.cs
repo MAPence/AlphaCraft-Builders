@@ -74,8 +74,9 @@ namespace ACB.Controllers
         {
              if(service == null)
             {
-                ModelState.AddModelError(nameof(Quote.service), "Please select a valid service type");
-                return View(quote);
+                ModelState.AddModelError(nameof(service), "Please select a valid service type");
+                ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
+                return View("QuoteForm",quote);
             }
 
             quote.service = Query.GetDBId(service, "contractor_service", "service_type");
