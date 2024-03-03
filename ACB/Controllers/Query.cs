@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Configuration;
 using NuGet.Protocol.Plugins;
+using Azure.Core;
 
 namespace ACB.Controllers
 {
@@ -95,6 +96,34 @@ namespace ACB.Controllers
             adapter2.Fill(dt2);
             sqlconn2.Close();
             return int.Parse(dt2.Rows[0][0].ToString()!);
+
+        }
+
+        public static void AddImageToDB(int fk, byte[] image)
+        {
+            SqlConnection sqlconn = new SqlConnection(GetConnectionString());
+            const string sql_insert_string =
+                "Insert into quote_image (Quote_id, q_image) values (@image_id, @image_byte_array)";
+            var byteParam = new SqlParameter("@image_byte_array", SqlDbType.VarBinary)
+            {
+                Direction = ParameterDirection.Input,
+                Size = image.Length,
+                Value = image
+            };
+
+            var imageIdParam = new SqlParameter("@image_id", SqlDbType.Int, 4)
+            {
+                Direction = ParameterDirection.Input,
+                Value = fk
+            };
+            SqlTransaction transaction = null;
+            SqlCommand sqlcomm = new SqlCommand(sql_insert_string, sqlconn, transaction);
+            sqlcomm.Parameters.Add(byteParam);
+            sqlcomm.Parameters.Add(imageIdParam);
+            sqlconn.Open();
+            sqlcomm.ExecuteNonQuery();
+            sqlconn.Close();
+
 
         }
 
