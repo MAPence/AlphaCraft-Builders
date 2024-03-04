@@ -40,6 +40,9 @@ namespace ACB.Controllers
             return View("Index");
         }
 
-        
+        public IActionResult FindContractors()
+        {
+            return View();
+        }
     }
 }
