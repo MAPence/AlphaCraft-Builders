@@ -114,11 +114,9 @@
 <script>
     function SuccessPrompt() {
 
-        var serviceDropdown = document.getElementById("service");
+        var serviceDropdown = document.querySelector("#service");
 
-        alert(serviceDropDrown.value);
-
-        if (serviceDropdown.value == "Select Service" || serviceDropdown.value ==  null) {
+        if (serviceDropdown.value ==  "") {
             alert("Please select a service");
         } else {
             
