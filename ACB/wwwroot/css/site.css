@@ -38,7 +38,7 @@ body {
 .cu-bg {
     background-image: url("../resources/images/CUPicture.jpg");
     /* background-color: #A7D7C5;*/
-    width: 100wh;
+    width: 100vw;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
