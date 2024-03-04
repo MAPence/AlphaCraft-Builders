@@ -113,11 +113,16 @@
 
 <script>
     function SuccessPrompt() {
+
         var serviceDropdown = document.getElementById("service");
-        if (serviceDropdown.value !== "Select Service" || null) {
-            alert("Success! Your quote request has been sent to local contractors");
-        } else {
+
+        alert(serviceDropDrown.value);
+
+        if (serviceDropdown.value == "Select Service" || serviceDropdown.value ==  null) {
             alert("Please select a service");
+        } else {
+            
+            alert("Success! Your quote request has been sent to local contractors");
         }
     }
 

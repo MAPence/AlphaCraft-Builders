@@ -7,9 +7,12 @@ namespace ACB.Controllers
 {
     public class QuoteController : Controller
     {
-        public IActionResult QuoteForm()
+
+        public List<SelectListItem> PopulateStates() 
         {
-            ViewBag.StateOptions = new List<SelectListItem>{
+
+
+            List<SelectListItem> States = new List<SelectListItem> {
             new SelectListItem { Text = "Alabama", Value = "AL" },
             new SelectListItem { Text = "Alaska", Value = "AK" },
             new SelectListItem { Text = "Arizona", Value = "AZ" },
@@ -62,6 +65,19 @@ namespace ACB.Controllers
             new SelectListItem { Text = "Wyoming", Value = "WY" }
             };
 
+            return States;
+
+
+        }
+
+            
+
+
+        
+        public IActionResult QuoteForm()
+        {
+            ViewBag.StateOptions = PopulateStates();
+
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
             return View();
         }
@@ -73,11 +89,13 @@ namespace ACB.Controllers
             string? service, List<IFormFile> imageFile)
         {
              if(service == null)
-            {
+             {
+
                 ModelState.AddModelError(nameof(service), "Please select a valid service type");
+                ViewBag.StateOptions = PopulateStates();
                 ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
                 return View("QuoteForm",quote);
-            }
+             }
 
             quote.service = Query.GetDBId(service, "contractor_service", "service_type");
 
@@ -92,6 +110,8 @@ namespace ACB.Controllers
             }
             Notify.QuoteSuccessful(quote, service);
 
+
+            ViewBag.StateOptions = PopulateStates();
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
             return View("../Home/Index");
         }
