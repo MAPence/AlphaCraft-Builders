@@ -1,6 +1,8 @@
 ﻿using ACB.Areas.Identity.Data;
 using ACB.Data;
 using ACB.Models;
+//using Microsoft.AspNet.Identity;
+
 ///using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -38,7 +40,8 @@ namespace ACB.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Home", "Dashboard");
+                    ContractorVM contractor = Query.GetContractor(model.Username);
+                    return View("../Dashboard/Home", contractor);
                 }
 
                 ModelState.AddModelError("", "Invalid login attempt");
@@ -82,8 +85,9 @@ namespace ACB.Controllers
 
                 if (result.Succeeded)
                 {
+                    ContractorVM contractor = Query.GetContractor(user.UserName);
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Home", "Dashboard");
+                    return View("../Dashboard/Home", contractor);
 
                 }
 

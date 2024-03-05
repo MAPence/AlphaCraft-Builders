@@ -127,6 +127,29 @@ namespace ACB.Controllers
 
         }
 
+        public static ContractorVM GetContractor(string email)
+        {
+            var contractor = new ContractorVM();
+            SqlConnection sqlconn = new SqlConnection(GetConnectionString());
+            string sqlQuery = "select contractor_id, FirstName, LastName from AspNetUsers" +
+                $"\r\n Where UserName = '{email}'";
+            SqlCommand cmnd = new SqlCommand(sqlQuery, sqlconn);
+            sqlconn.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter(cmnd);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            sqlconn.Close() ;
+            contractor.Id = Convert.ToInt32(dt.Rows[0][0]);
+            contractor.FirstName = dt.Rows[0][1].ToString();
+            contractor.LastName = dt.Rows[0][2].ToString();
+            contractor.Email = email;
+
+
+
+            return contractor;
+
+        }
+
 
 
     }

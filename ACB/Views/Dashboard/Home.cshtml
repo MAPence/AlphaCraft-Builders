@@ -1,7 +1,51 @@
-﻿
+﻿@model ACB.Models.ContractorVM
 @{
     ViewData["Title"] = "home";
 }
 
-<h1>home</h1>
+<h1>@Model.Email</h1>
+
+<div class="col-9">
+
+    <div class="container-fluid ">
+
+        <div class="row table-w">
+            <div class="col-12 py-3">
+                <div class="dash-header">Quote Requests</div>
+                <div class="container-fluid dash-row">
+
+                    <div class="row">
+
+                        <div class="col-3 line">
+                            <a href="./quote.html">@Model.Email</a>
+                        </div>
+
+                        <div class="col-3 line">
+                            <a href="#">@Model.FirstName</a>
+                        </div>
+
+                        <div class="col-3 line">
+                            <a href="#">@Model.LastName</a>
+                        </div>
+
+                        <div class="col-3 line">
+                            ASAP
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+</div>
+
+
+
+                            
 
