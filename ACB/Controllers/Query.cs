@@ -149,6 +149,34 @@ namespace ACB.Controllers
 
         }
 
+        public static List<QuoteVM>? GetQuotes(int? service_type)
+        {
+            List<QuoteVM>? quotes = new List<QuoteVM>();
+
+            SqlConnection sqlconn = new SqlConnection(GetConnectionString());
+            string sqlQuery = "select * from quote" +
+                $"\r\n Where job_type = {service_type}";
+            SqlCommand cmnd = new SqlCommand(sqlQuery, sqlconn);
+            sqlconn.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter(cmnd);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            sqlconn.Close();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                QuoteVM quote = new QuoteVM();
+                quote.Id = Convert.ToInt32(dt.Rows[i][0]);
+                quote.Firstname = (string?)dt.Rows[i][1];
+                quote.Lastname = (string?)dt.Rows[i][2];
+                quote.Email = (string?)dt.Rows[i][3];
+                quotes.Add(quote);
+            }
+
+            return quotes;
+
+
+        }
+
         public static ContractorVM GetContractor(string email)
         {
             var contractor = new ContractorVM();
@@ -166,6 +194,25 @@ namespace ACB.Controllers
             contractor.LastName = dt.Rows[0][2].ToString();
             contractor.Email = email;
             contractor.Services = GetServicesoffered(contractor.Id);
+            foreach(var service in contractor.Services)
+            {
+                
+                List<QuoteVM> quotes = GetQuotes(service);
+                if(quotes != null && quotes.Count > 0)
+                {
+                    foreach (QuoteVM quote in quotes)
+                    {
+                        if(quote != null)
+                        {
+                            contractor.Quotes.Add(quote);
+                        }
+                        
+                    }
+
+                }
+                
+            }
+            
 
 
 
