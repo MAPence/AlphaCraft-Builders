@@ -1,7 +1,10 @@
 ﻿@model ACB.Models.ContractorVM
 @{
     ViewData["Title"] = "home";
+   
     var services = Model.Services;
+    
+    
     var quotes = Model.Quotes;
 }
 
@@ -41,7 +44,7 @@
 
                     }
                     
-
+                    
                     @foreach (var service in services)
                     {
                         <div>
