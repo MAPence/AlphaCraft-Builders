@@ -1,9 +1,10 @@
 ﻿@model ACB.Models.ContractorVM
 @{
     ViewData["Title"] = "home";
+    var services = Model.Services;
 }
 
-<h1>@Model.Email</h1>
+<h1>@Model.FirstName @Model.LastName</h1>
 
 <div class="col-9">
 
@@ -32,6 +33,13 @@
                             ASAP
                         </div>
                     </div>
+
+                    @foreach (var service in services)
+                    {
+                        <div>
+                            @service
+                        </div>
+                    }
 
                 </div>
 

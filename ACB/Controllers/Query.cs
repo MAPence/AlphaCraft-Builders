@@ -127,6 +127,28 @@ namespace ACB.Controllers
 
         }
 
+        public static List<int> GetServicesoffered(int? contractorId)
+        {
+            List <int> services = new List<int>();
+            SqlConnection sqlconn = new SqlConnection(GetConnectionString());
+            string sqlQuery = "select service_id from contractor_service_offered" +
+                $"\r\n Where contractor_id = {contractorId}";
+            SqlCommand cmnd = new SqlCommand(sqlQuery, sqlconn);
+            sqlconn.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter(cmnd);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+            sqlconn.Close();
+            for(int i = 0; i < dt.Rows.Count; i++)
+            {
+                services.Add(Convert.ToInt32(dt.Rows[i][0]));
+            }
+
+            return services;
+            
+
+        }
+
         public static ContractorVM GetContractor(string email)
         {
             var contractor = new ContractorVM();
@@ -143,6 +165,7 @@ namespace ACB.Controllers
             contractor.FirstName = dt.Rows[0][1].ToString();
             contractor.LastName = dt.Rows[0][2].ToString();
             contractor.Email = email;
+            contractor.Services = GetServicesoffered(contractor.Id);
 
 
 
