@@ -26,13 +26,19 @@ namespace ACB.Controllers
             return View();
         }
 
-        public IActionResult SideBar( ContractorVM contracotr) 
+        public IActionResult SideBar( ContractorVM contractor) 
         {
             var currentUser = _userManager.GetUserName;
 
             var user = currentUser.ToString();
-            Query.GetContractor(user);
-            return PartialView("../Shared/_sidebar", contracotr);
+
+            if(user != "System.Func`2[System.Security.Claims.ClaimsPrincipal,System.String]")
+            {
+                contractor = Query.GetContractor(user);
+                return PartialView("../Shared/_sidebar", contractor);
+            }
+            
+            return PartialView("../Shared/_sidebar");
         }
 
         public IActionResult Home(ContractorVM contractor)
