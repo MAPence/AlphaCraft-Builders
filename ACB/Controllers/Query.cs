@@ -202,7 +202,7 @@ namespace ACB.Controllers
                 List<QuoteVM> quotes = GetQuotes(service);
                 if(quotes != null && quotes.Count > 0)
                 {
-                    contractor.Quotes = new List<QuoteVM>();
+                    //contractor.Quotes = new List<QuoteVM>();
                     foreach (QuoteVM quote in quotes)
                     {
                         if(quote != null)
