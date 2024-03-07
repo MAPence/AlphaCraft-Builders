@@ -75,11 +75,16 @@
     width: 80vw;
 }
 
+.col-header {
+    font-size: 1rem;
+}
+
 .dash-row {
     border: 2px solid #04364A;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     width: 80vw;
+    text-align: center;
 }
 
 .line {
