@@ -155,6 +155,7 @@ namespace ACB.Controllers
 
             SqlConnection sqlconn = new SqlConnection(GetConnectionString());
             string sqlQuery = "select * from quote" +
+                $"\r\n join contractor_service on job_type = contractor_service.id" +
                 $"\r\n Where job_type = {service_type}";
             SqlCommand cmnd = new SqlCommand(sqlQuery, sqlconn);
             sqlconn.Open();
@@ -169,6 +170,7 @@ namespace ACB.Controllers
                 quote.Firstname = (string?)dt.Rows[i][1];
                 quote.Lastname = (string?)dt.Rows[i][2];
                 quote.Email = (string?)dt.Rows[i][3];
+                quote.Service = (string?)dt.Rows[i][12];
                 quotes.Add(quote);
             }
 
