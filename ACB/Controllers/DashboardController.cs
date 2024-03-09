@@ -26,45 +26,28 @@ namespace ACB.Controllers
             return View();
         }
 
-        /*public IActionResult SideBar( ContractorVM contractor) 
+        public IActionResult SideBar( ContractorVM contractor) 
         {
-            if (contractor.Email == null)
+            var currentUser = _userManager.GetUserName;
+
+            var user = currentUser.ToString();
+
+            if(user != "System.Func`2[System.Security.Claims.ClaimsPrincipal,System.String]")
             {
-
-                var currentUser = _userManager.GetUserName;
-
-                var user = currentUser.ToString();
-
-                if (user != "System.Func`2[System.Security.Claims.ClaimsPrincipal,System.String]")
-                {
-                    contractor = Query.GetContractor(user);
-                    return PartialView("../Shared/_sidebar", contractor);
-                }
-
-
+                contractor = Query.GetContractor(user);
+                return PartialView("../Shared/_sidebar", contractor);
             }
             
-            
-            return PartialView("../Shared/_sidebar", contractor);
-        }*/
+            return PartialView("../Shared/_sidebar");
+        }
 
-        public async Task<IActionResult> Home(ContractorVM contractor)
+        public IActionResult Home(ContractorVM contractor)
         {
-            if(contractor.Email == null)
+            if(contractor == null)
             {
-
-                var user = await _userManager.GetUserAsync(HttpContext.User);
-                var userId = user.UserName;
-
-                if (userId != "System.Func`2[System.Security.Claims.ClaimsPrincipal,System.String]")
-                {
-                    contractor = Query.GetContractor(userId);
-                    return View(contractor);
-
-                }
-                
+                contractor = new ContractorVM();
             }
-            //SideBar(contractor);
+            SideBar(contractor);
             return View(contractor);
         }
 
