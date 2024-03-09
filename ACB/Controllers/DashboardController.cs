@@ -5,6 +5,7 @@ using ACB.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Diagnostics.Contracts;
 
 namespace ACB.Controllers
 {
@@ -26,27 +27,6 @@ namespace ACB.Controllers
             return View();
         }
 
-        /*public IActionResult SideBar( ContractorVM contractor) 
-        {
-            if (contractor.Email == null)
-            {
-
-                var currentUser = _userManager.GetUserName;
-
-                var user = currentUser.ToString();
-
-                if (user != "System.Func`2[System.Security.Claims.ClaimsPrincipal,System.String]")
-                {
-                    contractor = Query.GetContractor(user);
-                    return PartialView("../Shared/_sidebar", contractor);
-                }
-
-
-            }
-            
-            
-            return PartialView("../Shared/_sidebar", contractor);
-        }*/
 
         public async Task<IActionResult> Home(ContractorVM contractor)
         {
@@ -64,8 +44,31 @@ namespace ACB.Controllers
                 }
                 
             }
-            //SideBar(contractor);
+
             return View(contractor);
+        }
+
+        public async Task<IActionResult> DisplayQuote(int? Id)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var userId = user.UserName;
+
+            if (userId != "System.Func`2[System.Security.Claims.ClaimsPrincipal,System.String]")
+            {
+                ContractorVM contractor = Query.GetContractor(userId);
+
+                foreach(var quote in contractor.Quotes)
+                {
+                    if(quote.Id == Id)
+                    {
+                        contractor.Quote = quote;
+                    }
+                }
+                return View(contractor);
+
+            }
+
+            return View();
         }
 
 
