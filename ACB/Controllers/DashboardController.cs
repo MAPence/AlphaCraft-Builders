@@ -46,7 +46,7 @@ namespace ACB.Controllers
         }
         public async Task<IActionResult> CreateOrder(ContractorVM contractor)
         {
-            if(contractor == null)
+            if(contractor.Email == null)
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 string? userId = user.UserName;
