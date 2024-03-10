@@ -34,13 +34,20 @@ namespace ACB.Controllers
             {
                 contractor = new ContractorVM();
                 var user = await _userManager.GetUserAsync(HttpContext.User);
-                var userId = user.UserName;
 
-                if (userId != "System.Func`2[System.Security.Claims.ClaimsPrincipal,System.String]")
+                if(user != null)
                 {
-                    contractor = Query.GetContractor(userId);
-                    return View(contractor);
+
+                    var userId = user.UserName;
+
+                    if (userId != "System.Func`2[System.Security.Claims.ClaimsPrincipal,System.String]")
+                    {
+                        contractor = Query.GetContractor(userId);
+                        return View(contractor);
+                    }
+
                 }
+                
             }
             return View(contractor);
         }
