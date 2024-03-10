@@ -30,7 +30,7 @@ namespace ACB.Controllers
 
         public async Task<IActionResult> Home(ContractorVM contractor)
         {
-            if(contractor == null)
+            if(contractor.Email == null)
             {
 
                 contractor = new ContractorVM();
