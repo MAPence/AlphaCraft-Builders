@@ -1,4 +1,4 @@
-﻿@model ACB.Models.NewOrder
+﻿@model ACB.Models.ContractorVM
 
 
 
@@ -15,9 +15,9 @@
             <div class="row">
                
                 <div class="form-group col-6">
-                    <label asp-for="case_id" class="control-label">Email</label>
-                    <input asp-for="case_id" class="form-control" />
-                    <span asp-validation-for="case_id" class="text-danger"></span>
+                    <label asp-for="NewOrder.case_id" class="control-label">Email</label>
+                    <input asp-for="NewOrder.case_id" class="form-control" />
+                    <span asp-validation-for="NewOrder.case_id" class="text-danger"></span>
                 </div>
 
             </div>
@@ -25,9 +25,9 @@
 
             <div class="row">
                 <div class="form-group col-6">
-                    <label asp-for="total" class="control-label">First Name</label>
-                    <input asp-for="total" class="form-control" />
-                    <span asp-validation-for="total" class="text-danger"></span>
+                    <label asp-for="NewOrder.total" class="control-label">First Name</label>
+                    <input asp-for="NewOrder.total" class="form-control" />
+                    <span asp-validation-for="NewOrder.total" class="text-danger"></span>
                 </div>
 
             </div>

@@ -48,22 +48,55 @@ namespace ACB.Controllers
 
             return View(contractor);
         }
-        public async Task<IActionResult> CreateOrder()
+        public async Task<IActionResult> CreateOrder(ContractorVM contractor)
         {
+            if(contractor == null)
+            {
 
-
-            ContractorVM contractor = new ContractorVM();
-
-
-            var user = await _userManager.GetUserAsync(HttpContext.User);
+                var user = await _userManager.GetUserAsync(HttpContext.User);
                 string? userId = user.UserName;
 
                 if (userId != null)
                 {
                     contractor = Query.GetContractor(userId);
+
+
+                    return View(contractor);
+
                 }
+
+            }
+
             
-            return View(contractor.NewOrder);
+
+            return View(contractor);
+
+
+
         }
+
+        /*public async Task<IActionResult> DisplayQuote(int? Id)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            string? userId = user.UserName;
+
+            if (userId != null)
+            {
+                ContractorVM contractor = Query.GetContractor(userId);
+
+                foreach (var quote in contractor.Quotes)
+                {
+                    if (quote.Id == Id)
+                    {
+                        contractor.Quote = quote;
+                    }
+                }
+                contractor.Quote.Images = Query.GetQuoteImages(Id);
+                return View(contractor);
+
+            }
+
+            return View();
+        }*/
     }
 }
