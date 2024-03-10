@@ -26,13 +26,10 @@ namespace ACB.Controllers
             return View();
         }
 
-<<<<<<< HEAD
-=======
 
->>>>>>> DisplayQuote
         public async Task<IActionResult> Home(ContractorVM contractor)
         {
-            if(contractor.Email == null)
+            if (contractor.Email == null)
             {
 
                 contractor = new ContractorVM();
@@ -46,12 +43,10 @@ namespace ACB.Controllers
                     return View(contractor);
                 }
             }
-<<<<<<< HEAD
-=======
 
->>>>>>> DisplayQuote
             return View(contractor);
         }
+
         public async Task<IActionResult> CreateOrder(ContractorVM contractor)
         {
             if(contractor.Email == null)
@@ -59,11 +54,18 @@ namespace ACB.Controllers
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 string? userId = user.UserName;
 
-<<<<<<< HEAD
+
                 if (userId != null)
                 {
                     contractor = Query.GetContractor(userId);
-=======
+
+
+                    return View(contractor);
+                }
+            }
+            return View(contractor);
+        }
+
         public async Task<IActionResult> DisplayQuote(int? Id)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -73,9 +75,9 @@ namespace ACB.Controllers
             {
                 ContractorVM contractor = Query.GetContractor(userId);
 
-                foreach(var quote in contractor.Quotes)
+                foreach (var quote in contractor.Quotes)
                 {
-                    if(quote.Id == Id)
+                    if (quote.Id == Id)
                     {
                         contractor.Quote = quote;
                     }
@@ -88,13 +90,6 @@ namespace ACB.Controllers
             return View();
         }
 
->>>>>>> DisplayQuote
-
-                    return View(contractor);
-                }
-            }
-            return View(contractor);
-        }
         public async Task<IActionResult> AllOrders(ContractorVM contractor)
         {
             // Retrieve the current authenticated user
