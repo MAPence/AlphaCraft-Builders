@@ -1,6 +1,8 @@
 ﻿using ACB.Areas.Identity.Data;
 using ACB.Data;
 using ACB.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
@@ -91,6 +93,11 @@ namespace ACB.Controllers
             contractor.Orders = Query.GetOrders(contractor.Id);           
 
             return View(contractor);
+        }
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }
