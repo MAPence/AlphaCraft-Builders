@@ -1,10 +1,10 @@
 ﻿using ACB.Areas.Identity.Data;
 using ACB.Data;
 using ACB.Models;
-//using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
+using System.Diagnostics.Contracts;
 
 namespace ACB.Controllers
 {
@@ -26,13 +26,11 @@ namespace ACB.Controllers
             return View();
         }
 
-        /*public IActionResult SideBar( ContractorVM contractor) 
+        /*public IActionResult SideBar(ContractorVM contractor) 
         {
             if (contractor.Email == null)
             {
-
                 var currentUser = _userManager.GetUserName;
-
                 var user = currentUser.ToString();
 
                 if (user != "System.Func`2[System.Security.Claims.ClaimsPrincipal,System.String]")
@@ -40,11 +38,7 @@ namespace ACB.Controllers
                     contractor = Query.GetContractor(user);
                     return PartialView("../Shared/_sidebar", contractor);
                 }
-
-
             }
-            
-            
             return PartialView("../Shared/_sidebar", contractor);
         }*/
 
@@ -52,7 +46,6 @@ namespace ACB.Controllers
         {
             if(contractor.Email == null)
             {
-
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 var userId = user.UserName;
 
@@ -60,14 +53,26 @@ namespace ACB.Controllers
                 {
                     contractor = Query.GetContractor(userId);
                     return View(contractor);
-
                 }
-                
             }
             //SideBar(contractor);
             return View(contractor);
         }
+        public async Task<IActionResult> CreateOrder(string Email)
+        {
+            ContractorVM contractor = Query.GetContractor(Email);
 
+            if (contractor.Email == null)
+            {
+                var user = await _userManager.GetUserAsync(HttpContext.User);
+                string? userId = user.UserName;
 
+                if (userId != null)
+                {
+                contractor = Query.GetContractor(userId);
+                }
+            }
+            return View(contractor);
+        }
     }
 }
