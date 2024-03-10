@@ -159,3 +159,16 @@
     border: none;
     background-color: #176B87;
 }
+
+.in-vis{
+    display: none;
+}
+
+.arrow-btn{
+    font-size: 2rem;
+    color: white;
+}
+
+.q-img{
+    height:60vh;
+}

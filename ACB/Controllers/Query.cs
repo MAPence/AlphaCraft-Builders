@@ -25,6 +25,20 @@ namespace ACB.Controllers
 
         }
 
+        public static DataTable GetDataTable(string query)
+        {
+            SqlConnection sqlconn = new SqlConnection(GetConnectionString());
+            string sqlQuery = query;
+            SqlCommand cmnd = new SqlCommand(sqlQuery, sqlconn);
+            sqlconn.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter(cmnd);
+            DataTable dt = new DataTable();
+            adapter.Fill(dt);
+
+            return dt;
+
+        }
+
         //return list of strings from all rows in a table
         public static List<string> PopulateDropDown(string table, int column)
         {
@@ -60,7 +74,7 @@ namespace ACB.Controllers
             SqlConnection sqlconn = new SqlConnection(GetConnectionString());
             SqlCommand sqlquery = new SqlCommand(insertQuery, sqlconn);
             sqlconn.Open();
-            
+
             //execute query statement, return new id
             newId = Convert.ToInt32(sqlquery.ExecuteScalar());
             System.Diagnostics.Debug.WriteLine("New ID : " + newId);
@@ -80,7 +94,7 @@ namespace ACB.Controllers
             //check query statement in output window
             System.Diagnostics.Debug.WriteLine(query);
             return Insert(query);
-        } 
+        }
 
         //get the id of a row in a table wih a unique string value
         public static int GetDBId(string name, string table, string field)
@@ -129,7 +143,7 @@ namespace ACB.Controllers
 
         public static List<int> GetServicesoffered(int? contractorId)
         {
-            List <int> services = new List<int>();
+            List<int> services = new List<int>();
             SqlConnection sqlconn = new SqlConnection(GetConnectionString());
             string sqlQuery = "select service_id from contractor_service_offered" +
                 $"\r\n Where contractor_id = {contractorId}";
@@ -139,13 +153,13 @@ namespace ACB.Controllers
             DataTable dt = new DataTable();
             adapter.Fill(dt);
             sqlconn.Close();
-            for(int i = 0; i < dt.Rows.Count; i++)
+            for (int i = 0; i < dt.Rows.Count; i++)
             {
                 services.Add(Convert.ToInt32(dt.Rows[i][0]));
             }
 
             return services;
-            
+
 
         }
 
@@ -190,35 +204,67 @@ namespace ACB.Controllers
             SqlDataAdapter adapter = new SqlDataAdapter(cmnd);
             DataTable dt = new DataTable();
             adapter.Fill(dt);
-            sqlconn.Close() ;
+            sqlconn.Close();
             contractor.Id = Convert.ToInt32(dt.Rows[0][0]);
             contractor.FirstName = dt.Rows[0][1].ToString();
             contractor.LastName = dt.Rows[0][2].ToString();
             contractor.Email = email;
             contractor.Services = GetServicesoffered(contractor.Id);
-            foreach(var service in contractor.Services)
+            foreach (var service in contractor.Services)
             {
-                
+
                 List<QuoteVM> quotes = GetQuotes(service);
-                if(quotes != null && quotes.Count > 0)
+                if (quotes != null && quotes.Count > 0)
                 {
                     //contractor.Quotes = new List<QuoteVM>();
                     foreach (QuoteVM quote in quotes)
                     {
-                        if(quote != null)
+                        if (quote != null)
                         {
                             contractor.Quotes.Add(quote);
                         }
-                        
+
                     }
+<<<<<<< HEAD
                 }               
             }
+=======
+
+                }
+
+            }
+
+
+
+
+>>>>>>> DisplayQuote
             return contractor;
         }
 
+<<<<<<< HEAD
         public static List<OrdersVM> GetOrders(int? co_id)
         {
             List<OrdersVM> orders = new List<OrdersVM>();
+=======
+        public static List<byte[]>? GetQuoteImages(int? quoteID)
+        {
+            List<byte[]>? quoteImages = new List<byte[]>();
+
+            string query = $"select q_image from quote_image " +
+                $"\b\n where quote_id = {quoteID};";
+
+            DataTable dt = GetDataTable(query);
+
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                quoteImages.Add((byte[])dt.Rows[i][0]);
+            }
+
+
+            return quoteImages;
+        }
+
+>>>>>>> DisplayQuote
 
             using (SqlConnection sqlconn = new SqlConnection(GetConnectionString()))
             {

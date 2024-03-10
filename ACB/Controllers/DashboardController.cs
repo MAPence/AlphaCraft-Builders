@@ -26,6 +26,10 @@ namespace ACB.Controllers
             return View();
         }
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> DisplayQuote
         public async Task<IActionResult> Home(ContractorVM contractor)
         {
             if(contractor.Email == null)
@@ -42,6 +46,10 @@ namespace ACB.Controllers
                     return View(contractor);
                 }
             }
+<<<<<<< HEAD
+=======
+
+>>>>>>> DisplayQuote
             return View(contractor);
         }
         public async Task<IActionResult> CreateOrder(ContractorVM contractor)
@@ -51,9 +59,36 @@ namespace ACB.Controllers
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 string? userId = user.UserName;
 
+<<<<<<< HEAD
                 if (userId != null)
                 {
                     contractor = Query.GetContractor(userId);
+=======
+        public async Task<IActionResult> DisplayQuote(int? Id)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            string? userId = user.UserName;
+
+            if (userId != null)
+            {
+                ContractorVM contractor = Query.GetContractor(userId);
+
+                foreach(var quote in contractor.Quotes)
+                {
+                    if(quote.Id == Id)
+                    {
+                        contractor.Quote = quote;
+                    }
+                }
+                contractor.Quote.Images = Query.GetQuoteImages(Id);
+                return View(contractor);
+
+            }
+
+            return View();
+        }
+
+>>>>>>> DisplayQuote
 
                     return View(contractor);
                 }
