@@ -36,21 +36,14 @@
                             Install Date
                         </div>
                     </div>
-
-
                 </div>
                 <div class="container-fluid dash-row">
-
-
 
                     @foreach (var quote in @quotes)
                     {
                         <div class="row">
-
-
                                     <div class="col-3 line py-2">
                                         <a asp-controller="Dashboard" asp-action="DisplayQuote" asp-route-id="@quote.Id" style="text-decoration:none">@quote.Id</a>
-
                                     </div>
 
                                     <div class="col-3 line">
@@ -63,27 +56,11 @@
 
                                     <div class="col-3 line">
                                         ASAP
-                                    </div>
-                                
-                        </div>
-                        
-                    }
-                
-
-
+                                    </div>                       
+                        </div>                      
+                    }              
                 </div>
-
             </div>
-
         </div>
-
-
-
     </div>
-
-</div>
-
-
-
-                            
-
+</div>                     

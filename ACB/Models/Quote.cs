@@ -13,28 +13,8 @@ namespace ACB.Models
         public string? address { get; set; }
         public int zip { get; set; }
         public string? city { get; set; }
-        public string? state { get; set; }
-        
+        public string? state { get; set; }       
         public int? service { get; set; }
         public byte[]? image { get; set; }
     }
-    /*public class NotEqualAttribute : ValidationAttribute
-    {
-        private readonly string _invalidValue;
-
-        public NotEqualAttribute(string invalidValue)
-        {
-            _invalidValue = invalidValue;
-        }
-
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            if (value != null && value.ToString() == _invalidValue)
-            {
-                return new ValidationResult(ErrorMessage);
-            }
-
-            return ValidationResult.Success;
-        }
-    }*/
 }

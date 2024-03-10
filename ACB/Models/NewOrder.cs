@@ -1,5 +1,4 @@
-﻿
-namespace ACB.Models
+﻿namespace ACB.Models
 {
     public class NewOrder
     {

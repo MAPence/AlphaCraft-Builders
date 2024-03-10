@@ -15,9 +15,7 @@
         public string? city { get; set; }
         public string? state { get; set; }
         public int? service { get; set; }
-
         // Usage to show list
         public IList<Quote> Quotes { get; set; }
-
     }
 }

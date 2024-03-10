@@ -8,6 +8,5 @@
         public string? Email { get; set;}
         public string? Service { get; set;}
         public List<Byte[]>? Images { get; set; }
-
     }
 }

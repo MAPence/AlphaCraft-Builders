@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 using ACB.Models;
 using System.Data;
-
 using System.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using System.Configuration;
@@ -22,7 +20,6 @@ namespace ACB.Controllers
 
             var connString = configuration.GetConnectionString("InterserverSQL");
             return connString;
-
         }
 
         public static DataTable GetDataTable(string query)
@@ -36,7 +33,6 @@ namespace ACB.Controllers
             adapter.Fill(dt);
 
             return dt;
-
         }
 
         //return list of strings from all rows in a table
@@ -63,7 +59,6 @@ namespace ACB.Controllers
             return list;
         }
 
-
         //insert into any table, and return id of new row
         public static int Insert(string insertQuery)
         {
@@ -80,7 +75,6 @@ namespace ACB.Controllers
             System.Diagnostics.Debug.WriteLine("New ID : " + newId);
             sqlconn.Close();
             return newId;
-
         }
         //insert a new customer generated quote request
         public static int NewQuote(Quote quote)
@@ -110,7 +104,6 @@ namespace ACB.Controllers
             adapter2.Fill(dt2);
             sqlconn2.Close();
             return int.Parse(dt2.Rows[0][0].ToString()!);
-
         }
 
         public static void AddImageToDB(int fk, byte[] image)
@@ -137,8 +130,6 @@ namespace ACB.Controllers
             sqlconn.Open();
             sqlcomm.ExecuteNonQuery();
             sqlconn.Close();
-
-
         }
 
         public static List<int> GetServicesoffered(int? contractorId)
@@ -157,10 +148,7 @@ namespace ACB.Controllers
             {
                 services.Add(Convert.ToInt32(dt.Rows[i][0]));
             }
-
             return services;
-
-
         }
 
         public static List<QuoteVM>? GetQuotes(int? service_type)
@@ -187,10 +175,7 @@ namespace ACB.Controllers
                 quote.Service = (string?)dt.Rows[i][12];
                 quotes.Add(quote);
             }
-
             return quotes;
-
-
         }
 
         public static ContractorVM GetContractor(string email)
@@ -212,7 +197,6 @@ namespace ACB.Controllers
             contractor.Services = GetServicesoffered(contractor.Id);
             foreach (var service in contractor.Services)
             {
-
                 List<QuoteVM> quotes = GetQuotes(service);
                 if (quotes != null && quotes.Count > 0)
                 {
@@ -223,18 +207,9 @@ namespace ACB.Controllers
                         {
                             contractor.Quotes.Add(quote);
                         }
-
                     }
-
-
                 }
-
             }
-
-
-
-
-
             return contractor;
         }
 
@@ -251,19 +226,12 @@ namespace ACB.Controllers
             {
                 quoteImages.Add((byte[])dt.Rows[i][0]);
             }
-
-
             return quoteImages;
         }
-
 
         public static List<OrdersVM> GetOrders(int? co_id)
         {
             List<OrdersVM> orders = new List<OrdersVM>();
-
-        
-
-
 
             using (SqlConnection sqlconn = new SqlConnection(GetConnectionString()))
             {

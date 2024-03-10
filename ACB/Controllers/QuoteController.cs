@@ -7,11 +7,8 @@ namespace ACB.Controllers
 {
     public class QuoteController : Controller
     {
-
         public List<SelectListItem> PopulateStates() 
         {
-
-
             List<SelectListItem> States = new List<SelectListItem> {
             new SelectListItem { Text = "Alabama", Value = "AL" },
             new SelectListItem { Text = "Alaska", Value = "AK" },
@@ -64,15 +61,8 @@ namespace ACB.Controllers
             new SelectListItem { Text = "Wisconsin", Value = "WI" },
             new SelectListItem { Text = "Wyoming", Value = "WY" }
             };
-
             return States;
-
-
         }
-
-            
-
-
         
         public IActionResult QuoteForm()
         {
@@ -99,8 +89,6 @@ namespace ACB.Controllers
 
             quote.service = Query.GetDBId(service, "contractor_service", "service_type");
 
-            
-
             int fk = Query.NewQuote(quote);
 
             foreach (var image in imageFile)
@@ -109,7 +97,6 @@ namespace ACB.Controllers
                 System.Diagnostics.Debug.WriteLine(fk);
             }
             Notify.QuoteSuccessful(quote, service);
-
 
             ViewBag.StateOptions = PopulateStates();
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));

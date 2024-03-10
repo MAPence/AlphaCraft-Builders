@@ -5,21 +5,13 @@
 
     var services = Model.Services;
     var images = Model.Quote.Images;
-
-
-
 }
 
 <div class="row d-flex justify-content-center">
-
-
     <div class="col-10 col-lg-6  alpha-form center mt-4">
-
             <form class="align-items-center justify-content-center">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
                 <div class="row">
-
                     <div class="form-group col-6">
                         @Model.Quote.Id
                     </div>
@@ -31,10 +23,7 @@
                     <div class="form-group col-6">
                         @Model.Quote.Lastname
                     </div>
-
                 </div>
-
-            
 
                 @foreach(var image in @images)
                 {
@@ -42,19 +31,15 @@
                         <a href="#" class="pop">
                             <img id="imageresource" class="q-img" src="data:image;base64,@System.Convert.ToBase64String(image)" onclick="enlarge(this);" />
                         </a>
-                    </div>
-                
+                    </div>              
                 }
-
                 <button class="btn arrow-btn left-arrow">
                     <p>&#x2190;</p>
                 </button>
 
                 <button class="btn arrow-btn right-arrow">
                     <p>&#x2192;</p>
-                </button>
-
-                
+                </button>              
             </form>
     </div>
     <script> 
@@ -83,7 +68,6 @@
                     if (activeImg > imgs.length - 1) {
                         activeImg = 0;
                     }
-
                 }
                 else {
                     activeImg --;
@@ -91,12 +75,8 @@
                         activeImg = imgs.length - 1;
                     }
                 }
-
                 activeImages();
             })
         })
-
-
     </script>
 </div>
-

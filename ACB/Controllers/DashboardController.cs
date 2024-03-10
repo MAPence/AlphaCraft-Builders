@@ -26,14 +26,11 @@ namespace ACB.Controllers
             return View();
         }
 
-
         public async Task<IActionResult> Home(ContractorVM contractor)
         {
             if (contractor.Email == null)
             {
-
                 contractor = new ContractorVM();
-
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 var userId = user.UserName;
 
@@ -43,7 +40,6 @@ namespace ACB.Controllers
                     return View(contractor);
                 }
             }
-
             return View(contractor);
         }
 
@@ -54,12 +50,9 @@ namespace ACB.Controllers
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 string? userId = user.UserName;
 
-
                 if (userId != null)
                 {
                     contractor = Query.GetContractor(userId);
-
-
                     return View(contractor);
                 }
             }
@@ -84,9 +77,7 @@ namespace ACB.Controllers
                 }
                 contractor.Quote.Images = Query.GetQuoteImages(Id);
                 return View(contractor);
-
             }
-
             return View();
         }
 
@@ -96,7 +87,6 @@ namespace ACB.Controllers
             var user = await _userManager.GetUserAsync(HttpContext.User);
 
             // Retrieve the orders from the database using the user's username
-
             contractor = Query.GetContractor(user.UserName);
             contractor.Orders = Query.GetOrders(contractor.Id);           
 

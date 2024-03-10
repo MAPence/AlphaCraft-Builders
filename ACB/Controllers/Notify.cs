@@ -14,9 +14,6 @@ namespace ACB.Controllers
             IConfiguration configuration = builder.Build();
 
             var password = configuration.GetConnectionString("password");
-
-            System.Diagnostics.Debug.WriteLine("HELLLOOOOOO!!!!" + password);
-
             return password;          
         }
 

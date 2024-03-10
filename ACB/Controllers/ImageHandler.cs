@@ -11,7 +11,6 @@ namespace ACB.Controllers
             {
                 throw new NotSupportedException("Unsupported image type. Please upload a valid image file.");
             }
-
             byte[]? image = null;
 
             if (imageFile.Length > 0)

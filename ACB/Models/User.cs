@@ -6,18 +6,12 @@ using System.Threading.Tasks;
 using ACB.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity;
 
-
-
 // Add profile data for application users by adding properties to the ACBUser class
-
-
-
 
 namespace ACB.Models
 {
     public class User 
     {
-
         [DataType(DataType.EmailAddress)]
         public string? Email { get; set; }
 
@@ -52,7 +46,5 @@ namespace ACB.Models
         public string Company { get; set; }
         [PersonalData]
         public string? Title { get; set; }
-
-
     }
 }
