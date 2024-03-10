@@ -9,6 +9,8 @@
         public List<int>? Services { get; set; }
         public List<QuoteVM>? Quotes { get; set; }
 
+        public NewOrder? NewOrder { get; set; }
+
         public ContractorVM() 
         { 
 

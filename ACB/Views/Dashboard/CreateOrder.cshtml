@@ -1,0 +1,48 @@
+﻿@model ACB.Models.NewOrder
+
+
+
+<div class="row d-flex justify-content-center">
+
+
+    <div class="col-10 col-lg-6  alpha-form center mt-4">
+
+        <form asp-action="Create" enctype="multipart/form-data" AllowMultiple="true" runat="server" class="align-items-center justify-content-center">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <h2 class="text-center mb-2">Get a bid from local contractors</h2>
+
+            <div class="row">
+               
+                <div class="form-group col-6">
+                    <label asp-for="case_id" class="control-label">Email</label>
+                    <input asp-for="case_id" class="form-control" />
+                    <span asp-validation-for="case_id" class="text-danger"></span>
+                </div>
+
+            </div>
+
+
+            <div class="row">
+                <div class="form-group col-6">
+                    <label asp-for="total" class="control-label">First Name</label>
+                    <input asp-for="total" class="form-control" />
+                    <span asp-validation-for="total" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="mb-3">
+                <label class="form-label">Images</label>
+
+                <input type="file" name="imageFile" class="form-control" multiple="multiple" AllowMultiple="true" />
+
+            </div>
+
+            <div class="form-group">
+                (6 images maximum, files accepted: .jpg, .jpeg, .png)
+                <input type="submit" value="Submit" class="btn btn-primary mt-3 form-btn " onclick="SuccessPrompt()" />
+            </div>
+        </form>
+    </div>
+</div>
+
