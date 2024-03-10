@@ -211,19 +211,39 @@ namespace ACB.Controllers
                         }
                         
                     }
-
-                }
-                
+                }               
             }
-            
-
-
-
             return contractor;
-
         }
 
+        public static List<OrdersVM> GetOrders(int? co_id)
+        {
+            List<OrdersVM> orders = new List<OrdersVM>();
 
+            using (SqlConnection sqlconn = new SqlConnection(GetConnectionString()))
+            {
+                string sqlQuery = "SELECT * FROM Orders WHERE co_id = @co_id";
+                SqlCommand cmnd = new SqlCommand(sqlQuery, sqlconn);
+                cmnd.Parameters.AddWithValue("@co_id", co_id);
 
+                sqlconn.Open();
+                using (SqlDataReader reader = cmnd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        OrdersVM order = new OrdersVM
+                        {
+                            Id = reader.GetInt32(0),
+                            co_id = reader.IsDBNull(1) ? null : (int?)reader.GetInt32(1),
+                            case_id = reader.IsDBNull(2) ? null : (int?)reader.GetInt32(2),
+                            total = (float?)(reader.IsDBNull(3) ? null : (decimal?)reader.GetDecimal(3)),
+                            //Created = reader.IsDBNull(4) ? null : (DateTime?)reader.GetDateTime(4)
+                        };
+                        orders.Add(order);
+                    }
+                }
+            }
+            return orders;
+        }
     }
 }

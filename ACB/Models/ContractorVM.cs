@@ -13,11 +13,11 @@
 
         public ContractorVM() 
         { 
-
+            Orders = new List<OrdersVM>();
             Quotes = new List<QuoteVM>();   
             Services = new List<int>();
         
         }
-
+        public List<OrdersVM>? Orders { get; set; }
     }
 }
