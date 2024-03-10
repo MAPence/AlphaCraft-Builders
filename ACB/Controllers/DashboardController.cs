@@ -51,9 +51,9 @@ namespace ACB.Controllers
         public async Task<IActionResult> DisplayQuote(int? Id)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            var userId = user.UserName;
+            string? userId = user.UserName;
 
-            if (userId != "System.Func`2[System.Security.Claims.ClaimsPrincipal,System.String]")
+            if (userId != null)
             {
                 ContractorVM contractor = Query.GetContractor(userId);
 
@@ -64,6 +64,7 @@ namespace ACB.Controllers
                         contractor.Quote = quote;
                     }
                 }
+                contractor.Quote.Images = Query.GetQuoteImages(Id);
                 return View(contractor);
 
             }

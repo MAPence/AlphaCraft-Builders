@@ -4,6 +4,7 @@
     ViewData["Title"] = "displayquote";
 
     var services = Model.Services;
+    var images = Model.Quote.Images;
 
 
 
@@ -14,7 +15,7 @@
 
     <div class="col-10 col-lg-6  alpha-form center mt-4">
 
-            <form asp-action="Create" class="align-items-center justify-content-center">
+            <form class="align-items-center justify-content-center">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="row">
@@ -33,7 +34,69 @@
 
                 </div>
 
+            
+
+                @foreach(var image in @images)
+                {
+                    <div >
+                        <a href="#" class="pop">
+                            <img id="imageresource" class="q-img" src="data:image;base64,@System.Convert.ToBase64String(image)" onclick="enlarge(this);" />
+                        </a>
+                    </div>
+                
+                }
+
+                <button class="btn arrow-btn left-arrow">
+                    <p>&#x2190;</p>
+                </button>
+
+                <button class="btn arrow-btn right-arrow">
+                    <p>&#x2192;</p>
+                </button>
+
                 
             </form>
     </div>
+    <script> 
+        const imgs = document.querySelectorAll(".q-img");
+        const arrowBtns = document.querySelectorAll(".arrow-btn");
+
+        let activeImg = 0;
+
+        console.log(arrowBtns);
+        console.log(imgs);
+
+        function activeImages() {
+            imgs.forEach((img) => {
+                img.classList.add("in-vis");
+            });
+
+            imgs[activeImg].classList.remove("in-vis");
+        }
+
+        activeImages();
+
+        arrowBtns.forEach((btn) => {
+            btn.addEventListener("click", () => {
+                if (btn.classList == "right-arrow") {
+                    activeImg++;
+                    if (activeImg > imgs.length - 1) {
+                        activeImg = 0;
+                    }
+
+                }
+                else {
+                    activeImg --;
+                    if (activeImg < 0) {
+                        activeImg = imgs.length - 1;
+                    }
+                }
+
+                activeImages();
+            })
+        })
+
+
+    </script>
 </div>
+
