@@ -9,7 +9,8 @@ namespace ACB.Controllers
     {
         public List<SelectListItem> PopulateStates() 
         {
-            List<SelectListItem> States = new List<SelectListItem> {
+            List<SelectListItem> States = new()
+            {
             new SelectListItem { Text = "Alabama", Value = "AL" },
             new SelectListItem { Text = "Alaska", Value = "AK" },
             new SelectListItem { Text = "Arizona", Value = "AZ" },
@@ -87,7 +88,7 @@ namespace ACB.Controllers
                 return View("QuoteForm",quote);
              }
 
-            quote.service = Query.GetDBId(service, "contractor_service", "service_type");
+            quote.Service = Query.GetDBId(service, "contractor_service", "service_type");
 
             int fk = Query.NewQuote(quote);
 
