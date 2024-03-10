@@ -1,4 +1,5 @@
-﻿namespace ACB.Models
+﻿
+namespace ACB.Models
 {
     public class NewOrder
     {
@@ -6,5 +7,6 @@
         public int? co_id { get; set; }
         public int? case_id { get; set; }
         public float? total { get; set; }
+        public DateTime? Created { get; internal set; }
     }
 }

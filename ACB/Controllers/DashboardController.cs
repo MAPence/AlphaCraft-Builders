@@ -26,8 +26,6 @@ namespace ACB.Controllers
             return View();
         }
 
-
-
         public async Task<IActionResult> Home(ContractorVM contractor)
         {
             if(contractor == null)
@@ -43,16 +41,13 @@ namespace ACB.Controllers
                     contractor = Query.GetContractor(userId);
                     return View(contractor);
                 }
-
             }
-
             return View(contractor);
         }
         public async Task<IActionResult> CreateOrder(ContractorVM contractor)
         {
             if(contractor == null)
             {
-
                 var user = await _userManager.GetUserAsync(HttpContext.User);
                 string? userId = user.UserName;
 
@@ -60,43 +55,22 @@ namespace ACB.Controllers
                 {
                     contractor = Query.GetContractor(userId);
 
-
                     return View(contractor);
-
                 }
-
             }
+            return View(contractor);
+        }
+        public async Task<IActionResult> AllOrders(ContractorVM contractor)
+        {
+            // Retrieve the current authenticated user
+            var user = await _userManager.GetUserAsync(HttpContext.User);
 
-            
+            // Retrieve the orders from the database using the user's username
+
+            contractor = Query.GetContractor(user.UserName);
+            contractor.Orders = Query.GetOrders(contractor.Id);           
 
             return View(contractor);
-
-
-
         }
-
-        /*public async Task<IActionResult> DisplayQuote(int? Id)
-        {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            string? userId = user.UserName;
-
-            if (userId != null)
-            {
-                ContractorVM contractor = Query.GetContractor(userId);
-
-                foreach (var quote in contractor.Quotes)
-                {
-                    if (quote.Id == Id)
-                    {
-                        contractor.Quote = quote;
-                    }
-                }
-                contractor.Quote.Images = Query.GetQuoteImages(Id);
-                return View(contractor);
-
-            }
-
-            return View();
-        }*/
     }
 }

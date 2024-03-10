@@ -1,0 +1,50 @@
+﻿@model ACB.Models.ContractorVM
+@{
+    ViewData["Title"] = "All Orders";
+    var orders = Model.Orders;
+}
+
+<div class="col-9">
+    <div class="container-fluid">
+        <div class="row table-w container">
+            <div class="col-12 py-3">
+                <div class="dash-header">
+                    All Orders
+                    <div class="row px-4">
+                        <div class="col-3 line col-header">
+                            Order #
+                        </div>
+                        <div class="col-3 line col-header">
+                            Contractor Name
+                        </div>
+                        <div class="col-3 line col-header">
+                            Case ID
+                        </div>
+                        <div class="col-3 line col-header">
+                            Total
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid dash-row">
+                    @foreach (var order in orders)
+                    {
+                        <div class="row">
+                            <div class="col-3 line">
+                                @order.Id
+                            </div>
+                            <div class="col-3 line">
+                                @(order.co_id)
+                            </div>
+                            <div class="col-3 line">
+                                @order.case_id
+                            </div>
+                            <div class="col-3 line">
+                                @order.total
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
