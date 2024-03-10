@@ -45,34 +45,33 @@
 
                     @foreach (var quote in @quotes)
                     {
-
                         <div class="row">
 
-<<<<<<< HEAD
-                            <div class="col-3 line">
-                                <a href="./quote.html">@quote.Id</a>
-=======
-                            <div class="col-3 line py-2">
-                                <a asp-controller="Dashboard" asp-action="DisplayQuote" asp-route-id="@quote.Id" style="text-decoration:none">@quote.Id</a>
->>>>>>> DisplayQuote
-                            </div>
 
-                            <div class="col-3 line">
-                                <a href="#">@quote.Firstname @quote.Lastname</a>
-                            </div>
+                                <div class="col-3 line">
+                                    <a href="./quote.html">@quote.Id</a>
 
-                            <div class="col-3 line">
-                                @quote.Service
-                            </div>
+                                    <div class="col-3 line py-2">
+                                        <a asp-controller="Dashboard" asp-action="DisplayQuote" asp-route-id="@quote.Id" style="text-decoration:none">@quote.Id</a>
 
-                            <div class="col-3 line">
-                                ASAP
-                            </div>
+                                    </div>
+
+                                    <div class="col-3 line">
+                                        <a href="#">@quote.Firstname @quote.Lastname</a>
+                                    </div>
+
+                                    <div class="col-3 line">
+                                        @quote.Service
+                                    </div>
+
+                                    <div class="col-3 line">
+                                        ASAP
+                                    </div>
+                                </div>
                         </div>
                         
-
-
                     }
+                
 
 
                 </div>

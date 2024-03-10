@@ -225,10 +225,7 @@ namespace ACB.Controllers
                         }
 
                     }
-<<<<<<< HEAD
-                }               
-            }
-=======
+
 
                 }
 
@@ -237,15 +234,10 @@ namespace ACB.Controllers
 
 
 
->>>>>>> DisplayQuote
+
             return contractor;
         }
 
-<<<<<<< HEAD
-        public static List<OrdersVM> GetOrders(int? co_id)
-        {
-            List<OrdersVM> orders = new List<OrdersVM>();
-=======
         public static List<byte[]>? GetQuoteImages(int? quoteID)
         {
             List<byte[]>? quoteImages = new List<byte[]>();
@@ -264,7 +256,14 @@ namespace ACB.Controllers
             return quoteImages;
         }
 
->>>>>>> DisplayQuote
+
+        public static List<OrdersVM> GetOrders(int? co_id)
+        {
+            List<OrdersVM> orders = new List<OrdersVM>();
+
+        
+
+
 
             using (SqlConnection sqlconn = new SqlConnection(GetConnectionString()))
             {

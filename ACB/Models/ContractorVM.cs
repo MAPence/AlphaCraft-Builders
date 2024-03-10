@@ -9,11 +9,11 @@
         public List<int>? Services { get; set; }
         public List<QuoteVM>? Quotes { get; set; }
 
-<<<<<<< HEAD
+
         public NewOrder? NewOrder { get; set; }
-=======
+
         public QuoteVM? Quote { get; set; }
->>>>>>> DisplayQuote
+
 
         public ContractorVM() 
         { 
