@@ -33,20 +33,22 @@
                         </a>
                     </div>              
                 }
-                <button class="btn arrow-btn left-arrow">
+                <button class="btn arrow-btn left-arrow" onclick="return scrollright()">
                     <p>&#x2190;</p>
                 </button>
 
-                <button class="btn arrow-btn right-arrow">
+                <button class="btn arrow-btn right-arrow" onclick="return scrollleft()">
                     <p>&#x2192;</p>
                 </button>              
             </form>
     </div>
-    <script> 
+    <script>
+        
         const imgs = document.querySelectorAll(".q-img");
         const arrowBtns = document.querySelectorAll(".arrow-btn");
 
         let activeImg = 0;
+        
 
         console.log(arrowBtns);
         console.log(imgs);
@@ -61,22 +63,37 @@
 
         activeImages();
 
-        arrowBtns.forEach((btn) => {
-            btn.addEventListener("click", () => {
-                if (btn.classList == "right-arrow") {
-                    activeImg++;
-                    if (activeImg > imgs.length - 1) {
-                        activeImg = 0;
-                    }
-                }
-                else {
-                    activeImg --;
-                    if (activeImg < 0) {
-                        activeImg = imgs.length - 1;
-                    }
-                }
-                activeImages();
-            })
-        })
+        function scrollright(){
+            
+            activeImg++;
+            if (activeImg > imgs.length - 1) {
+                activeImg = 0;
+            }
+
+            activeImages();
+            
+            return false;
+            
+        }
+
+        function scrollleft(){
+            
+            activeImg--;
+            if (activeImg < 0) {
+                activeImg = imgs.length - 1;
+            }
+
+            activeImages();
+            
+            return false;
+
+        }
+
+
+        
+
     </script>
 </div>
+
+
+       

@@ -76,7 +76,7 @@ namespace ACB.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create
-            ([Bind("service,client_first_name,client_last_name,client_email,details,city,state,zip")] Quote quote, 
+            ([Bind("Client_first_name,Client_last_name,Client_email,Details,City,State,Zip")] Quote quote, 
             string? service, List<IFormFile> imageFile)
         {
              if(service == null)

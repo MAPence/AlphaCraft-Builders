@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System.Diagnostics.Contracts;
+//using Microsoft.AspNet.Identity;
+using System.Security.Claims;
 
 namespace ACB.Controllers
 {
@@ -57,10 +59,11 @@ namespace ACB.Controllers
             if(contractor.Email == null)
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
-                string? userId = user.UserName;
+                
 
-                if (userId != null)
+                if (user != null)
                 {
+                    string? userId = user.UserName;
                     contractor = Query.GetContractor(userId);
                     return View(contractor);
                 }
@@ -68,13 +71,14 @@ namespace ACB.Controllers
             return View(contractor);
         }
 
-        public async Task<IActionResult> DisplayQuote(int? Id)
+        /*public async Task<IActionResult> DisplayQuote(int? Id)
         {
             var user = await _userManager.GetUserAsync(HttpContext.User);
-            string? userId = user.UserName;
+            
 
-            if (userId != null)
+            if (user != null)
             {
+                string? userId = user.UserName;
                 ContractorVM contractor = Query.GetContractor(userId);
 
                 foreach (var quote in contractor.Quotes)
@@ -88,6 +92,30 @@ namespace ACB.Controllers
                 return View(contractor);
             }
             return View();
+        }*/
+
+        public IActionResult DisplayQuote(int? Id)
+        {
+            //var user = await _userManager.GetUserAsync(HttpContext.User);
+            var user = User.FindFirstValue(ClaimTypes.Name);
+
+            if (user != null)
+            {
+                //string? userId = user.UserName;
+                ContractorVM contractor = Query.GetContractor(user);
+
+                foreach (var quote in contractor.Quotes)
+                {
+                    if (quote.Id == Id)
+                    {
+                        contractor.Quote = quote;
+                    }
+                }
+                contractor.Quote.Images = Query.GetQuoteImages(Id);
+                return View(contractor);
+            }
+            return View();
+
         }
 
         public async Task<IActionResult> AllOrders(ContractorVM contractor)
