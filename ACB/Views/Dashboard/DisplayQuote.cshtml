@@ -9,9 +9,16 @@
 
 <div class="row d-flex justify-content-center">
     <div class="col-10 col-lg-6  alpha-form center mt-4">
-            <form class="align-items-center justify-content-center">
+        <h2>Quote @Model.Quote.Id</h2>
+        <div class="row">
+            <div id="info-tab" class="col-3 tab-btn mx-3" onclick="return Info()">Info</div>
+            <div id="photo-tab" class="col-3 tab-btn" onclick="return Photos()">Photos</div>
+
+        </div>
+        
+            <form class="align-items-center justify-content-center quote-box">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <div class="row">
+                <div class="row ">
                     <div class="form-group col-6">
                         @Model.Quote.Id
                     </div>
@@ -87,6 +94,18 @@
             
             return false;
 
+        }
+
+        function Info() {
+            var element = document.getElementById("info-tab");
+            element.style.borderBottomColor = "#04364A";
+            return false;
+        }
+
+        function Info() {
+            var element = document.getElementById("photo-tab");
+            element.style.borderBottomColor = "#04364A";
+            return false;
         }
 
 

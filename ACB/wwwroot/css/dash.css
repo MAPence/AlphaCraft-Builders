@@ -21,6 +21,24 @@
     transition: 0.5s;
 }
 
+.quote-box {
+    padding: 20px;
+    border: 2px solid white;
+}
+
+.tab-btn {
+    border: 2px solid white;
+    border-radius: 15px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    margin-bottom: -2px;
+    z-index: 5;
+}
+
+#info-tab {
+    border-bottom-color: #04364A;
+}
+
 #sb-dash{
     padding: 5px;
 }
