@@ -208,9 +208,20 @@
    
 }
 
-@media (min-width: 768px) {
+@media (max-width: 1300px) {
 
     .alpha-form {
         width: 95vw;
+        margin: 0px;
+    }
+
+    .quote-box {
+        padding: 0px;
+    }
+
+    .arrow-btn {
+        font-size: 1.5rem;
+        color: white;
+        padding: 0px;
     }
 }
