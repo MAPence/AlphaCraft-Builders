@@ -55,3 +55,9 @@ body {
 .btn-microsoft {
     background-color: #00a1f1; /* Microsoft color */
 }
+
+
+@media (min-width: 768px) {
+
+
+}

@@ -8,7 +8,7 @@
 }
 
 <div class="row d-flex justify-content-center">
-    <div class="col-sm-10 alpha-form center mt-4">
+    <div class="col alpha-form center mt-4">
         <h2>Quote @Model.Quote.Id</h2>
         <div class="row">
             <div id="info-tab" class="col-5 tab-btn mx-3" onclick="return Info()">Info</div>
@@ -20,41 +20,41 @@
 
                 <div id="info-view" >
 
-                    <div class="row ">
-                        <div class="form-group col-6">
+                    
+                        <div class="col-6">
                             @Model.Quote.Id
                         </div>
 
-                        <div class="form-group col-6">
+                        <div class="col-6">
                             @Model.Quote.Firstname
                         </div>
 
-                        <div class="form-group col-6">
+                        <div class="col-6">
                             @Model.Quote.Lastname
                         </div>
-                    </div>
+                    
 
                 </div>
                 
 
                 <div id="photo-view">
+                    <div id="q-img-cont" class="container">
 
-                <button class="btn arrow-btn left-arrow" onclick="return scrollright()">
-                    <p>&#x2190;</p>
-                </button>
+                        <button class="btn arrow-btn left-arrow" onclick="return scrollright()">
+                            <p>&#x2190;</p>
+                        </button>
 
-                    @foreach (var image in @images)
-                    {
-                        
-                           <img class="q-img" src="data:image;base64,@System.Convert.ToBase64String(image)" onclick="enlarge(this);" />
-                        
-                    }
+                        @foreach (var image in @images)
+                        {
+                                <img class="q-img" src="data:image;base64,@System.Convert.ToBase64String(image)" onclick="enlarge(this);" />
+
+                        }
                     
+                        <button class="btn arrow-btn right-arrow" onclick="return scrollleft()">
+                            <p>&#x2192;</p>
+                        </button>
 
-                    <button class="btn arrow-btn right-arrow" onclick="return scrollleft()">
-                        <p>&#x2192;</p>
-                    </button>
-
+                    </div>
                 </div>
 
                              
@@ -110,15 +110,25 @@
         function Info() {
             var infotab = document.getElementById("info-tab");
             infotab.style.borderBottomColor = "#04364A";
+            
 
             var phototab = document.getElementById("photo-tab");
             phototab.style.borderBottomColor = "white";
+            
 
             var photos = document.getElementById("photo-view");
             var info = document.getElementById("info-view");
 
             photos.style.display = "none";
+            photos.style.zIndex = "0";
             info.style.height = "70vh";
+
+            var nodes = info.children;
+            for (var i = 0; i < nodes.length; i++) {
+
+                nodes[i].style.display = "block";
+
+            }
 
             return false;
         }
@@ -126,15 +136,28 @@
         function Photos() {
             var phototab = document.getElementById("photo-tab");
             phototab.style.borderBottomColor = "#04364A";
+            
+
 
             var infotab = document.getElementById("info-tab");
             infotab.style.borderBottomColor = "white";
+            
 
             var photos = document.getElementById("photo-view");
             var info = document.getElementById("info-view");
 
-            photos.style.display = "block";
+            //info.querySelector("#child").style.display = "none";
+
+            photos.style.display = "flex";
+            photos.style.zIndex = "15";
             info.style.height = "0px";
+
+            var nodes = info.children;
+            for (var i = 0; i < nodes.length; i++) {
+
+                nodes[i].style.display = "none";
+
+            }
 
             return false;
         }
