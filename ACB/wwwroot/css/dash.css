@@ -67,6 +67,17 @@
     border-bottom-color: #04364A;
 }
 
+.q-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+
+
+
 #sb-dash{
     padding: 5px;
 }

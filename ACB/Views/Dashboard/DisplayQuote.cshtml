@@ -20,18 +20,23 @@
 
                 <div id="info-view" >
 
-                    
-                        <div class="col-6">
-                            @Model.Quote.Id
+                    <div class="container q-data">
+
+                        <div class="col-8 my-3">
+                            @Model.Quote.Firstname @Model.Quote.Lastname
                         </div>
 
-                        <div class="col-6">
-                            @Model.Quote.Firstname
+                        <div class="col-8 my-3">
+                            @Model.Quote.Address @Model.Quote.Zip
                         </div>
 
-                        <div class="col-6">
-                            @Model.Quote.Lastname
-                        </div>
+                        <textarea rows="5" class="col-8 my3">
+                            @Model.Quote.Details
+                        </textarea>
+
+
+                    </div>
+                        
                     
 
                 </div>
