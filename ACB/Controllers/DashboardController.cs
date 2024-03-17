@@ -114,7 +114,7 @@ namespace ACB.Controllers
                 contractor.Quote.Images = Query.GetQuoteImages(Id);
                 return View(contractor);
             }
-            return View();
+            return View("../User/Login");
 
         }
 
