@@ -4,37 +4,17 @@ namespace ACB.Models
 {
     public class Quote
     {
-        public int id { get; set; }
-        public string? client_first_name { get; set; }
-        public string? client_last_name { get; set; }
-        public string? client_email { get; set; }
-        public DateTime? created { get; set; }
-        public string? details { get; set; }
-        public string? address { get; set; }
-        public int zip { get; set; }
-        public string? city { get; set; }
-        public string? state { get; set; }
-        
-        public int? service { get; set; }
-        public byte[]? image { get; set; }
+        public int Id { get; set; }
+        public string? Client_first_name { get; set; }
+        public string? Client_last_name { get; set; }
+        public string? Client_email { get; set; }
+        public DateTime? Created { get; set; }
+        public string? Details { get; set; }
+        public string? Address { get; set; }
+        public int Zip { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }       
+        public int? Service { get; set; }
+        public byte[]? Image { get; set; }
     }
-    /*public class NotEqualAttribute : ValidationAttribute
-    {
-        private readonly string _invalidValue;
-
-        public NotEqualAttribute(string invalidValue)
-        {
-            _invalidValue = invalidValue;
-        }
-
-        protected override ValidationResult IsValid(object value, ValidationContext validationContext)
-        {
-            if (value != null && value.ToString() == _invalidValue)
-            {
-                return new ValidationResult(ErrorMessage);
-            }
-
-            return ValidationResult.Success;
-        }
-    }*/
 }

@@ -12,7 +12,7 @@ public class ACBContext : IdentityDbContext<ACBUser>
     {
     }
 
-    public DbSet<ACB.Areas.Identity.Data.ACBUser>? aCBUsers { get; set; }
+    public DbSet<ACB.Areas.Identity.Data.ACBUser>? ACBUsers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

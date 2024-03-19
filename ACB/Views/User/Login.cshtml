@@ -33,9 +33,17 @@
                 </div>
             </div>
         </form>
+        <hr class="light-grey-line" />
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <!-- These buttons are formatted in site.css -->
+                <button class="btn btn-secondary btn-google mb-2">Login with Google</button>
+                <button class="btn btn-secondary btn-microsoft mb-2">Login with Microsoft</button>
+                <!-- Add more buttons for other providers -->
+            </div>
+        </div>
     </div>
 </div>
-
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

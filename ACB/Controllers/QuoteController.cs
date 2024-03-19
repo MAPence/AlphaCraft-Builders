@@ -7,9 +7,10 @@ namespace ACB.Controllers
 {
     public class QuoteController : Controller
     {
-        public IActionResult QuoteForm()
+        public List<SelectListItem> PopulateStates() 
         {
-            ViewBag.StateOptions = new List<SelectListItem>{
+            List<SelectListItem> States = new()
+            {
             new SelectListItem { Text = "Alabama", Value = "AL" },
             new SelectListItem { Text = "Alaska", Value = "AK" },
             new SelectListItem { Text = "Arizona", Value = "AZ" },
@@ -61,6 +62,12 @@ namespace ACB.Controllers
             new SelectListItem { Text = "Wisconsin", Value = "WI" },
             new SelectListItem { Text = "Wyoming", Value = "WY" }
             };
+            return States;
+        }
+        
+        public IActionResult QuoteForm()
+        {
+            ViewBag.StateOptions = PopulateStates();
 
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
             return View();
@@ -69,18 +76,19 @@ namespace ACB.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create
-            ([Bind("service,client_first_name,client_last_name,client_email,details,city,state,zip")] Quote quote, 
+            ([Bind("Client_first_name,Client_last_name,Client_email,Details,City,State,Zip")] Quote quote, 
             string? service, List<IFormFile> imageFile)
         {
              if(service == null)
-            {
-                ModelState.AddModelError(nameof(Quote.service), "Please select a valid service type");
-                return View(quote);
-            }
+             {
 
-            quote.service = Query.GetDBId(service, "contractor_service", "service_type");
+                ModelState.AddModelError(nameof(service), "Please select a valid service type");
+                ViewBag.StateOptions = PopulateStates();
+                ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
+                return View("QuoteForm",quote);
+             }
 
-            
+            quote.Service = Query.GetDBId(service, "contractor_service", "service_type");
 
             int fk = Query.NewQuote(quote);
 
@@ -91,6 +99,7 @@ namespace ACB.Controllers
             }
             Notify.QuoteSuccessful(quote, service);
 
+            ViewBag.StateOptions = PopulateStates();
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
             return View("../Home/Index");
         }

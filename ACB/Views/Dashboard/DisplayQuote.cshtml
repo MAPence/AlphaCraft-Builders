@@ -1,0 +1,177 @@
+﻿@model ACB.Models.ContractorVM
+
+@{
+    ViewData["Title"] = "displayquote";
+
+    var services = Model.Services;
+    var images = Model.Quote.Images;
+}
+
+<div class="row d-flex justify-content-center">
+    <div class="col alpha-form center mt-4">
+        <h2>Quote @Model.Quote.Id</h2>
+        <div class="row">
+            <div id="info-tab" class="col-5 tab-btn mx-3" onclick="return Info()">Info</div>
+            <div id="photo-tab" class="col-5 tab-btn" onclick="return Photos()">Photos</div>
+
+        </div>
+        
+            <div class="align-items-center justify-content-center quote-box">
+
+                <div id="info-view" >
+
+                    <div class="container q-data">
+
+                        <div class="col-8 my-3">
+                            @Model.Quote.Firstname @Model.Quote.Lastname
+                        </div>
+
+                        <div class="col-8 my-3">
+                            @Model.Quote.Address @Model.Quote.Zip
+                        </div>
+
+                        <textarea rows="5" class="col-8 my3">
+                            @Model.Quote.Details
+                        </textarea>
+
+
+                    </div>
+                        
+                    
+
+                </div>
+                
+
+                <div id="photo-view">
+                    <div id="q-img-cont" class="container ">
+
+                        <button class="btn arrow-btn left-arrow" onclick="return scrollright()">
+                            <p>&#x2190;</p>
+                        </button>
+
+                        @foreach (var image in @images)
+                        {
+                                <img class="q-img" src="data:image;base64,@System.Convert.ToBase64String(image)" onclick="enlarge(this);" />
+
+                        }
+                    
+                        <button class="btn arrow-btn right-arrow" onclick="return scrollleft()">
+                            <p>&#x2192;</p>
+                        </button>
+
+                    </div>
+                </div>
+
+                             
+            </div>
+    </div>
+    <script>
+        
+        const imgs = document.querySelectorAll(".q-img");
+        const arrowBtns = document.querySelectorAll(".arrow-btn");
+
+        let activeImg = 0;
+        
+
+        console.log(arrowBtns);
+        console.log(imgs);
+
+        function activeImages() {
+            imgs.forEach((img) => {
+                img.classList.add("in-vis");
+            });
+
+            imgs[activeImg].classList.remove("in-vis");
+        }
+
+        activeImages();
+
+        function scrollright(){
+            
+            activeImg++;
+            if (activeImg > imgs.length - 1) {
+                activeImg = 0;
+            }
+
+            activeImages();
+            
+            return false;
+            
+        }
+
+        function scrollleft(){
+            
+            activeImg--;
+            if (activeImg < 0) {
+                activeImg = imgs.length - 1;
+            }
+
+            activeImages();
+            
+            return false;
+
+        }
+
+        function Info() {
+            var infotab = document.getElementById("info-tab");
+            infotab.style.borderBottomColor = "#04364A";
+            
+
+            var phototab = document.getElementById("photo-tab");
+            phototab.style.borderBottomColor = "white";
+            
+
+            var photos = document.getElementById("photo-view");
+            var info = document.getElementById("info-view");
+
+            photos.style.display = "none";
+            photos.style.zIndex = "0";
+            info.style.height = "70vh";
+
+            var nodes = info.children;
+            for (var i = 0; i < nodes.length; i++) {
+
+                nodes[i].style.display = "flex";
+
+            }
+
+            return false;
+        }
+
+        function Photos() {
+            var phototab = document.getElementById("photo-tab");
+            phototab.style.borderBottomColor = "#04364A";
+            
+
+
+            var infotab = document.getElementById("info-tab");
+            infotab.style.borderBottomColor = "white";
+            
+
+            var photos = document.getElementById("photo-view");
+            var info = document.getElementById("info-view");
+
+            //info.querySelector("#child").style.display = "none";
+
+            photos.style.display = "flex";
+            photos.style.zIndex = "15";
+            info.style.height = "0px";
+
+            var nodes = info.children;
+            for (var i = 0; i < nodes.length; i++) {
+
+                nodes[i].style.display = "none";
+
+            }
+
+            return false;
+        }
+
+
+        
+
+    </script>
+</div>
+
+
+       

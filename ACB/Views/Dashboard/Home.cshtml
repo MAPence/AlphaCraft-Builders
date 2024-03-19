@@ -1,7 +1,66 @@
-﻿
+﻿@model ACB.Models.ContractorVM
 @{
     ViewData["Title"] = "home";
+   
+    var services = Model.Services;
+    
+    
+    var quotes = Model.Quotes;
 }
 
-<h1>home</h1>
+<h1>@Model.FirstName @Model.LastName</h1>
 
+<div class="col-9">
+
+    <div class="container-fluid ">
+
+        <div class="row table-w container">
+            <div class="col-12 py-3">
+                <div class="dash-header">Quote Requests
+
+                    <div class="row px-4">
+
+                        <div class="col-3 line col-header">
+                            Request #
+                        </div>
+
+                        <div class="col-3 line col-header">
+                            Client Name
+                        </div>
+
+                        <div class="col-3 line col-header">
+                            Service Needed
+                        </div>
+
+                        <div class="col-3 line col-header">
+                            Install Date
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid dash-row">
+
+                    @foreach (var quote in @quotes)
+                    {
+                        <div class="row">
+                                    <div class="col-3 line py-2">
+                                        <a asp-controller="Dashboard" asp-action="DisplayQuote" asp-route-id="@quote.Id" style="text-decoration:none">@quote.Id</a>
+                                    </div>
+
+                                    <div class="col-3 line">
+                                        <a href="#">@quote.Firstname @quote.Lastname</a>
+                                    </div>
+
+                                    <div class="col-3 line">
+                                        @quote.Service
+                                    </div>
+
+                                    <div class="col-3 line">
+                                        ASAP
+                                    </div>                       
+                        </div>                      
+                    }              
+                </div>
+            </div>
+        </div>
+    </div>
+</div>                     

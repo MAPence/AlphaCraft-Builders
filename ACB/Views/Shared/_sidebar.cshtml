@@ -51,11 +51,10 @@
         </nav>
     </header>
 
+    @model ACB.Models.ContractorVM
 
     <div class="container-fluid ">
-
         <div class=" row over-lay">
-
             <div class=" col-1 dense ">
 
                 <!-- side menu -->
@@ -65,17 +64,15 @@
                     @if (@User.Identity?.Name! != null)
                     {
                         <a href="/" class="d-flex align-items-center pb-3 mb-3 link-body-emphasis  text-decoration-none border-bottom">
-                            <span class="fs-5 fw-semibold menu-txt sb-list-item"><div id="contractor-name" class="sb-list-item">@User.Identity?.Name</div></span>
+                            <span class="fs-5 fw-semibold menu-txt sb-list-item"><div id="contractor-name" class="sb-list-item">@Model.FirstName</div></span>
                         </a>
 
                     }
 
-                    
-
                     <ul class="list-unstyled ps-0">
 
                         <li class="mb-1 ">
-                            <a href="./dashboard.html">
+                            <a asp-action="Home" asp-controller="Dashboard">
                                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed menu-txt sb-list-item" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="false" href="./dashboard.html">
                                     Home
                                 </button>
@@ -108,8 +105,8 @@
                             </button>
                             <div class="collapse sb-list-item" id="orders-collapse">
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                                    <li><a href="./neworder.html" class="link-body-emphasis d-inline-flex text-decoration-none rounded">New Order</a></li>
-                                    <li><a href="./allorders.html" class="link-body-emphasis d-inline-flex text-decoration-none rounded">All Orders</a></li>
+                                    <li><a asp-action="CreateOrder" asp-controller="Dashboard"  class="link-body-emphasis d-inline-flex text-decoration-none rounded">New Order</a></li>
+                                    <li><a asp-action="AllOrders" asp-controller="Dashboard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">All Orders</a></li>
                                 </ul>
                             </div>
                         </li>
@@ -136,15 +133,11 @@
                                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                                     
                                     <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Profile</a></li>
-                                    <li><a href="#" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
+                                    <li><a asp-action="Logout" asp-controller="Dashboard" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign out</a></li>
                                 </ul>
                             </div>
                         </li>
-
-                        
-
                     </ul>
-
                 </div>
 
                 <button class="btn btn-toggle d-inline-flex align-items-center border-0 collapsed menu-txt col-1 side-menu" id="side-btn" @* data-bs-toggle="collapse" *@ onclick="openNav()" data-bs-target="#sb-dash" aria-expanded="true">
@@ -154,28 +147,18 @@
             </div>
 
             <!-- table area -->
-            <div class="col-9">
+            <div class="col-10">
 
-                <div @* class="container-fluid" *@>
+                <div>
                     <main role="main" class="pb-3">
                         @RenderBody()
                     </main>
                 </div>
 
-                
-
-
             </div>
-
         </div>
-
     </div>
 
-    
-
-
-
-    
 
     <footer class="border-top footer text-muted">
         <div class="container">
@@ -186,11 +169,7 @@
     <script>
         function openNav() {
 
-            
-            
             var element = document.getElementById("sb-dash");
-
-            
 
             if (element.style.width == "0px") {
 
@@ -200,13 +179,10 @@
                 var elements = document.getElementsByClassName("sb-list-item");
 
                 for (var i = 0; i < elements.length; i++) {
-
                     //set font size to dissappear
                     element.getElementsByClassName("sb-list-item")[i].style.fontSize = "2rem";
 
                 }
-
-
             }
 
             else {
@@ -217,26 +193,17 @@
                 var elements = document.getElementsByClassName("sb-list-item");
 
                 for (var i = 0; i < elements.length; i++) {
-
                     //set font size to dissappear
                     element.getElementsByClassName("sb-list-item")[i].style.fontSize = "0rem";
-
                 }
-
-
                 document.getElementById("close-menu").style.display = "none";
 
                 document.getElementById("contractor-name").style.fontSize = "0rem";
-
             }
-            
-            
-
-            
+                    
             document.getElementById("close-menu").style.display = "block";
 
-            document.getElementById("contractor-name").style.fontSize = "1.5rem";
-            
+            document.getElementById("contractor-name").style.fontSize = "1.5rem";           
         }
        
     </script>

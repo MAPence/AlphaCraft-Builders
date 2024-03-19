@@ -58,9 +58,9 @@
             <section class="contact-form alpha-form col-10">
                 <h2>Contact Us</h2>
                 <form asp-action="ContactUs" method="POST">
-                    <input asp-for="name" name="name" placeholder="Your Name" required><br>
-                    <input asp-for="email" type="email" name="email" placeholder="Your Email" required><br>
-                    <textarea asp-for="message" name="message" placeholder="Your Message" rows="4" required></textarea><br>
+                    <input asp-for="Name" name="name" placeholder="Your Name" required><br>
+                    <input asp-for="Email" type="email" name="email" placeholder="Your Email" required><br>
+                    <textarea asp-for="Message" name="message" placeholder="Your Message" rows="4" required></textarea><br>
                     <input type="submit"  value="Send Message">
                 </form>
             </section>
@@ -81,8 +81,7 @@
                 </p>
             </section>
 
-        </div>
-       
+        </div>       
     </div>
 </body>
 

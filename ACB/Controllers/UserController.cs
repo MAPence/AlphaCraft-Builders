@@ -1,16 +1,15 @@
 ﻿using ACB.Areas.Identity.Data;
 using ACB.Data;
 using ACB.Models;
-///using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Contracts;
 
 namespace ACB.Controllers
 {
     public class UserController : Controller
     {
-
         private readonly ACBContext _context;
         private readonly UserManager<ACBUser> _userManager;
         private readonly SignInManager<ACBUser> _signInManager;
@@ -26,19 +25,18 @@ namespace ACB.Controllers
         {
             return View();
         }
-
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM model)
         {
             if (ModelState.IsValid)
-            {
-                
+            {                
                 //login
                 var result = await _signInManager.PasswordSignInAsync(model.Username!, model.Password!, model.RememberMe, false);
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Home", "Dashboard");
+                    ContractorVM contractor = Query.GetContractor(model.Username);
+                    return View("../Dashboard/Home", contractor);
                 }
 
                 ModelState.AddModelError("", "Invalid login attempt");
@@ -46,16 +44,13 @@ namespace ACB.Controllers
             }
             return View(model);
         }
-
         // GET: UserController
         public ActionResult Register()
         {
             
             return View();
         }
-
-        
-
+      
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -75,20 +70,17 @@ namespace ACB.Controllers
                     Address = userInfo.Address, City = userInfo.City, Zip = userInfo.Zip, State = userInfo.State,
                     Company = userInfo.Company, Phone = userInfo.Phone, UserName = userInfo.Email, EmailConfirmed = true
 
-                };
-
-                
+                };               
                 var result = await _userManager.CreateAsync(user, userInfo.Password!);
 
                 if (result.Succeeded)
                 {
+                    ContractorVM contractor = Query.GetContractor(user.UserName);
                     await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Home", "Dashboard");
+                    return View("../Dashboard/Home", contractor);
 
                 }
-
-                return View("Register");
-                
+                return View("Register");    
             }
             try
             {
