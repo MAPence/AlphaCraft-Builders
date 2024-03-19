@@ -1,0 +1,65 @@
+﻿<script>
+    var map;
+    const apiKey = 'AIzaSyChApDFEzmpCEBP6xfQPCHwucDuC5Z8Bzo';
+    window.onload = loadMapScript;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 37.0902, lng: -95.7129 },
+            zoom: 5
+        });
+    }
+
+    function addMarker(location) {
+        var marker = new google.maps.Marker({
+            position: location,
+            map: map,
+            title: 'Contractor Location'
+        });
+    }
+
+    function loadMapScript() {
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap`;
+        script.defer = true;
+        script.async = true;
+        document.head.appendChild(script);
+    }
+
+    document.getElementById('locationForm').addEventListener('submit', async function (e) {
+        e.preventDefault();
+
+        const address = document.getElementById('Address').value;
+        const city = document.getElementById('City').value;
+        const state = document.getElementById('State').value;
+        const zip = document.getElementById('Zip').value;
+        const fullAddress = `${address}, ${city}, ${state} ${zip}`;
+
+        const geocodingService = new GeocodingService();
+        const { lat, lng } = await geocodingService.geocodeAddress(fullAddress);
+
+        if (lat && lng) {
+            const location = { lat, lng };
+            addMarker(location);
+            map.setCenter(location);
+        } else {
+            console.error('Geocode was not successful.');
+        }
+    });
+
+    function GeocodingService() {
+        this.geocodeAddress = async function (address) {
+            const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(address)}&key=${apiKey}`);
+            const data = await response.json();
+
+            if (data.status === 'OK') {
+                return {
+                    lat: data.results[0].geometry.location.lat,
+                    lng: data.results[0].geometry.location.lng
+                };
+            } else {
+                console.error('Geocode was not successful for the following reason:', data.status);
+                return { lat: null, lng: null };
+            }
+        };
+    }
+</script>
