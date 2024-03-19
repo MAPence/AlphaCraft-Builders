@@ -1,15 +1,28 @@
 ﻿@model ACB.Models.ContractorVM
 
+@{
+	var tot = ViewBag.Services.length;
+	var servUpdat = new List<int>[tot];
+}
+
 
 <table class="container d-flex d-inline-flex">
 	@foreach(var service in ViewBag.Services)
 	{
 		var chk = service.IsOffered;
-		<div class="col-3 col-sm-6 d-inline-flex">
-			<input type="checkbox" value="@service" checked="@chk" />
+		<div class="col-6 col-md-4 d-inline-flex">
+			<input type="checkbox" value="@service.Id" checked="@chk" class="mx-1 serv"/>
 			<label>@service.Name</label>
 
 		</div>
 		
 	}
+
+	
 </table>
+
+<script>
+	const var checklist = document.querySelectorAll(".serv");
+	
+	
+</script>
