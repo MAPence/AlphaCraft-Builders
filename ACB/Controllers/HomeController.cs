@@ -39,5 +39,10 @@ namespace ACB.Controllers
             Notify.ContactForm(submission);
             return View("Index");
         }
+
+        public IActionResult FindContractors()
+        {
+            return View();
+        }
     }
 }

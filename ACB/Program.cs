@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using ACB.Data;
 using ACB.Areas.Identity.Data;
+using ACB.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);

@@ -38,26 +38,48 @@ body {
 .cu-bg {
     background-image: url("../resources/images/CUPicture.jpg");
     /* background-color: #A7D7C5;*/
+    width: 100wh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.loc-bg {
+    background-image: url("../resources/images/BlueUS.jpg");
+    /* background-color: #A7D7C5;*/
     width: 100vw;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
 
-.btn-facebook {
-    background-color: #3b5998; /* Facebook color */
+.loc-form {
+    position: fixed;
+    left: 0;
+    top: 15%;
+    height: 500px;
+    background-color: #04364A;
+    margin-left: 10%;
+    width: 600px;
+    border-radius: 40px;
+    padding: 20px;
+    color: white;
+    font-weight: 500;
 }
 
-.btn-google {
-    background-color: #db4437; /* Google color */
-}
-
-.btn-microsoft {
-    background-color: #00a1f1; /* Microsoft color */
-}
-
-
-@media (min-width: 768px) {
-
-
+.geo-box {
+    position: fixed;
+    right: 0;
+    top: 15%;
+    height: 500px;
+    width: 800px;
+    background-color: cadetblue;
+    margin-right: 10%;
+    border-radius: 10px;
+    border-color: #04364A;
+    padding: 20px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    border: 2px solid #04364A;
 }
