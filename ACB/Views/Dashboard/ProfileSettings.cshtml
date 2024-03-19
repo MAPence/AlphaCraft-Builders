@@ -2,7 +2,7 @@
 
 @{
 
-    ViewData["Title"] = "ProfileSettings";
+    ViewData["Title"] = "Profile Settings";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -39,10 +39,9 @@
         <input asp-for="ConfirmNewPassword" class="form-control" />
         <span asp-validation-for="ConfirmNewPassword" class="text-danger"></span>
     </div>
-    <div class="form-group">
-        <button type="submit" class="btn btn-primary">Save Changes</button>
-    </div>
-</form>
+
+    <h3>Services Offered:</h3>
+
 <table class="container d-flex d-inline-flex">
 	@foreach(var service in ViewBag.Services)
 	{
@@ -54,3 +53,8 @@
 		</div>		
 	}
 </table>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+</form>

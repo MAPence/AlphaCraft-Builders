@@ -22,13 +22,5 @@ namespace ACB.Controllers
             {
                 return View();
             }
-
-        private void AddErrors(IEnumerable<IdentityError> errors)
-        {
-            foreach (var error in errors)
-            {
-                ModelState.AddModelError(string.Empty, $"Code: {error.Code}, Message: You have encountered an error");
-            }
-        }
     }
 }
