@@ -129,6 +129,23 @@ namespace ACB.Controllers
 
             return View(contractor);
         }
+        public async Task<IActionResult> ProfileSettings()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            if (user == null)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var model = new ProfileSettings
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email
+            };
+
+            return View();
+        }
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
