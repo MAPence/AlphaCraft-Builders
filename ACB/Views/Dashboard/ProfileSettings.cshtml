@@ -1,6 +1,7 @@
 ﻿@model ACB.Models.ContractorVM
 
 @{
+
     ViewData["Title"] = "ProfileSettings";
 }
 
@@ -42,3 +43,14 @@
         <button type="submit" class="btn btn-primary">Save Changes</button>
     </div>
 </form>
+<table class="container d-flex d-inline-flex">
+	@foreach(var service in ViewBag.Services)
+	{
+		var chk = service.IsOffered;
+		<div class="col-6 col-md-4 d-inline-flex">
+			<input type="checkbox" value="@service.Id" checked="@chk" class="mx-1 serv"/>
+			<label>@service.Name</label>
+
+		</div>		
+	}
+</table>

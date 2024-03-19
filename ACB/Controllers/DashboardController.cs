@@ -9,6 +9,7 @@ using System.Data;
 using System.Diagnostics.Contracts;
 //using Microsoft.AspNet.Identity;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ACB.Controllers
 {
@@ -18,8 +19,7 @@ namespace ACB.Controllers
         private readonly UserManager<ACBUser> _userManager;
         private readonly SignInManager<ACBUser> _signInManager;
 
-        public DashboardController(UserManager<ACBUser> userManager,
-            SignInManager<ACBUser> signInManager)
+        public DashboardController(UserManager<ACBUser> userManager, SignInManager<ACBUser> signInManager)
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
@@ -39,7 +39,6 @@ namespace ACB.Controllers
 
                 if(user != null)
                 {
-
                     var userId = user.UserName;
 
                     if (userId != "System.Func`2[System.Security.Claims.ClaimsPrincipal,System.String]")
@@ -47,9 +46,7 @@ namespace ACB.Controllers
                         contractor = Query.GetContractor(userId);
                         return View(contractor);
                     }
-
                 }
-                
             }
             return View(contractor);
         }
@@ -70,29 +67,6 @@ namespace ACB.Controllers
             }
             return View(contractor);
         }
-
-        /*public async Task<IActionResult> DisplayQuote(int? Id)
-        {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            
-
-            if (user != null)
-            {
-                string? userId = user.UserName;
-                ContractorVM contractor = Query.GetContractor(userId);
-
-                foreach (var quote in contractor.Quotes)
-                {
-                    if (quote.Id == Id)
-                    {
-                        contractor.Quote = quote;
-                    }
-                }
-                contractor.Quote.Images = Query.GetQuoteImages(Id);
-                return View(contractor);
-            }
-            return View();
-        }*/
 
         public IActionResult DisplayQuote(int? Id)
         {
@@ -129,27 +103,39 @@ namespace ACB.Controllers
 
             return View(contractor);
         }
-        public async Task<IActionResult> ProfileSettings()
-        {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                return RedirectToAction("Login", "Account");
-            }
-
-            var model = new ProfileSettings
-            {
-                FirstName = user.FirstName,
-                LastName = user.LastName,
-                Email = user.Email
-            };
-
-            return View();
-        }
+    
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult ProfileSettings()
+        {
+            List<Service> services = Query.ServiceSelection("contractor_service");
+            ViewBag.Services = services;
+
+			var user = User.FindFirstValue(ClaimTypes.Name);
+
+			if (user != null)
+			{
+				//string? userId = user.UserName;
+				ContractorVM contractor = Query.GetContractor(user);
+
+				foreach (var service in contractor.Services)
+				{
+					foreach(var chk in services)
+                    { 
+                        if(service == chk.Id)
+                        {
+                            chk.IsOffered = true;
+                            break;
+                        }
+                    }
+				}				
+				return View(contractor);
+			}
+			return View();
+		}
     }
 }
