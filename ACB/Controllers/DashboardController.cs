@@ -9,6 +9,7 @@ using System.Data;
 using System.Diagnostics.Contracts;
 //using Microsoft.AspNet.Identity;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ACB.Controllers
 {
@@ -134,5 +135,35 @@ namespace ACB.Controllers
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Home");
         }
+
+        public IActionResult ProfileSettings()
+        {
+            List<Service> services = Query.SercieSelection("contractor_service");
+            ViewBag.Services = services;
+
+			var user = User.FindFirstValue(ClaimTypes.Name);
+
+			if (user != null)
+			{
+				//string? userId = user.UserName;
+				ContractorVM contractor = Query.GetContractor(user);
+
+				foreach (var service in contractor.Services)
+				{
+					foreach(var chk in services)
+                    { 
+                        if(service == chk.Id)
+                        {
+                            chk.IsOffered = true;
+                            break;
+                        }
+                    }
+				}
+				
+				return View(contractor);
+			}
+
+			return View();
+		}
     }
 }
