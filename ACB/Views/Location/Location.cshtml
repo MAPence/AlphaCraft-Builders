@@ -54,6 +54,7 @@
 
         .location-form input[type="submit"]:hover {
             background-color: #0056b3;
+            padding: 10%;
         }
     </style>
 </head>
@@ -91,6 +92,7 @@
                     </div>
                     <input asp-for="Latitude" class="form-control" type="hidden" />
                     <input asp-for="Longitude" class="form-control" type="hidden" />
+                    <br>
                     <div class="form-group submit-group">
                         <input type="submit" value="Submit" class="btn btn-primary" />
                     </div>
@@ -134,7 +136,7 @@
 
                     // Update map with new marker
                     var map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: 8,
+                        zoom: 12,
                         center: location
                     });
 
