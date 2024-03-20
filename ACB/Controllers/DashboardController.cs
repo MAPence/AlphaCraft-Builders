@@ -1,15 +1,9 @@
 ﻿using ACB.Areas.Identity.Data;
 using ACB.Data;
 using ACB.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
-using System.Diagnostics.Contracts;
-//using Microsoft.AspNet.Identity;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ACB.Controllers
 {
@@ -19,8 +13,7 @@ namespace ACB.Controllers
         private readonly UserManager<ACBUser> _userManager;
         private readonly SignInManager<ACBUser> _signInManager;
 
-        public DashboardController(UserManager<ACBUser> userManager,
-            SignInManager<ACBUser> signInManager)
+        public DashboardController(UserManager<ACBUser> userManager, SignInManager<ACBUser> signInManager)
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
@@ -38,9 +31,8 @@ namespace ACB.Controllers
                 contractor = new ContractorVM();
                 var user = await _userManager.GetUserAsync(HttpContext.User);
 
-                if(user != null)
+                if (user != null)
                 {
-
                     var userId = user.UserName;
 
                     if (userId != "System.Func`2[System.Security.Claims.ClaimsPrincipal,System.String]")
@@ -48,19 +40,17 @@ namespace ACB.Controllers
                         contractor = Query.GetContractor(userId);
                         return View(contractor);
                     }
-
                 }
-                
             }
             return View(contractor);
         }
 
         public async Task<IActionResult> CreateOrder(ContractorVM contractor)
         {
-            if(contractor.Email == null)
+            if (contractor.Email == null)
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
-                
+
 
                 if (user != null)
                 {
@@ -71,29 +61,6 @@ namespace ACB.Controllers
             }
             return View(contractor);
         }
-
-        /*public async Task<IActionResult> DisplayQuote(int? Id)
-        {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            
-
-            if (user != null)
-            {
-                string? userId = user.UserName;
-                ContractorVM contractor = Query.GetContractor(userId);
-
-                foreach (var quote in contractor.Quotes)
-                {
-                    if (quote.Id == Id)
-                    {
-                        contractor.Quote = quote;
-                    }
-                }
-                contractor.Quote.Images = Query.GetQuoteImages(Id);
-                return View(contractor);
-            }
-            return View();
-        }*/
 
         public IActionResult DisplayQuote(int? Id)
         {
@@ -126,10 +93,11 @@ namespace ACB.Controllers
 
             // Retrieve the orders from the database using the user's username
             contractor = Query.GetContractor(user.UserName);
-            contractor.Orders = Query.GetOrders(contractor.Id);           
+            contractor.Orders = Query.GetOrders(contractor.Id);
 
             return View(contractor);
         }
+
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
@@ -138,32 +106,30 @@ namespace ACB.Controllers
 
         public IActionResult ProfileSettings()
         {
-            List<Service> services = Query.SercieSelection("contractor_service");
+            List<Service> services = Query.ServiceSelection("contractor_service");
             ViewBag.Services = services;
 
-			var user = User.FindFirstValue(ClaimTypes.Name);
+            var user = User.FindFirstValue(ClaimTypes.Name);
 
-			if (user != null)
-			{
-				//string? userId = user.UserName;
-				ContractorVM contractor = Query.GetContractor(user);
+            if (user != null)
+            {
+                //string? userId = user.UserName;
+                ContractorVM contractor = Query.GetContractor(user);
 
-				foreach (var service in contractor.Services)
-				{
-					foreach(var chk in services)
-                    { 
-                        if(service == chk.Id)
+                foreach (var service in contractor.Services)
+                {
+                    foreach (var chk in services)
+                    {
+                        if (service == chk.Id)
                         {
                             chk.IsOffered = true;
                             break;
                         }
                     }
-				}
-				
-				return View(contractor);
-			}
-
-			return View();
-		}
+                }
+                return View(contractor);
+            }
+            return View();
+        }
     }
 }

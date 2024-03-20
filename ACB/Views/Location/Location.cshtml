@@ -1,0 +1,224 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"
+    <title> </title>
+    <style>
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            padding: 20px;
+            backdrop-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-form {
+            margin-top: 20px;
+        }
+
+        .location-form {
+            display: flex;
+            justify-content: center;
+        }
+
+            .location-form input[type="text"],
+            .location-form input[type="email"],
+            .location-form textarea {
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-sizing: border-box;
+            }
+
+            .location-form input[type="submit"] {
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 5px;
+                cursor: pointer;
+            }
+
+        #map {
+            height: 452px;
+            width: 100%;
+        }
+
+        .location-form input[type="submit"]:hover {
+            background-color: #0056b3;
+            padding: 10%;
+        }
+    </style>
+</head>
+    @model Location
+<
+<body class="loc-bg">
+    <div class="container ">
+        <div class="center-form">
+            <section class="loc-form alpha-form col-10">
+                <h2>Find Your Contractor</h2>
+                <form asp-action="Index" asp-controller="Location" method="post" onsubmit="return updateMapWithMarker()">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label">Your Name</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Address" class="control-label">Your Address</label>
+                        <input asp-for="Address" class="form-control" id="Address" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="City" class="control-label">City</label>
+                        <input asp-for="City" class="form-control" id="City" />
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>State:</label>
+                        @Html.DropDownListFor(model => model.State, GetStates(), new { @class = "form-control", id = "State" })
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Zip" class="control-label">Zip Code</label>
+                        <input asp-for="Zip" class="form-control" id="Zip" />
+                        <span asp-validation-for="Zip" class="text-danger"></span>
+                    </div>
+                    <input asp-for="Latitude" class="form-control" type="hidden" />
+                    <input asp-for="Longitude" class="form-control" type="hidden" />
+                    <br>
+                    <div class="form-group submit-group">
+                        <input type="submit" value="Submit" class="btn btn-primary" />
+                    </div>
+                </form>
+            </section>
+        </div>
+    </div>
+    <div class="geo-box">
+        <div id="map"></div>
+        <section class="mapname-container">
+
+            <script>
+                function initMap() {
+                    var options = {
+                        zoom: 4,
+                        center: { lat: 37.0902, lng: -95.7129 }
+                    }
+                    var map = new google.maps.Map(document.getElementById('map'), options);
+
+                    var marker = new google.maps.Marker({
+                        position: null,
+                        map: map
+                    });
+                }
+
+            </script>
+        </section>
+    </div>
+    <script>
+        function updateMapWithMarker() {
+            var address = document.getElementById('Address').value + ', ' +
+                document.getElementById('City').value + ', ' +
+                document.getElementById('State').value + ' ' +
+                document.getElementById('Zip').value;
+
+            // Use geocoding service to convert address to coordinates
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status === 'OK') {
+                    var location = results[0].geometry.location;
+
+                    // Update map with new marker
+                    var map = new google.maps.Map(document.getElementById('map'), {
+                        zoom: 12,
+                        center: location
+                    });
+
+                    var marker = new google.maps.Marker({
+                        position: location,
+                        map: map
+                    });
+
+                    // Update hidden inputs with latitude and longitude
+                    document.getElementById('Latitude').value = location.lat();
+                    document.getElementById('Longitude').value = location.lng();
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+
+            return false; // Prevent default form submission
+        }
+    </script>
+    <script async
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChApDFEzmpCEBP6xfQPCHwucDuC5Z8Bzo&loading=async&callback=initMap">
+    </script>
+</body>
+</html>
+
+@functions {
+    public SelectList GetStates()
+    {
+        Dictionary<string, string> stateNames = new Dictionary<string, string>
+        {
+            { "AL", "Alabama" },
+            { "AK", "Alaska" },
+            { "AZ", "Arizona" },
+            { "AR", "Arkansas" },
+            { "CA", "California" },
+            { "CO", "Colorado" },
+            { "CT", "Connecticut" },
+            { "DE", "Delaware" },
+            { "FL", "Florida" },
+            { "GA", "Georgia" },
+            { "HI", "Hawaii" },
+            { "ID", "Idaho" },
+            { "IL", "Illinois" },
+            { "IN", "Indiana" },
+            { "IA", "Iowa" },
+            { "KS", "Kansas" },
+            { "KY", "Kentucky" },
+            { "LA", "Louisiana" },
+            { "ME", "Maine" },
+            { "MD", "Maryland" },
+            { "MA", "Massachusetts" },
+            { "MI", "Michigan" },
+            { "MN", "Minnesota" },
+            { "MS", "Mississippi" },
+            { "MO", "Missouri" },
+            { "MT", "Montana" },
+            { "NE", "Nebraska" },
+            { "NV", "Nevada" },
+            { "NH", "New Hampshire" },
+            { "NJ", "New Jersey" },
+            { "NM", "New Mexico" },
+            { "NY", "New York" },
+            { "NC", "North Carolina" },
+            { "ND", "North Dakota" },
+            { "OH", "Ohio" },
+            { "OK", "Oklahoma" },
+            { "OR", "Oregon" },
+            { "PA", "Pennsylvania" },
+            { "RI", "Rhode Island" },
+            { "SC", "South Carolina" },
+            { "SD", "South Dakota" },
+            { "TN", "Tennessee" },
+            { "TX", "Texas" },
+            { "UT", "Utah" },
+            { "VT", "Vermont" },
+            { "VA", "Virginia" },
+            { "WA", "Washington" },
+            { "WV", "West Virginia" },
+            { "WI", "Wisconsin" },
+            { "WY", "Wyoming" }
+        };
+
+        return new SelectList(stateNames, "Key", "Value");
+    }
+}

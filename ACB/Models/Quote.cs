@@ -16,5 +16,8 @@ namespace ACB.Models
         public string? State { get; set; }       
         public int? Service { get; set; }
         public byte[]? Image { get; set; }
+
+        public double? Longitude { get; set; }
+        public double? Latitude { get; set;}
     }
 }

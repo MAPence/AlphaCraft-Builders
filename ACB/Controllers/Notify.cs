@@ -1,5 +1,4 @@
 ﻿using ACB.Models;
-using System.Data.SqlClient;
 using System.Net.Mail;
 
 namespace ACB.Controllers
@@ -14,13 +13,13 @@ namespace ACB.Controllers
             IConfiguration configuration = builder.Build();
 
             var password = configuration.GetConnectionString("password");
-            return password;          
+            return password;
         }
 
-        public static void QuoteSuccessful(Quote quote,string? service)
+        public static void QuoteSuccessful(Quote quote, string? service)
         {
             MailMessage mail = new();
-            
+
             mail.To.Add(quote.Client_email);
             mail.From = new MailAddress("alphaCraftBuilders@gmail.com");
             mail.Subject = "Your Quote";

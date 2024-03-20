@@ -1,10 +1,8 @@
 ﻿using ACB.Areas.Identity.Data;
 using ACB.Data;
 using ACB.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics.Contracts;
 
 namespace ACB.Controllers
 {
@@ -29,7 +27,7 @@ namespace ACB.Controllers
         public async Task<IActionResult> Login(LoginVM model)
         {
             if (ModelState.IsValid)
-            {                
+            {
                 //login
                 var result = await _signInManager.PasswordSignInAsync(model.Username!, model.Password!, model.RememberMe, false);
 
@@ -47,10 +45,10 @@ namespace ACB.Controllers
         // GET: UserController
         public ActionResult Register()
         {
-            
+
             return View();
         }
-      
+
         // POST: UserController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -66,11 +64,20 @@ namespace ACB.Controllers
                 ACBUser user = new()
                 {
                     FirstName = userInfo.FirstName,
-                    LastName = userInfo.LastName, Email = userInfo.Email, Country = userInfo.Country, Title = userInfo.Title,
-                    Address = userInfo.Address, City = userInfo.City, Zip = userInfo.Zip, State = userInfo.State,
-                    Company = userInfo.Company, Phone = userInfo.Phone, UserName = userInfo.Email, EmailConfirmed = true
+                    LastName = userInfo.LastName,
+                    Email = userInfo.Email,
+                    Country = userInfo.Country,
+                    Title = userInfo.Title,
+                    Address = userInfo.Address,
+                    City = userInfo.City,
+                    Zip = userInfo.Zip,
+                    State = userInfo.State,
+                    Company = userInfo.Company,
+                    Phone = userInfo.Phone,
+                    UserName = userInfo.Email,
+                    EmailConfirmed = true
 
-                };               
+                };
                 var result = await _userManager.CreateAsync(user, userInfo.Password!);
 
                 if (result.Succeeded)
@@ -80,7 +87,7 @@ namespace ACB.Controllers
                     return View("../Dashboard/Home", contractor);
 
                 }
-                return View("Register");    
+                return View("Register");
             }
             try
             {

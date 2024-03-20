@@ -1,9 +1,48 @@
 ﻿@model ACB.Models.ContractorVM
 
+<<<<<<< HEAD
 @{
 	
 }
+=======
+>>>>>>> 1301f424d3b24bbbfb345c8d122c98ddcc2e0321
 
+<h1>Profile Settings</h1>
+
+<form asp-action="ProfileSettings" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="FirstName" class="control-label"></label>
+        <input asp-for="FirstName" class="form-control" />
+        <span asp-validation-for="FirstName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="LastName" class="control-label"></label>
+        <input asp-for="LastName" class="form-control" />
+        <span asp-validation-for="LastName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Email" class="control-label"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CurrentPassword" class="control-label"></label>
+        <input asp-for="CurrentPassword" class="form-control" />
+        <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NewPassword" class="control-label"></label>
+        <input asp-for="NewPassword" class="form-control" />
+        <span asp-validation-for="NewPassword" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ConfirmNewPassword" class="control-label"></label>
+        <input asp-for="ConfirmNewPassword" class="form-control" />
+        <span asp-validation-for="ConfirmNewPassword" class="text-danger"></span>
+    </div>
+    <br>
+    <h3>Services Offered:</h3>
 
 <table class="container d-flex d-inline-flex">
 	@foreach(var service in ViewBag.Services)
@@ -12,16 +51,11 @@
 		<div class="col-6 col-md-4 d-inline-flex">
 			<input type="checkbox" value="@service.Id" checked="@chk" class="mx-1 serv"/>
 			<label>@service.Name</label>
-
-		</div>
-		
+		</div>		
 	}
-
-	
 </table>
-
-<script>
-	const var checklist = document.querySelectorAll(".serv");
-	
-	
-</script>
+<br></br>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+    </div>
+</form>

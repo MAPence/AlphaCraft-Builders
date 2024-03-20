@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace ACB.Controllers
 {
@@ -35,7 +34,7 @@ namespace ACB.Controllers
                 return true;
             }
             else
-            {return false;}
+            { return false; }
         }
     }
 }
