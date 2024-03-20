@@ -72,7 +72,8 @@ namespace ACB.Controllers
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
             return View();
         }
-
+        
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create
