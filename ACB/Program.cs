@@ -1,8 +1,7 @@
+using ACB.Areas.Identity.Data;
+using ACB.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using ACB.Data;
-using ACB.Areas.Identity.Data;
-using ACB.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -101,7 +100,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-app.UseAuthentication();;
+app.UseAuthentication(); ;
 
 app.UseAuthorization();
 
@@ -109,6 +108,6 @@ app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-app.MapRazorPages();    
+app.MapRazorPages();
 
 app.Run();

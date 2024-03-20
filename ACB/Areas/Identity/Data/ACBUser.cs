@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
 namespace ACB.Areas.Identity.Data;
 
@@ -28,6 +24,6 @@ public class ACBUser : IdentityUser
     [PersonalData]
     public string Company { get; set; }
     [PersonalData]
-    public string Title { get; set; }    
+    public string Title { get; set; }
 }
 

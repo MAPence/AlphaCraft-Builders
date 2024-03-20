@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace ACB.Models
+﻿namespace ACB.Models
 {
     public class Quote
     {

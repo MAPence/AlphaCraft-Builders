@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ACB.Models;
+﻿using ACB.Models;
 using System.Data;
 using System.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-using System.Configuration;
-using NuGet.Protocol.Plugins;
-using Azure.Core;
 
 namespace ACB.Controllers
 {
@@ -261,5 +256,34 @@ namespace ACB.Controllers
             }
             return orders;
         }
+
+        public static List<Service> ServiceSelection(string table)
+        {
+            // new list that will be retunred for drop down menu
+            List<Service> list = new();
+
+            // query table for values to populate list using column and table parameters
+            SqlConnection sqlconn = new(GetConnectionString());
+            string sqlquery = $"select * from {table}";
+            SqlCommand sqlcomm = new(sqlquery, sqlconn);
+            sqlconn.Open();
+            SqlDataAdapter adapter = new(sqlcomm);
+            DataTable dt = new();
+            adapter.Fill(dt);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Service service = new()
+                {
+                    Id = Convert.ToInt32(dt.Rows[i][0]),
+                    Name = (string?)(dt.Rows[i][1]),
+                    IsOffered = false
+                };
+                list.Add(service);
+
+            }
+            sqlconn.Close();
+            return list;
+        }
+
     }
 }
