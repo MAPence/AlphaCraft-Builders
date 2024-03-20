@@ -19,5 +19,12 @@ namespace ACB.Models
 
         public double? Longitude { get; set; }
         public double? Latitude { get; set;}
+
+        public void GenerateLongLat()
+        {
+
+            //set long and lat here???
+
+        }
     }
 }

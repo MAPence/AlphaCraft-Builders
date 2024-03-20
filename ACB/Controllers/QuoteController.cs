@@ -91,6 +91,11 @@ namespace ACB.Controllers
 
             quote.Service = Query.GetDBId(service, "contractor_service", "service_type");
 
+
+            //set long/lat on quote...
+
+
+            //inserts quote into db
             int fk = Query.NewQuote(quote);
 
             foreach (var image in imageFile)
