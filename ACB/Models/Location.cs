@@ -17,4 +17,5 @@ namespace ACB.Models
         public double? Longitude { get; set; }
         public string? WorkNeeded { get; set; }
     }
+
 }

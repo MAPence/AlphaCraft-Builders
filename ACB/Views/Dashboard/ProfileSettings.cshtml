@@ -1,7 +1,12 @@
 ﻿@model ACB.Models.ContractorVM
 
+<style>
+    .center {
+        text-align: center;
+    }
+</style>
 
-<h1>@ViewData["Profile Settings"]</h1>
+<h1 class="center">Profile Settings</h1>
 
 <form asp-action="ProfileSettings" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
