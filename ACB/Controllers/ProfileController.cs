@@ -1,5 +1,4 @@
-﻿using ACB.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ACB.Controllers
@@ -10,17 +9,17 @@ namespace ACB.Controllers
         {
             return View();
         }
-        
-            private readonly UserManager<IdentityUser> _userManager;
 
-            public ProfileController(UserManager<IdentityUser> userManager)
-            {
-                _userManager = userManager;
-            }
+        private readonly UserManager<IdentityUser> _userManager;
 
-            public IActionResult ProfileSettings()
-            {
-                return View();
-            }
+        public ProfileController(UserManager<IdentityUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
+        public IActionResult ProfileSettings()
+        {
+            return View();
+        }
     }
 }

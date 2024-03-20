@@ -8,16 +8,16 @@ namespace ACB.Models
         [Display(Name = "First Name")]
         public string? FirstName { get; set; }
         [Display(Name = "Last Name")]
-        public string? LastName { get; set;}
+        public string? LastName { get; set; }
         public string? Email { get; set; }
         public List<int>? Services { get; set; }
         public List<QuoteVM>? Quotes { get; set; }
         public NewOrder? NewOrder { get; set; }
         public QuoteVM? Quote { get; set; }
-        public ContractorVM() 
-        { 
+        public ContractorVM()
+        {
             Orders = new List<OrdersVM>();
-            Quotes = new List<QuoteVM>();   
+            Quotes = new List<QuoteVM>();
             Services = new List<int>();
         }
         public List<OrdersVM>? Orders { get; set; }
