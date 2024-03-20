@@ -171,7 +171,7 @@ namespace ACB.Controllers
                     Zip = Convert.ToInt32(dt.Rows[i][5]),
                     //Address = (string?)dt.Rows[i][6],
                     Details = (string?)dt.Rows[i][7],
-                    Service = (string?)dt.Rows[i][12]
+                    Service = (string?)dt.Rows[i][14]
                 };
                 quotes.Add(quote);
             }
