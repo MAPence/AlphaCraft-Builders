@@ -1,12 +1,13 @@
 ﻿using ACB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 
 namespace ACB.Controllers
 {
     public class QuoteController : Controller
     {
-        public List<SelectListItem> PopulateStates()
+        public List<SelectListItem> PopulateStates() 
         {
             List<SelectListItem> States = new()
             {
@@ -63,7 +64,7 @@ namespace ACB.Controllers
             };
             return States;
         }
-
+        
         public IActionResult QuoteForm()
         {
             ViewBag.StateOptions = PopulateStates();
@@ -71,21 +72,22 @@ namespace ACB.Controllers
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
             return View();
         }
-
+        
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create
-            ([Bind("Client_first_name,Client_last_name,Client_email,Details,City,State,Zip")] Quote quote,
+            ([Bind("Client_first_name,Client_last_name,Client_email,Details,Address,City,State,Zip")] Quote quote, 
             string? service, List<IFormFile> imageFile)
         {
-            if (service == null)
-            {
+             if(service == null)
+             {
 
                 ModelState.AddModelError(nameof(service), "Please select a valid service type");
                 ViewBag.StateOptions = PopulateStates();
                 ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
-                return View("QuoteForm", quote);
-            }
+                return View("QuoteForm",quote);
+             }
 
             quote.Service = Query.GetDBId(service, "contractor_service", "service_type");
 
@@ -100,7 +102,6 @@ namespace ACB.Controllers
 
             ViewBag.StateOptions = PopulateStates();
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
-            
             return View("../Home/Index");
         }
     }

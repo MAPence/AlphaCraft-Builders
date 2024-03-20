@@ -1,6 +1,11 @@
-﻿using ACB.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using ACB.Models;
 using System.Data;
 using System.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System.Configuration;
+using NuGet.Protocol.Plugins;
+using Azure.Core;
 
 namespace ACB.Controllers
 {
@@ -272,12 +277,11 @@ namespace ACB.Controllers
             adapter.Fill(dt);
             for (int i = 0; i < dt.Rows.Count; i++)
             {
-                Service service = new()
-                {
-                    Id = Convert.ToInt32(dt.Rows[i][0]),
-                    Name = (string?)(dt.Rows[i][1]),
-                    IsOffered = false
-                };
+                Service service = new Service();
+
+                service.Id = Convert.ToInt32(dt.Rows[i][0]);
+                service.Name = (string?)(dt.Rows[i][1]);
+                service.IsOffered = false;
                 list.Add(service);
 
             }
