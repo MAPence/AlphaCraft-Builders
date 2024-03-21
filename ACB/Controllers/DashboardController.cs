@@ -3,6 +3,7 @@ using ACB.Data;
 using ACB.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 using System.Security.Claims;
 
 namespace ACB.Controllers
@@ -130,6 +131,21 @@ namespace ACB.Controllers
                 return View(contractor);
             }
             return View();
+        }
+
+        [HttpPost]
+        public IActionResult UpdateServices(int[] data, ContractorVM contractor)
+        {
+            List<Service> services = Query.ServiceSelection("contractor_service");
+            ViewBag.Services = services;
+
+            foreach (var num in data)
+            {
+                System.Diagnostics.Debug.WriteLine(num);
+            }
+            
+
+            return View("ProfileSettings", contractor);
         }
     }
 }
