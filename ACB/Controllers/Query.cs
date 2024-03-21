@@ -59,6 +59,20 @@ namespace ACB.Controllers
             return list;
         }
 
+        public static void DeleteQuery(string table, string col, string val)
+        {
+            string query = $"Delete from {table} where {col} = {val};";
+
+            //open db connection and run passed in query
+            SqlConnection sqlconn = new(GetConnectionString());
+            SqlCommand sqlquery = new(query, sqlconn);
+            
+            sqlconn.Open();
+            sqlquery.ExecuteNonQuery();
+            sqlconn.Close();
+
+        }
+
         //insert into any table, and return id of new row
         public static int Insert(string insertQuery)
         {
@@ -287,6 +301,20 @@ namespace ACB.Controllers
             }
             sqlconn.Close();
             return list;
+        }
+
+        public static void UpdateServices(int? Id, int[] services)
+        {
+
+            DeleteQuery("contractor_service_offered", "contractor_id", Id.ToString());
+
+            foreach(var service in services)
+            {
+                string newService = $"insert into contractor_service_offered (contractor_id, service_Id)" +
+                    $"\b\n values ({Id}, {service});";
+                Insert(newService);
+            }
+
         }
 
     }

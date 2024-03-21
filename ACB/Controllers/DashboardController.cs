@@ -143,6 +143,25 @@ namespace ACB.Controllers
             {
                 System.Diagnostics.Debug.WriteLine(num);
             }
+
+            var user = User.FindFirstValue(ClaimTypes.Name);
+
+            if (user != null)
+            {
+                //string? userId = user.UserName;
+                contractor = Query.GetContractor(user);
+
+             
+            }
+
+            if (contractor.Id != null) {
+
+                Query.UpdateServices(contractor.Id, data);
+
+                contractor = Query.GetContractor(contractor.Email);
+
+            }
+
             
 
             return View("ProfileSettings", contractor);
