@@ -56,7 +56,7 @@
 			    <label>@service.Name</label>
 		    </div>		
 	    }
-            <button onclick="updateServices()">
+            <button onclick="return updateServices()">
                 Update
             </button>
     </table>
@@ -99,11 +99,18 @@
                 url: "@Url.Action("UpdateServices")",
                 traditional: true,
                 dataType: "json",
-                data: { data: servicesArr }
+                data: { data: servicesArr },
+                success: function (result) {
+                    console.log(result);
+                },
+                error: function (req, status, err) {
+                    console.log(status);
+                }
 
 
             });
 
+            return flase;
 
 
 

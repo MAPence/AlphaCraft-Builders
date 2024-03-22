@@ -134,31 +134,34 @@ namespace ACB.Controllers
         }
 
         [HttpPost]
-        public IActionResult UpdateServices(int[] data, ContractorVM contractor)
+        public async Task<IActionResult> UpdateServices(int[] data, ContractorVM contractor)
         {
             List<Service> services = Query.ServiceSelection("contractor_service");
             ViewBag.Services = services;
+            foreach (var service in data)
+            {
+
+                services[service - 1].IsOffered = true;
+
+            }
 
             foreach (var num in data)
             {
                 System.Diagnostics.Debug.WriteLine(num);
             }
 
-            var user = User.FindFirstValue(ClaimTypes.Name);
+            var user = await _userManager.GetUserAsync(HttpContext.User);
 
             if (user != null)
             {
-                //string? userId = user.UserName;
-                contractor = Query.GetContractor(user);
 
-             
-            }
-
-            if (contractor.Id != null) {
+                contractor = Query.GetContractor(user.UserName);
 
                 Query.UpdateServices(contractor.Id, data);
 
                 contractor = Query.GetContractor(contractor.Email);
+
+
 
             }
 
@@ -166,5 +169,10 @@ namespace ACB.Controllers
 
             return View("ProfileSettings", contractor);
         }
+
+
+
     }
+
+
 }
