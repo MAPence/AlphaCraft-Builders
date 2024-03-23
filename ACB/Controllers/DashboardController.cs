@@ -3,6 +3,7 @@ using ACB.Data;
 using ACB.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Security.Claims;
 
@@ -133,19 +134,19 @@ namespace ACB.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<IActionResult> UpdateServices(int[] data, ContractorVM contractor)
+        /*[HttpPost]
+        public async Task<IActionResult> UpdateServices(int[] u_serv, ContractorVM contractor)
         {
             List<Service> services = Query.ServiceSelection("contractor_service");
             ViewBag.Services = services;
-            foreach (var service in data)
+            foreach (var service in u_serv)
             {
 
                 services[service - 1].IsOffered = true;
 
             }
 
-            foreach (var num in data)
+            foreach (var num in u_serv)
             {
                 System.Diagnostics.Debug.WriteLine(num);
             }
@@ -157,7 +158,7 @@ namespace ACB.Controllers
 
                 contractor = Query.GetContractor(user.UserName);
 
-                Query.UpdateServices(contractor.Id, data);
+                Query.UpdateServices(contractor.Id, u_serv);
 
                 contractor = Query.GetContractor(contractor.Email);
 
@@ -168,11 +169,17 @@ namespace ACB.Controllers
             
 
             return View("ProfileSettings", contractor);
+        }*/
+        [HttpPost]
+        public void UpdateServices(int[] u_serv, ContractorVM contractor)
+        {
+            Query.UpdateServices(contractor.Id, u_serv);
         }
 
 
-
     }
+
+    
 
 
 }

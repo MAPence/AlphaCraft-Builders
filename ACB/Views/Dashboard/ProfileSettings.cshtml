@@ -45,26 +45,28 @@
         <span asp-validation-for="ConfirmNewPassword" class="text-danger"></span>
     </div>
     <br>
-    <h3>Services Offered:</h3>
+    
 
-    <table class="container d-flex d-inline-flex">
-	    @foreach(var service in ViewBag.Services)
-	    {
-		    var chk = service.IsOffered;
-		    <div class="col-6 col-md-4 d-inline-flex">
-			    <input type="checkbox" value="@service.Id" checked="@chk" class="mx-1 serv"/>
-			    <label>@service.Name</label>
-		    </div>		
-	    }
-            <button onclick="return updateServices()">
-                Update
-            </button>
-    </table>
-    <br></br>
+    
     <div class="form-group">
         <button type="submit" value="Submit" onclick="updateServices()" class="btn btn-primary">Save Changes</button>
     </div>
 </form>
+<h3>Services Offered:</h3>
+<table class="container d-flex d-inline-flex">
+    @foreach (var service in ViewBag.Services)
+    {
+        var chk = service.IsOffered;
+        <div class="col-6 col-md-4 d-inline-flex">
+            <input type="checkbox" value="@service.Id" checked="@chk" class="mx-1 serv" />
+            <label>@service.Name</label>
+        </div>
+    }
+    <button onclick="return updateServices()">
+        Update
+    </button>
+</table>
+<br></br>
 
 @section scripts{
 
@@ -81,10 +83,8 @@
             for (let i = 0; i < serv.length; i++) {
                 if (serv[i].checked) {
 
-                    //console.log(serv[i].value);
                     var type = serv[i].value;
                     servicesArr.push(type);
-
 
                 }
 
@@ -92,16 +92,16 @@
 
             console.log(servicesArr);
 
-            
 
             $.ajax({
                 type: "POST",
                 url: "@Url.Action("UpdateServices")",
                 traditional: true,
                 dataType: "json",
-                data: { data: servicesArr },
+                data: { u_serv: servicesArr },
                 success: function (result) {
                     console.log(result);
+                    alert("Your service offerings have been updated.");
                 },
                 error: function (req, status, err) {
                     console.log(status);
@@ -110,9 +110,9 @@
 
             });
 
+            alert("Success! Your service offerings have been updated.");
+            
             return flase;
-
-
 
         }
 
@@ -124,8 +124,6 @@
 
 }
 
-var array = [1, 2, 3, 4, 5];
-            $.post('/Dashboard/UpdateServices', $.param({ data: servicesArr }, true), function (data) { });
 
 
         
