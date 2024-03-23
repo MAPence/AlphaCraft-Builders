@@ -10,6 +10,11 @@ namespace ACB.Models
         [Display(Name = "Last Name")]
         public string? LastName { get; set; }
         public string? Email { get; set; }
+        public string? Company { get; set; }
+        public string? Address { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
+        public int? Zip {  get; set; }
         public List<int>? Services { get; set; }
         public List<QuoteVM>? Quotes { get; set; }
         public NewOrder? NewOrder { get; set; }

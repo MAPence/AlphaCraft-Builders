@@ -201,7 +201,7 @@ namespace ACB.Controllers
         {
             var contractor = new ContractorVM();
             SqlConnection sqlconn = new(GetConnectionString());
-            string sqlQuery = "select contractor_id, FirstName, LastName from AspNetUsers" +
+            string sqlQuery = "select contractor_id, FirstName, LastName, Company, Address, City, State, Zip from AspNetUsers" +
                 $"\r\n Where UserName = '{email}'";
             SqlCommand cmnd = new(sqlQuery, sqlconn);
             sqlconn.Open();
@@ -212,6 +212,11 @@ namespace ACB.Controllers
             contractor.Id = Convert.ToInt32(dt.Rows[0][0]);
             contractor.FirstName = dt.Rows[0][1].ToString();
             contractor.LastName = dt.Rows[0][2].ToString();
+            contractor.Company = dt.Rows[0][3].ToString();
+            contractor.Address = dt.Rows[0][4].ToString();
+            contractor.City = dt.Rows[0][5].ToString();
+            contractor.State = dt.Rows[0][6].ToString();
+            contractor.Zip = Convert.ToInt32(dt.Rows[0][7]);
             contractor.Email = email;
             contractor.Services = GetServicesoffered(contractor.Id);
             foreach (var service in contractor.Services)
