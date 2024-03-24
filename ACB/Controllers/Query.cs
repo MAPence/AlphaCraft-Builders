@@ -94,10 +94,11 @@ namespace ACB.Controllers
         public static int NewQuote(Quote quote)
         {
             //create query statement, insert quote and return new id
-            string query = $"insert into quote (client_first_name, client_last_name, client_email, details, job_zip, job_type) " +
+            string query = $"insert into quote (client_first_name, client_last_name, client_email, job_address, city, State, job_zip, details, job_type, latitude, longitude) " +
                 $"\r\noutput inserted.id " +
                 $"\r\nvalues ('{quote.Client_first_name}' ,'{quote.Client_last_name}', '{quote.Client_email}'," +
-                $"\r\n'{quote.Details}','{quote.Zip}', {quote.Service});";
+                $"\r\n'{quote.Address}', '{quote.City}', '{quote.State}', {quote.Zip}, " +
+                $"\r\n'{quote.Details}', {quote.Service}, {quote.LatLong.Lat}, {quote.LatLong.Long});";
 
             //check query statement in output window
             System.Diagnostics.Debug.WriteLine(query);

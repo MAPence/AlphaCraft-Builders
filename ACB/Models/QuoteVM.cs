@@ -8,6 +8,8 @@
         public string? Email { get; set; }
         public string? Service { get; set; }
         public string? Address { get; set; }
+        public string? City { get; set; }
+        public string? State { get; set; }
         public int? Zip { get; set; }
         public string? Details { get; set; }
         public DateTime? Created { get; set; }

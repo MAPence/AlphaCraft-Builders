@@ -93,7 +93,8 @@ namespace ACB.Controllers
 
 
             //set long/lat on quote...
-
+            GeoLocation geo = new GeoLocation();
+            quote.LatLong = await geo.GetCoordinatesAsync(quote.Address,quote.City,quote.State,quote.Zip.ToString());   
 
             //inserts quote into db
             int fk = Query.NewQuote(quote);
