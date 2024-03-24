@@ -10,7 +10,9 @@
     }
 </style>
 
-<h1 class="center">Profile Settings</h1>
+<h1 class="center mb-3">Profile Settings</h1>
+
+<h4 class="text-center mt-2">Personal Info:</h4>
 
 <form asp-controller="Dashboard" asp-action="UpdateServices">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -41,26 +43,49 @@
 
     </div>
     
-    <div class="form-group">
-        <label asp-for="Email" class="control-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email" class="text-danger"></span>
+    <div class="row">
+        <div class="form-group col-5">
+            <label asp-for="Address" class="control-label"></label>
+            <input asp-for="Address" class="form-control" />
+            <span asp-validation-for="Address" class="text-danger"></span>
+        </div>
+        <div class="form-group col-3">
+            <label asp-for="City" class="control-label"></label>
+            <input asp-for="City" class="form-control" />
+            <span asp-validation-for="City" class="text-danger"></span>
+        </div>
+        <div class="form-group col-2">
+            <label asp-for="State" class="control-label"></label>
+            <input asp-for="State" class="form-control" />
+            <span asp-validation-for="State" class="text-danger"></span>
+        </div>
+        <div class="form-group col-2">
+            <label asp-for="Zip" class="control-label"></label>
+            <input asp-for="Zip" class="form-control" />
+            <span asp-validation-for="Zip" class="text-danger"></span>
+        </div>
+
     </div>
-    <div class="form-group">
-        <label asp-for="CurrentPassword" class="control-label"></label>
-        <input asp-for="CurrentPassword" class="form-control" />
-        <span asp-validation-for="CurrentPassword" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="NewPassword" class="control-label"></label>
-        <input asp-for="NewPassword" class="form-control" />
-        <span asp-validation-for="NewPassword" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="ConfirmNewPassword" class="control-label"></label>
-        <input asp-for="ConfirmNewPassword" class="form-control" />
-        <span asp-validation-for="ConfirmNewPassword" class="text-danger"></span>
-    </div>
+
+    @* <div class="row">
+        <div class="form-group col-4">
+            <label asp-for="CurrentPassword" class="control-label"></label>
+            <input asp-for="CurrentPassword" class="form-control" />
+            <span asp-validation-for="CurrentPassword" class="text-danger"></span>
+        </div>
+        <div class="form-group col-4">
+            <label asp-for="NewPassword" class="control-label"></label>
+            <input asp-for="NewPassword" class="form-control" />
+            <span asp-validation-for="NewPassword" class="text-danger"></span>
+        </div>
+        <div class="form-group col-4">
+            <label asp-for="ConfirmNewPassword" class="control-label"></label>
+            <input asp-for="ConfirmNewPassword" class="form-control" />
+            <span asp-validation-for="ConfirmNewPassword" class="text-danger"></span>
+        </div>
+
+    </div> *@
+    
     <br>
     
 
@@ -69,7 +94,9 @@
         <button type="submit" value="Submit" onclick="updateServices()" class="btn btn-primary">Save Changes</button>
     </div>
 </form>
-<h3>Services Offered:</h3>
+
+
+<h4 class="text-center mt-4">Services Offered:</h4>
 <table class="container d-flex d-inline-flex">
     @foreach (var service in ViewBag.Services)
     {
@@ -79,10 +106,11 @@
             <label>@service.Name</label>
         </div>
     }
-    <button onclick="return updateServices()">
-        Update
-    </button>
+    
 </table>
+<button class="btn btn-primary" onclick="return updateServices()">
+    Update
+</button>
 <br></br>
 
 @section scripts{

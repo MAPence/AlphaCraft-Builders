@@ -78,6 +78,11 @@ namespace ACB.Controllers
                     EmailConfirmed = true
 
                 };
+
+                GeoLocation geo = new GeoLocation();
+                Task<LatLong> latlong = geo.GetCoordinatesAsync(user.Address, user.City, user.State, user.Zip);
+                user.latitude = latlong.Result.Lat;
+                user.longitude = latlong.Result.Long;
                 var result = await _userManager.CreateAsync(user, userInfo.Password!);
 
                 if (result.Succeeded)

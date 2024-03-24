@@ -25,5 +25,8 @@ public class ACBUser : IdentityUser
     public string Company { get; set; }
     [PersonalData]
     public string Title { get; set; }
+
+    public double? longitude { get; set; }
+    public double? latitude { get; set; }
 }
 
