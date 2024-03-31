@@ -36,8 +36,8 @@ namespace ACB.Controllers
                     var content = await response.Content.ReadAsStringAsync();
                     var json = JObject.Parse(content);
                     var location = json["results"][0]["geometry"]["location"];
-                    var latitude = (double)location["lat"];
-                    var longitude = (double)location["lng"];
+                    var latitude = (decimal)location["lat"];
+                    var longitude = (decimal)location["lng"];
                     latlong.Lat = latitude;
                     latlong.Long = longitude;
                     return latlong;

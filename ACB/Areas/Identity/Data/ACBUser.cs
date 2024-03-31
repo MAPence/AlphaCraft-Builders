@@ -26,7 +26,7 @@ public class ACBUser : IdentityUser
     [PersonalData]
     public string Title { get; set; }
 
-    public double? longitude { get; set; }
-    public double? latitude { get; set; }
+    public decimal? longitude { get; set; }
+    public decimal? latitude { get; set; }
 }
 
