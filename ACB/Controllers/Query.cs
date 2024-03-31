@@ -166,14 +166,49 @@ namespace ACB.Controllers
             return services;
         }
 
-        public static List<QuoteVM>? GetQuotes(int? service_type)
+        /*        public static List<QuoteVM>? GetQuotes(int? service_type)
+                {
+                    List<QuoteVM>? quotes = new();
+
+                    SqlConnection sqlconn = new(GetConnectionString());
+                    string sqlQuery = "select * from quote" +
+                        $"\r\n join contractor_service on job_type = contractor_service.id" +
+                        $"\r\n Where job_type = {service_type}";
+                    SqlCommand cmnd = new(sqlQuery, sqlconn);
+                    sqlconn.Open();
+                    SqlDataAdapter adapter = new(cmnd);
+                    DataTable dt = new();
+                    adapter.Fill(dt);
+                    sqlconn.Close();
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        QuoteVM quote = new()
+                        {
+                            Id = Convert.ToInt32(dt.Rows[i][0]),
+                            Firstname = (string?)dt.Rows[i][1],
+                            Lastname = (string?)dt.Rows[i][2],
+                            Email = (string?)dt.Rows[i][3],
+                            Zip = Convert.ToInt32(dt.Rows[i][5]),
+                            //Address = (string?)dt.Rows[i][6],
+                            Details = (string?)dt.Rows[i][7],
+                            Service = (string?)dt.Rows[i][16]
+                        };
+                        quotes.Add(quote);
+                    }
+                    return quotes;
+                }*/
+
+        public static List<QuoteVM>? GetQuotes(int? service_type, LatLong? latlong, int dist)
         {
             List<QuoteVM>? quotes = new();
 
             SqlConnection sqlconn = new(GetConnectionString());
-            string sqlQuery = "select * from quote" +
+            string sqlQuery = $"Declare @LocStart GEOGRAPHY = GEOGRAPHY::Point({latlong.Lat},{latlong.Long}, 4326)" +
+                "select * from quote" +
                 $"\r\n join contractor_service on job_type = contractor_service.id" +
-                $"\r\n Where job_type = {service_type}";
+                $"\r\n Where job_type = {service_type}" +
+                $"\r\n and latitude is not null" +
+                $"\r\n and  @LocStart.STDistance(GEOGRAPHY::Point(latitude, longitude, 4326))/1609.344 <= {dist};";
             SqlCommand cmnd = new(sqlQuery, sqlconn);
             sqlconn.Open();
             SqlDataAdapter adapter = new(cmnd);
@@ -202,7 +237,7 @@ namespace ACB.Controllers
         {
             var contractor = new ContractorVM();
             SqlConnection sqlconn = new(GetConnectionString());
-            string sqlQuery = "select contractor_id, FirstName, LastName, Company, Address, City, State, Zip from AspNetUsers" +
+            string sqlQuery = "select contractor_id, FirstName, LastName, Company, Address, City, State, Zip, latitude, longitude from AspNetUsers" +
                 $"\r\n Where UserName = '{email}'";
             SqlCommand cmnd = new(sqlQuery, sqlconn);
             sqlconn.Open();
@@ -218,11 +253,13 @@ namespace ACB.Controllers
             contractor.City = dt.Rows[0][5].ToString();
             contractor.State = dt.Rows[0][6].ToString();
             contractor.Zip = Convert.ToInt32(dt.Rows[0][7]);
+            contractor.LatLong.Lat = (decimal)dt.Rows[0][8];
+            contractor.LatLong.Long = (decimal)dt.Rows[0][9];
             contractor.Email = email;
             contractor.Services = GetServicesoffered(contractor.Id);
             foreach (var service in contractor.Services)
             {
-                List<QuoteVM> quotes = GetQuotes(service);
+                List<QuoteVM> quotes = GetQuotes(service, contractor.LatLong, 25);
                 if (quotes != null && quotes.Count > 0)
                 {
                     //contractor.Quotes = new List<QuoteVM>();

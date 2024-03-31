@@ -19,11 +19,13 @@ namespace ACB.Models
         public List<QuoteVM>? Quotes { get; set; }
         public NewOrder? NewOrder { get; set; }
         public QuoteVM? Quote { get; set; }
+        public LatLong? LatLong { get; set; }
         public ContractorVM()
         {
             Orders = new List<OrdersVM>();
             Quotes = new List<QuoteVM>();
             Services = new List<int>();
+            LatLong = new LatLong();
         }
         public List<OrdersVM>? Orders { get; set; }
 
