@@ -360,5 +360,34 @@ namespace ACB.Controllers
 
         }
 
+        public static JobVM ConvertQuote(int id)
+        {
+            
+
+            string query = "select * from quote" +
+                $"\r\nwhere id = {id};";
+
+            DataTable dt = GetDataTable(query);
+
+            JobVM job = new JobVM()
+            {
+                Firstname = (string?)dt.Rows[0][1],
+                Lastname = (string?)dt.Rows[0][2],
+                Email = (string?)dt.Rows[0][3],
+                Service = (string?)dt.Rows[0][16],
+                Address = (string?)dt.Rows[0][6],
+                City = (string?)dt.Rows[0][13],
+                State = (string?)dt.Rows[0][14],
+                Zip = (int?)dt.Rows[0][5],
+                Details = (string?)dt.Rows[0][7],
+
+
+            };
+
+
+
+            return job;
+        }
+
     }
 }

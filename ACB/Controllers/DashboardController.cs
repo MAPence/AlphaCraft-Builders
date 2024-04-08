@@ -1,6 +1,7 @@
 ﻿using ACB.Areas.Identity.Data;
 using ACB.Data;
 using ACB.Models;
+//using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.Contracts;
@@ -146,6 +147,25 @@ namespace ACB.Controllers
                 Query.UpdateServices(contractor.Id, u_serv);
             }
                 
+        }
+        
+        public async Task<IActionResult> NewJob(int id)
+        {
+            ContractorVM contractor = new ContractorVM();
+            System.Diagnostics.Debug.WriteLine(id);
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            if (user != null)
+            {
+                string? userId = user.UserName;
+                contractor = Query.GetContractor(userId);
+                //string? userId = user.UserName;
+                
+
+               
+                return View("NewJob",contractor);
+            }
+
+            return View();
         }
 
 
