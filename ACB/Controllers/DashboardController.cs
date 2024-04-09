@@ -159,6 +159,8 @@ namespace ACB.Controllers
                 string? userId = user.UserName;
                 contractor = Query.GetContractor(userId);
                 //string? userId = user.UserName;
+
+                contractor.Job = Query.ConvertQuote(id);
                 
 
                

@@ -365,7 +365,8 @@ namespace ACB.Controllers
             
 
             string query = "select * from quote" +
-                $"\r\nwhere id = {id};";
+                "\r\njoin contractor_service on job_type = contractor_service.Id" +
+                $"\r\nwhere quote.id = {id};";
 
             DataTable dt = GetDataTable(query);
 
@@ -378,7 +379,7 @@ namespace ACB.Controllers
                 Address = (string?)dt.Rows[0][6],
                 City = (string?)dt.Rows[0][13],
                 State = (string?)dt.Rows[0][14],
-                Zip = (int?)dt.Rows[0][5],
+                Zip = Convert.ToInt32(dt.Rows[0][5]),
                 Details = (string?)dt.Rows[0][7],
 
 
