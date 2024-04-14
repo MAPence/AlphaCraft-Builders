@@ -160,7 +160,7 @@ namespace ACB.Controllers
                 contractor = Query.GetContractor(userId);
                 //string? userId = user.UserName;
 
-                if(id != null)
+                if(id != 0)
                 {
 					contractor.Job = Query.ConvertQuote(id);
 				}
@@ -174,6 +174,26 @@ namespace ACB.Controllers
             contractor.Job = new JobVM();
 
             return View(contractor);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> NewJob([Bind("Firstname,Lastname,Email,Address,City,State,Zip,Details,Start,End,Amount")] JobVM job)
+        {
+			ContractorVM contractor = new ContractorVM();
+			
+			var user = await _userManager.GetUserAsync(HttpContext.User);
+
+			string? userId = user.UserName;
+			contractor = Query.GetContractor(userId);
+
+            string query = "insert into Job " +
+                "(contractor_id, client_first_name, client_last_name, client_email, job_zib, " +
+                "job_address, details, quote_total,job_start, job_end)" +
+                $"\r\nvalues ({contractor.Id}, '{job.Firstname}', '{job.Lastname}', '{job.Email}', {job.Zip}," +
+                $"\r\n'{job.Address} {job.City}, {job.State}', '{job.Details}', {job.Amount}, {job.Start}, {job.End})";
+            Query.Insert(query);
+            System.Diagnostics.Debug.WriteLine("Hello");
+            return View();
         }
 
 
