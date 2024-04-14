@@ -21,7 +21,6 @@ namespace ACB.Models
         public NewOrder? NewOrder { get; set; }
         public QuoteVM? Quote { get; set; }
         public LatLong? LatLong { get; set; }
-
         public JobVM? Job { get; set; }
         public ContractorVM()
         {

@@ -166,38 +166,6 @@ namespace ACB.Controllers
             return services;
         }
 
-        /*        public static List<QuoteVM>? GetQuotes(int? service_type)
-                {
-                    List<QuoteVM>? quotes = new();
-
-                    SqlConnection sqlconn = new(GetConnectionString());
-                    string sqlQuery = "select * from quote" +
-                        $"\r\n join contractor_service on job_type = contractor_service.id" +
-                        $"\r\n Where job_type = {service_type}";
-                    SqlCommand cmnd = new(sqlQuery, sqlconn);
-                    sqlconn.Open();
-                    SqlDataAdapter adapter = new(cmnd);
-                    DataTable dt = new();
-                    adapter.Fill(dt);
-                    sqlconn.Close();
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        QuoteVM quote = new()
-                        {
-                            Id = Convert.ToInt32(dt.Rows[i][0]),
-                            Firstname = (string?)dt.Rows[i][1],
-                            Lastname = (string?)dt.Rows[i][2],
-                            Email = (string?)dt.Rows[i][3],
-                            Zip = Convert.ToInt32(dt.Rows[i][5]),
-                            //Address = (string?)dt.Rows[i][6],
-                            Details = (string?)dt.Rows[i][7],
-                            Service = (string?)dt.Rows[i][16]
-                        };
-                        quotes.Add(quote);
-                    }
-                    return quotes;
-                }*/
-
         public static List<QuoteVM>? GetQuotes(int? service_type, LatLong? latlong, int dist)
         {
             List<QuoteVM>? quotes = new();
@@ -375,7 +343,6 @@ namespace ACB.Controllers
 
         public static void UpdateServices(int? Id, int[] services)
         {
-
             DeleteQuery("contractor_service_offered", "contractor_id", Id.ToString());
 
             foreach(var service in services)
@@ -384,13 +351,10 @@ namespace ACB.Controllers
                     $"\b\n values ({Id}, {service});";
                 Insert(newService);
             }
-
         }
 
         public static JobVM ConvertQuote(int id)
         {
-            
-
             string query = "select * from quote" +
                 "\r\njoin contractor_service on job_type = contractor_service.Id" +
                 $"\r\nwhere quote.id = {id};";
@@ -408,14 +372,8 @@ namespace ACB.Controllers
                 State = (string?)dt.Rows[0][14],
                 Zip = Convert.ToInt32(dt.Rows[0][5]),
                 Details = (string?)dt.Rows[0][7],
-
-
             };
-
-
-
             return job;
         }
-
     }
 }

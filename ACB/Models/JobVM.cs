@@ -19,6 +19,5 @@ namespace ACB.Models
         public Decimal? Amount { get; set; }
         public IList<JobVM>? Jobs { get; set; }
         public ACBUser CurrentUser { get; set; }
-
     }
 }
