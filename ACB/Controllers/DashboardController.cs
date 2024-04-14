@@ -187,10 +187,10 @@ namespace ACB.Controllers
 			contractor = Query.GetContractor(userId);
 
             string query = "insert into Job " +
-                "(contractor_id, client_first_name, client_last_name, client_email, job_zib, " +
+                "(contractor_id, client_first_name, client_last_name, client_email, job_zip, " +
                 "job_address, details, quote_total,job_start, job_end)" +
                 $"\r\nvalues ({contractor.Id}, '{job.Firstname}', '{job.Lastname}', '{job.Email}', {job.Zip}," +
-                $"\r\n'{job.Address} {job.City}, {job.State}', '{job.Details}', {job.Amount}, {job.Start}, {job.End})";
+                $"\r\n'{job.Address} {job.City}, {job.State}', '{job.Details}', {job.Amount}, '{job.Start}', '{job.End}');";
             Query.Insert(query);
             System.Diagnostics.Debug.WriteLine("Hello");
             return View();
