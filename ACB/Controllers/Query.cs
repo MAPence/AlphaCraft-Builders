@@ -311,12 +311,39 @@ namespace ACB.Controllers
                         Co_id = reader.IsDBNull(1) ? null : (int?)reader.GetInt32(1),
                         Case_id = reader.IsDBNull(2) ? null : (int?)reader.GetInt32(2),
                         Total = (float?)(reader.IsDBNull(3) ? null : (decimal?)reader.GetDecimal(3)),
-                        //Created = reader.IsDBNull(4) ? null : (DateTime?)reader.GetDateTime(4)
                     };
                     orders.Add(order);
                 }
             }
             return orders;
+        }
+        public static List<JobVM> GetJobs(int? co_id)
+        {
+            List<JobVM> jobs = new();
+
+            using (SqlConnection sqlconn = new(GetConnectionString()))
+            {
+                string sqlQuery = "SELECT * FROM Job WHERE contractor_id = @co_id";
+                SqlCommand cmnd = new(sqlQuery, sqlconn);
+                cmnd.Parameters.AddWithValue("@co_id", co_id);
+
+                sqlconn.Open();
+                using SqlDataReader reader = cmnd.ExecuteReader();
+                while (reader.Read())
+                {
+                    JobVM job = new()
+                    {
+                        Id = reader.GetInt32(0),
+                        Firstname = reader.IsDBNull(3) ? null : reader.GetString(3),
+                        Lastname = reader.IsDBNull(4) ? null : reader.GetString(4),
+                        Address = reader.IsDBNull(8) ? null : reader.GetString(8),    
+                        Start = reader.IsDBNull(12) ? null : (DateTime?)reader.GetDateTime(12),
+                        Amount = reader.IsDBNull(11) ? null : (decimal?)reader.GetDecimal(11)
+                    };
+                    jobs.Add(job);
+                }
+            }
+            return jobs;
         }
 
         public static List<Service> ServiceSelection(string table)

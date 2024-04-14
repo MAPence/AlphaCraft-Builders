@@ -100,7 +100,17 @@ namespace ACB.Controllers
 
             return View(contractor);
         }
+        public async Task<IActionResult> AllJobs(ContractorVM contractor)
+        {
+            // Retrieve the current authenticated user
+            var user = await _userManager.GetUserAsync(HttpContext.User);
 
+            // Retrieve the orders from the database using the user's username
+            contractor = Query.GetContractor(user.UserName);
+            contractor.Jobs = Query.GetJobs(contractor.Id);
+
+            return View(contractor);
+        }
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();

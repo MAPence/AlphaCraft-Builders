@@ -17,6 +17,7 @@ namespace ACB.Models
         public int? Zip {  get; set; }
         public List<int>? Services { get; set; }
         public List<QuoteVM>? Quotes { get; set; }
+        public List<JobVM>? Jobs { get; set; }
         public NewOrder? NewOrder { get; set; }
         public QuoteVM? Quote { get; set; }
         public LatLong? LatLong { get; set; }
@@ -24,6 +25,7 @@ namespace ACB.Models
         public JobVM? Job { get; set; }
         public ContractorVM()
         {
+            Jobs = new List<JobVM>();
             Orders = new List<OrdersVM>();
             Quotes = new List<QuoteVM>();
             Services = new List<int>();
