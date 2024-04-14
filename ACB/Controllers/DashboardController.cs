@@ -160,14 +160,20 @@ namespace ACB.Controllers
                 contractor = Query.GetContractor(userId);
                 //string? userId = user.UserName;
 
-                contractor.Job = Query.ConvertQuote(id);
+                if(id != null)
+                {
+					contractor.Job = Query.ConvertQuote(id);
+				}
+                
                 
 
                
                 return View("NewJob",contractor);
             }
 
-            return View();
+            contractor.Job = new JobVM();
+
+            return View(contractor);
         }
 
 
