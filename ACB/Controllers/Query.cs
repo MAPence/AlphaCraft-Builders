@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ACB.Models;
+﻿using ACB.Models;
 using System.Data;
 using System.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-using System.Configuration;
-using NuGet.Protocol.Plugins;
-using Azure.Core;
 
 namespace ACB.Controllers
 {
@@ -53,7 +48,6 @@ namespace ACB.Controllers
             {
                 // add value to list
                 list.Add(dt.Rows[i][column].ToString()!);
-
             }
             sqlconn.Close();
             return list;
@@ -70,7 +64,6 @@ namespace ACB.Controllers
             sqlconn.Open();
             sqlquery.ExecuteNonQuery();
             sqlconn.Close();
-
         }
 
         //insert into any table, and return id of new row

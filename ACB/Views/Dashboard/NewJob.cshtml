@@ -1,10 +1,7 @@
 ﻿@model ACB.Models.ContractorVM
-
 @{
     ViewData["Title"] = "NewJob";
 }
-
-
 <hr />
 <div class="row">
     <div class="col alpha-form">
@@ -23,11 +20,9 @@
                     <input asp-for="Job.Lastname" class="form-control" />
                     <span asp-validation-for="Job.Lastname" class="text-danger"></span>
                 </div>
-
             </div>
             
             <div class="row d-flex">
-
                 <div class="form-group col-lg-6">
                     <label asp-for="Job.Email" class="control-label"></label>
                     <input asp-for="Job.Email" class="form-control" />
@@ -38,7 +33,6 @@
                     <input  asp-for="Job.Service" class="form-control" />
                     <span asp-validation-for="Job.Service" class="text-danger"></span>
                 </div>
-
             </div>
             
             <div class="form-group">
@@ -91,4 +85,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-

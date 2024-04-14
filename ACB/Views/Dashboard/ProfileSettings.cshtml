@@ -1,9 +1,5 @@
 ﻿@model ACB.Models.ContractorVM
 
-@{
-   // var services = new List<int>;
-}
-
 <style>
     .center {
         text-align: center;
@@ -40,7 +36,6 @@
             <input asp-for="Company" class="form-control" />
             <span asp-validation-for="Company" class="text-danger"></span>
         </div>
-
     </div>
     
     <div class="row">
@@ -64,37 +59,14 @@
             <input asp-for="Zip" class="form-control" />
             <span asp-validation-for="Zip" class="text-danger"></span>
         </div>
-
     </div>
-
-    @* <div class="row">
-        <div class="form-group col-4">
-            <label asp-for="CurrentPassword" class="control-label"></label>
-            <input asp-for="CurrentPassword" class="form-control" />
-            <span asp-validation-for="CurrentPassword" class="text-danger"></span>
-        </div>
-        <div class="form-group col-4">
-            <label asp-for="NewPassword" class="control-label"></label>
-            <input asp-for="NewPassword" class="form-control" />
-            <span asp-validation-for="NewPassword" class="text-danger"></span>
-        </div>
-        <div class="form-group col-4">
-            <label asp-for="ConfirmNewPassword" class="control-label"></label>
-            <input asp-for="ConfirmNewPassword" class="form-control" />
-            <span asp-validation-for="ConfirmNewPassword" class="text-danger"></span>
-        </div>
-
-    </div> *@
     
     <br>
-    
-
-    
+       
     <div class="form-group">
         <button type="submit" value="Submit" onclick="updateServices()" class="btn btn-primary">Save Changes</button>
     </div>
 </form>
-
 
 <h4 class="text-center mt-4">Services Offered:</h4>
 <table class="container d-flex d-inline-flex">
@@ -106,7 +78,6 @@
             <label>@service.Name</label>
         </div>
     }
-    
 </table>
 <button class="btn btn-primary" onclick="return updateServices()">
     Update
@@ -116,7 +87,6 @@
 @section scripts{
 
     <script>
-
         function updateServices() {
 
             var serv = document.getElementsByClassName('serv');
@@ -130,13 +100,10 @@
 
                     var type = serv[i].value;
                     servicesArr.push(type);
-
                 }
-
             }
 
             console.log(servicesArr);
-
 
             $.ajax({
                 type: "POST",
@@ -151,24 +118,9 @@
                 error: function (req, status, err) {
                     console.log(status);
                 }
-
-
             });
-
             alert("Success! Your service offerings have been updated.");
             
             return flase;
-
         }
-
-
-
-    </script>
-
-
-
-}
-
-
-
-        
+    </script>       

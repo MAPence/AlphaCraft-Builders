@@ -1,17 +1,11 @@
-﻿
-using Newtonsoft.Json.Linq;
-using System.Net.Http;
+﻿using Newtonsoft.Json.Linq;
 using ACB.Models;
 using System.Net;
 
 namespace ACB.Controllers
-
 {
     public class GeoLocation
     {
-
-        
-
         private const string GoogleMapsGeocodingApiUrl = "https://maps.googleapis.com/maps/api/geocode/json";
         private readonly HttpClient _httpClient;
 
@@ -30,7 +24,6 @@ namespace ACB.Controllers
                 var requestUrl = $"{GoogleMapsGeocodingApiUrl}?address={encodedAddress}&key=AIzaSyChApDFEzmpCEBP6xfQPCHwucDuC5Z8Bzo";
                 var response = await _httpClient.GetAsync(requestUrl);
                 
-
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
