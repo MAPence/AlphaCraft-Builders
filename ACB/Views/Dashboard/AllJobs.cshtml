@@ -1,0 +1,61 @@
+﻿@model ACB.Models.ContractorVM
+@{
+    ViewData["Title"] = "All Jobs";
+    var jobs = Model.Job;
+}
+<div class="col-9">
+    <div class="container-fluid">
+        <div class="row table-w container">
+            <div class="col-12 py-3">
+                <div class="dash-header">
+                    All Jobs
+                    <div class="row px-4">
+                        <div class="col-2 line col-header">
+                            Job #
+                        </div>
+                        <div class="col-2 line col-header">
+                            Customer First Name
+                        </div>
+                        <div class="col-2 line col-header">
+                            Customer Last Name
+                        </div>
+                        <div class="col-2 line col-header">
+                            Address
+                        </div>
+                        <div class="col-2 line col-header">
+                            Start Date
+                        </div>
+                        <div class="col-2 line col-header">
+                            Amount
+                        </div>
+                    </div>
+                </div>
+                <div class="container-fluid dash-row">
+                    @foreach (var job in @Model.Jobs)
+                    {
+                        <div class="row">
+                            <div class="col-2 line">
+                                @job.Id
+                            </div>
+                            <div class="col-2 line">
+                                @job.Firstname
+                            </div>
+                            <div class="col-2 line">
+                                @job.Lastname
+                            </div>
+                            <div class="col-2 line">
+                                @job.Address
+                            </div>
+                            <div class="col-2 line">
+                                @job.Start
+                            </div>
+                            <div class="col-2 line">
+                                @job.Amount
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

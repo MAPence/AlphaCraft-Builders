@@ -9,7 +9,6 @@ namespace ACB.Controllers
 {
     public class LocationController : Controller
     {
-
         private readonly ACBContext _context;
 
         public LocationController(ACBContext context)
@@ -30,7 +29,6 @@ namespace ACB.Controllers
             {
                 return RedirectToAction("Location");
             }
-
             return View("../Location/Location");
         }
 
@@ -39,5 +37,4 @@ namespace ACB.Controllers
             return View();
         }
     }
-
 }

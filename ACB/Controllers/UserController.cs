@@ -45,7 +45,6 @@ namespace ACB.Controllers
         // GET: UserController
         public ActionResult Register()
         {
-
             return View();
         }
 
@@ -76,7 +75,6 @@ namespace ACB.Controllers
                     Phone = userInfo.Phone,
                     UserName = userInfo.Email,
                     EmailConfirmed = true
-
                 };
 
                 GeoLocation geo = new GeoLocation();
@@ -90,7 +88,6 @@ namespace ACB.Controllers
                     ContractorVM contractor = Query.GetContractor(user.UserName);
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     return View("../Dashboard/Home", contractor);
-
                 }
                 return View("Register");
             }

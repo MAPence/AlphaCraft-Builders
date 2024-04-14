@@ -1,11 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using ACB.Models;
+﻿using ACB.Models;
 using System.Data;
 using System.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
-using System.Configuration;
-using NuGet.Protocol.Plugins;
-using Azure.Core;
 
 namespace ACB.Controllers
 {
@@ -53,7 +48,6 @@ namespace ACB.Controllers
             {
                 // add value to list
                 list.Add(dt.Rows[i][column].ToString()!);
-
             }
             sqlconn.Close();
             return list;
@@ -70,7 +64,6 @@ namespace ACB.Controllers
             sqlconn.Open();
             sqlquery.ExecuteNonQuery();
             sqlconn.Close();
-
         }
 
         //insert into any table, and return id of new row
@@ -165,38 +158,6 @@ namespace ACB.Controllers
             }
             return services;
         }
-
-        /*        public static List<QuoteVM>? GetQuotes(int? service_type)
-                {
-                    List<QuoteVM>? quotes = new();
-
-                    SqlConnection sqlconn = new(GetConnectionString());
-                    string sqlQuery = "select * from quote" +
-                        $"\r\n join contractor_service on job_type = contractor_service.id" +
-                        $"\r\n Where job_type = {service_type}";
-                    SqlCommand cmnd = new(sqlQuery, sqlconn);
-                    sqlconn.Open();
-                    SqlDataAdapter adapter = new(cmnd);
-                    DataTable dt = new();
-                    adapter.Fill(dt);
-                    sqlconn.Close();
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        QuoteVM quote = new()
-                        {
-                            Id = Convert.ToInt32(dt.Rows[i][0]),
-                            Firstname = (string?)dt.Rows[i][1],
-                            Lastname = (string?)dt.Rows[i][2],
-                            Email = (string?)dt.Rows[i][3],
-                            Zip = Convert.ToInt32(dt.Rows[i][5]),
-                            //Address = (string?)dt.Rows[i][6],
-                            Details = (string?)dt.Rows[i][7],
-                            Service = (string?)dt.Rows[i][16]
-                        };
-                        quotes.Add(quote);
-                    }
-                    return quotes;
-                }*/
 
         public static List<QuoteVM>? GetQuotes(int? service_type, LatLong? latlong, int dist)
         {
@@ -311,12 +272,39 @@ namespace ACB.Controllers
                         Co_id = reader.IsDBNull(1) ? null : (int?)reader.GetInt32(1),
                         Case_id = reader.IsDBNull(2) ? null : (int?)reader.GetInt32(2),
                         Total = (float?)(reader.IsDBNull(3) ? null : (decimal?)reader.GetDecimal(3)),
-                        //Created = reader.IsDBNull(4) ? null : (DateTime?)reader.GetDateTime(4)
                     };
                     orders.Add(order);
                 }
             }
             return orders;
+        }
+        public static List<JobVM> GetJobs(int? co_id)
+        {
+            List<JobVM> jobs = new();
+
+            using (SqlConnection sqlconn = new(GetConnectionString()))
+            {
+                string sqlQuery = "SELECT * FROM Job WHERE contractor_id = @co_id";
+                SqlCommand cmnd = new(sqlQuery, sqlconn);
+                cmnd.Parameters.AddWithValue("@co_id", co_id);
+
+                sqlconn.Open();
+                using SqlDataReader reader = cmnd.ExecuteReader();
+                while (reader.Read())
+                {
+                    JobVM job = new()
+                    {
+                        Id = reader.GetInt32(0),
+                        Firstname = reader.IsDBNull(3) ? null : reader.GetString(3),
+                        Lastname = reader.IsDBNull(4) ? null : reader.GetString(4),
+                        Address = reader.IsDBNull(8) ? null : reader.GetString(8),    
+                        Start = reader.IsDBNull(12) ? null : (DateTime?)reader.GetDateTime(12),
+                        Amount = reader.IsDBNull(11) ? null : (decimal?)reader.GetDecimal(11)
+                    };
+                    jobs.Add(job);
+                }
+            }
+            return jobs;
         }
 
         public static List<Service> ServiceSelection(string table)
@@ -348,7 +336,6 @@ namespace ACB.Controllers
 
         public static void UpdateServices(int? Id, int[] services)
         {
-
             DeleteQuery("contractor_service_offered", "contractor_id", Id.ToString());
 
             foreach(var service in services)
@@ -357,13 +344,10 @@ namespace ACB.Controllers
                     $"\b\n values ({Id}, {service});";
                 Insert(newService);
             }
-
         }
 
         public static JobVM ConvertQuote(int id)
         {
-            
-
             string query = "select * from quote" +
                 "\r\njoin contractor_service on job_type = contractor_service.Id" +
                 $"\r\nwhere quote.id = {id};";
@@ -381,14 +365,8 @@ namespace ACB.Controllers
                 State = (string?)dt.Rows[0][14],
                 Zip = Convert.ToInt32(dt.Rows[0][5]),
                 Details = (string?)dt.Rows[0][7],
-
-
             };
-
-
-
             return job;
         }
-
     }
 }

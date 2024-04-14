@@ -1,4 +1,6 @@
-﻿namespace ACB.Models
+﻿using ACB.Areas.Identity.Data;
+
+namespace ACB.Models
 {
     public class JobVM
     {
@@ -15,5 +17,7 @@
         public DateTime? Start { get; set; }
         public DateTime? End { get; set; }
         public Decimal? Amount { get; set; }
+        public IList<JobVM>? Jobs { get; set; }
+        public ACBUser CurrentUser { get; set; }
     }
 }
