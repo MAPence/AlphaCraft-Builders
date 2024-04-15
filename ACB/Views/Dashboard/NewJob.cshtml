@@ -1,0 +1,101 @@
+﻿@model ACB.Models.ContractorVM
+@{
+    ViewData["Title"] = "NewJob";
+}
+
+<div class="row mt-5">
+    <div class="col alpha-form">
+        <h4 class="text-center">Client Info</h4>
+        <form asp-action="NewJob">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="row d-flex">
+
+                <div class="form-group col-6 col-lg-6">
+                    <label asp-for="Job.Firstname" class="control-label">Client First Name
+                    </label>
+                    <input asp-for="Job.Firstname" class="form-control" />
+                    <span asp-validation-for="Job.Firstname" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6 col-lg-6">
+                    <label asp-for="Job.Lastname" class="control-label"></label>
+                    <input asp-for="Job.Lastname" class="form-control" />
+                    <span asp-validation-for="Job.Lastname" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6 col-lg-6">
+                    <label asp-for="Job.Email" class="control-label"></label>
+                    <input asp-for="Job.Email" class="form-control" />
+                    <span asp-validation-for="Job.Email" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6 col-lg-6">
+                    <label asp-for="Job.Phone" class="control-label"></label>
+                    <input asp-for="Job.Phone" class="form-control" />
+                    <span asp-validation-for="Job.Phone" class="text-danger"></span>
+                </div>
+            </div>
+            
+            <div class="row d-flex">
+                
+                <div class="form-group col-lg-6">
+                    <label asp-for="Job.Service" class="control-label"></label>
+                    <input  asp-for="Job.Service" class="form-control" />
+                    <span asp-validation-for="Job.Service" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row d-flex">
+
+                <div class="form-group col-lg-5">
+                    <label asp-for="Job.Address" class="control-label"></label>
+                    <input asp-for="Job.Address" class="form-control" />
+                    <span asp-validation-for="Job.Address" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-3">
+                    <label asp-for="Job.City" class="control-label"></label>
+                    <input asp-for="Job.City" class="form-control" />
+                    <span asp-validation-for="Job.City" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6 col-lg-2">
+                    <label asp-for="Job.State" class="control-label"></label>
+                    <input asp-for="Job.State" class="form-control" />
+                    <span asp-validation-for="State" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6 col-lg-2">
+                    <label asp-for="Job.Zip" class="control-label"></label>
+                    <input asp-for="Job.Zip" class="form-control" />
+                    <span asp-validation-for="Zip" class="text-danger"></span>
+                </div>
+
+            </div>
+
+            <div class="row d-flex">
+
+                <div class="form-group col-6 col-lg-5">
+                    <label asp-for="Job.Start" class="control-label"></label>
+                    <input asp-for="Job.Start" class="form-control" />
+                    <span asp-validation-for="Job.Start" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6 col-lg-5">
+                    <label asp-for="Job.End" class="control-label"></label>
+                    <input asp-for="Job.End" class="form-control" />
+                    <span asp-validation-for="Job.End" class="text-danger"></span>
+                </div>
+                <div class="form-group col-lg-2">
+                    <label asp-for="Job.Amount" class="control-label"></label>
+                    <input asp-for="Job.Amount" class="form-control" />
+                    <span asp-validation-for="Job.Amount" class="text-danger"></span>
+                </div>
+
+            </div>
+            
+            <div class="form-group">
+                <label asp-for="Job.Details" class="control-label"></label>
+                <textarea asp-for="Job.Details" class="form-control" rows="5" ></textarea>
+                <span asp-validation-for="Job.Details" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group my-3 mt-4 d-flex justify-content-center">
+                <input type="submit" value="Book" class="btn btn-primary col-8 col-lg-4" />
+            </div>
+        </form>
+    </div>
+</div>
+
