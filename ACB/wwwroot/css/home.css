@@ -60,6 +60,8 @@
 
 
 .footer {
+    position: relative;
+    margin-top: 50px;
     color: #DAFFFB;
     background-color: #04364A;
 }

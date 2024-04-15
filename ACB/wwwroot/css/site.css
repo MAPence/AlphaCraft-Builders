@@ -8,6 +8,7 @@ html {
   }
 }
 
+
 html {
   position: relative;
   min-height: 100%;
@@ -47,34 +48,24 @@ body {
 .loc-bg {
     background-image: url("../resources/images/BlueUS.jpg");
     /* background-color: #A7D7C5;*/
-    width: 100vw;
-    background-position: center;
+    width: 100vw;/*
+    background-position: center;*/
     background-repeat: no-repeat;
     background-size: cover;
 }
 
 .loc-form {
-    position: fixed;
-    left: 0;
-    top: 15%;
-    height: 500px;
     background-color: #04364A;
-    margin-left: 10%;
-    width: 600px;
+    width: 45vw;
     border-radius: 40px;
-    padding: 20px;
+    padding: 30px;
     color: white;
     font-weight: 500;
 }
 
 .geo-box {
-    position: fixed;
-    right: 0;
-    top: 15%;
-    height: 500px;
-    width: 800px;
+    width: 45vw;
     background-color: cadetblue;
-    margin-right: 10%;
     border-radius: 10px;
     border-color: #04364A;
     padding: 20px;
@@ -82,4 +73,24 @@ body {
     display: flex;
     justify-content: center;
     border: 2px solid #04364A;
+}
+
+.review-box {
+    position: relative;
+    padding: 0 15px;
+    height: 400px;
+    width: 1800px;
+    margin: 0 15px;
+    margin-left: 30px;
+    margin-right: 30px;
+    border-radius: 10px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    border: 2px solid #04364A;
+    padding-bottom: 50px;
+}
+.review-container {
+    display: flex;
+    justify-content: center;
 }
