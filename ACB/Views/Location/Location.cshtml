@@ -6,25 +6,20 @@
     <title> </title>
     <style>
 
-        .container {
-            max-width: 800px;
-            width: 100%;
+        .container2 {
+            display: none;
+            width: 100%; /* Full width of the viewport */
             text-align: center;
             padding: 20px;
-            backdrop-color: #fff;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            box-sizing: border-box;
         }
 
         .location-form {
-            margin-top: 20px;
+            margin-top: 25px;
         }
-
-        .location-form {
-            display: flex;
-            justify-content: center;
-        }
-
             .location-form input[type="text"],
             .location-form input[type="email"],
             .location-form textarea {
@@ -46,7 +41,7 @@
             }
 
         #map {
-            height: 452px;
+            height: 440px;
             width: 100%;
         }
 
@@ -59,15 +54,15 @@
     @model Location
 <
 <body class="loc-bg">
-    <div class="container ">
-        <div class="center-form">
-            <section class="loc-form alpha-form col-10">
+    <div class="container2 d-flex">
+        <div class="col col-lg-6">
+            <section class=" alpha-form col-11">
                 <h2>Find Your Contractor</h2>
                 <form asp-action="Index" asp-controller="Location" method="post" onsubmit="return updateMapWithMarker()">
-                    <div class="form-group">
-                        <label asp-for="Name" class="control-label">Your Name</label>
-                        <input asp-for="Name" class="form-control" />
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                    <div class="col-12 ">
+                        Service
+                        @Html.DropDownList("Service", ViewBag.Services, "Select Service", new { id = "service", @class = "form-control" })
+
                     </div>
                     <div class="form-group">
                         <label asp-for="Address" class="control-label">Your Address</label>
@@ -97,27 +92,35 @@
                 </form>
             </section>
         </div>
-    </div>
-    <div class="geo-box">
-        <div id="map"></div>
-        <section class="mapname-container">
+        <div class="geo-box col col-lg-6">
+            <div id="map"></div>
+            <section class="mapname-container">
 
-            <script>
-                function initMap() {
-                    var options = {
-                        zoom: 4,
-                        center: { lat: 37.0902, lng: -95.7129 }
+                <script>
+                    function initMap() {
+                        var options = {
+                            zoom: 4,
+                            center: { lat: 37.0902, lng: -95.7129 }
+                        }
+                        var map = new google.maps.Map(document.getElementById('map'), options);
+
+                        var marker = new google.maps.Marker({
+                            position: null,
+                            map: map
+                        });
                     }
-                    var map = new google.maps.Map(document.getElementById('map'), options);
 
-                    var marker = new google.maps.Marker({
-                        position: null,
-                        map: map
-                    });
-                }
-            </script>
-        </section>
+                </script>
+            </section>
+        </div> 
+        
     </div>
+    <div class="review-box">
+        <div class="review-container">
+            <div id="review-list"></div>
+        </div>
+    </div>
+   
     <script>
         function updateMapWithMarker() {
             var address = document.getElementById('Address').value + ', ' +
@@ -149,11 +152,45 @@
                     alert('Geocode was not successful for the following reason: ' + status);
                 }
             });
+
             return false; // Prevent default form submission
         }
     </script>
     <script async
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChApDFEzmpCEBP6xfQPCHwucDuC5Z8Bzo&loading=async&callback=initMap">
+    </script>
+    <script>
+        function initMaprev() {
+            const service = new google.maps.places.PlacesService(document.createElement('div'));
+
+            service.getDetails({ placeId }, (place, status) => {
+                if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    const reviewList = document.getElementById('review-list');
+                    const reviews = place.reviews;
+
+                    if (reviews) {
+                        reviews.forEach((review) => {
+                            const reviewElement = document.createElement('div');
+                            reviewElement.innerHTML =
+                                `<h3>${review.author_name}</h3>` +
+                                `<p>${review.text}</p>` +
+                                `<p>Rating: ${review.rating}</p>`;
+                            reviewList.appendChild(reviewElement);
+                        });
+                    } else {
+                        reviewList.innerHTML = '<p>No reviews available.</p>';
+                    }
+                } else {
+                    console.error('Error retrieving place details:', status);
+                }
+            });
+        }
+
+        // Make sure the Google Maps API is loaded before calling initMaprev
+        const script = document.createElement('script');
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMaprev`;
+        script.async = true;
+        document.body.appendChild(script);
     </script>
 </body>
 </html>
@@ -214,6 +251,7 @@
             { "WI", "Wisconsin" },
             { "WY", "Wyoming" }
         };
+
         return new SelectList(stateNames, "Key", "Value");
     }
 }
