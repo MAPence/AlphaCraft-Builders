@@ -178,17 +178,28 @@ namespace ACB.Controllers
 			ContractorVM contractor = new ContractorVM();
 			var user = await _userManager.GetUserAsync(HttpContext.User);
 
-			string? userId = user.UserName;
-			contractor = Query.GetContractor(userId);
+            //ensure valid user is logged in and insert new job
+            if(user != null)
+            {
+                string? userId = user.UserName;
+                contractor = Query.GetContractor(userId);
 
-            string query = "insert into Job " +
-                "(contractor_id, client_first_name, client_last_name, client_email, job_zip, " +
-                "job_address, details, quote_total,job_start, job_end)" +
-                $"\r\nvalues ({contractor.Id}, '{job.Firstname}', '{job.Lastname}', '{job.Email}', {job.Zip}," +
-                $"\r\n'{job.Address} {job.City}, {job.State}', '{job.Details}', {job.Amount}, '{job.Start}', '{job.End}');";
-            Query.Insert(query);
-            System.Diagnostics.Debug.WriteLine("Hello");
+                string query = "insert into Job " +
+                    "(contractor_id, client_first_name, client_last_name, client_email, job_zip, " +
+                    "job_address, details, quote_total,job_start, job_end)" +
+                    $"\r\nvalues ({contractor.Id}, '{job.Firstname}', '{job.Lastname}', '{job.Email}', {job.Zip}," +
+                    $"\r\n'{job.Address} {job.City}, {job.State}', '{job.Details}', {job.Amount}, '{job.Start}', '{job.End}');";
+                Query.Insert(query);
+                System.Diagnostics.Debug.WriteLine("Hello");
+
+                //populate contractor jobs and route to Jobs table
+                contractor.Jobs = Query.GetJobs(contractor.Id);
+                return View("AllJobs", contractor);
+
+            }
+
             return View();
+			
         }
     }
 }
