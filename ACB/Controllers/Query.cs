@@ -1,6 +1,7 @@
 ﻿using ACB.Models;
 using System.Data;
 using System.Data.SqlClient;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ACB.Controllers
 {
@@ -28,6 +29,33 @@ namespace ACB.Controllers
             adapter.Fill(dt);
 
             return dt;
+        }
+
+        public static List<SelectListItem> GetOptions(string query)
+        {
+            // new list that will be retunred for drop down menu
+            List<SelectListItem> list = new();
+            list.Add(new SelectListItem()
+            {
+                Value = "0",
+                Text = "General Expense"
+            });
+            DataTable dt = GetDataTable(query);
+            
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                // add value to list
+                SelectListItem option = new()
+                {
+                    Value = Convert.ToInt32(dt.Rows[i][0]).ToString(),
+                    Text = $"{dt.Rows[i][1].ToString()} - {Convert.ToInt32(dt.Rows[i][0]).ToString()}"
+                };
+
+                list.Add(option);
+
+            }
+    
+            return list;
         }
 
         //return list of strings from all rows in a table

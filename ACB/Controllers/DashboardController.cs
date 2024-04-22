@@ -4,6 +4,7 @@ using ACB.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ACB.Controllers
 {
@@ -17,6 +18,13 @@ namespace ACB.Controllers
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
+        }
+
+        public List<SelectListItem> JobList(int? id)
+        {
+            string q = "select id, concat(client_first_name, ' ', client_last_name) from Job" +
+                $"\r\nwhere contractor_id = {id};";
+            return Query.GetOptions(q);
         }
 
         public IActionResult Index()
@@ -47,6 +55,7 @@ namespace ACB.Controllers
 
         public async Task<IActionResult> CreateOrder(ContractorVM contractor)
         {
+            //ViewBag.jobs = JobList(contractor.Id);
             if (contractor.Email == null)
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -54,9 +63,11 @@ namespace ACB.Controllers
                 {
                     string? userId = user.UserName;
                     contractor = Query.GetContractor(userId);
+                    ViewBag.jobs = JobList(contractor.Id);
                     return View(contractor);
                 }
             }
+            ViewBag.jobs = JobList(0);
             return View(contractor);
         }
 

@@ -1,5 +1,15 @@
 ﻿@model ACB.Models.ContractorVM
 
+@* <datalist id="joblist">
+
+    @foreach (var job in @ViewBag.jobs)
+    {
+
+        <option value="@job.Value">@job.Text</option>
+    }
+
+</datalist> *@
+
 <div class="row d-flex justify-content-center">
     <div class="col-10 col-lg-6  alpha-form center mt-4">
         <form asp-action="Create" enctype="multipart/form-data" AllowMultiple="true" runat="server" class="align-items-center justify-content-center">
@@ -8,21 +18,40 @@
             <h2 class="text-center mb-2">Save your Reciepts Here!</h2>
 
             <div class="row">              
-                <div class="form-group col-6">
-                    <label asp-for="NewOrder.Case_id" class="control-label">Case Id</label>
-                    <input 
-                        asp-for="NewOrder.Case_id" class="form-control" />
+                <div class="form-group col-12">
+                    <label asp-for="NewOrder.Case_id" class="control-label" >Associated Job</label>
+                    <select asp-for="NewOrder.Case_id" class="form-control" asp-items="ViewBag.jobs" ></select>
                     <span asp-validation-for="NewOrder.Case_id" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="row">
-                <div class="form-group col-6">
-                    <label asp-for="NewOrder.Total" class="control-label">Order Total</label>
-                    <input asp-for="NewOrder.Total" class="form-control" />
-                    <span asp-validation-for="NewOrder.Total" class="text-danger"></span>
+                <div class="form-group col-4">
+                    <label asp-for="NewOrder.Subtotal" class="control-label">Sub Total</label>
+                    <input id="subtotal" asp-for="NewOrder.Subtotal" class="form-control" type="number" />
+                    <span asp-validation-for="NewOrder.Subtotal" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="NewOrder.SalesTax" class="control-label">Sales Tax</label>
+                    <input id="tax" asp-for="NewOrder.SalesTax" class="form-control" type="number" />
+                    <span asp-validation-for="NewOrder.SalesTax" class="text-danger"></span>
+                </div>
+                <div class="form-group col-4">
+                    <label asp-for="NewOrder.Total" class="control-label">Total</label>
+                    <input id="total" type="number" class="form-control" readonly="readonly" />
+                    
                 </div>
             </div>
+
+            <div class="row">
+                <div class="form-group col-12">
+                    <label asp-for="NewOrder.Notes" class="control-label">Associated Job</label>
+                    <textarea asp-for="NewOrder.Notes" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="NewOrder.Notes" class="text-danger"></span>
+                </div>
+            </div>
+
+            
 
             <div class="mb-3">
                 <label class="form-label">Reciept Pictures</label>
@@ -36,3 +65,30 @@
         </form>
     </div>
 </div>
+
+<script>
+
+    var subtotal = document.getElementById("subtotal");
+    var tax = document.getElementById("tax");
+    var total = document.getElementById("total");
+    var tot = 0;
+    subtotal.addEventListener("change", (e) => {
+        
+        tot = 0;
+        tot = parseFloat(subtotal.value) + parseFloat(tax.value);
+        console.log(tot);
+        total.value = tot;
+        
+    });
+
+    tax.addEventListener("change", (e) => {
+
+        tot = 0;
+        tot = parseFloat(subtotal.value) + parseFloat(tax.value);
+        console.log(tot);
+        total.value = tot;
+
+    });
+
+
+</script>
