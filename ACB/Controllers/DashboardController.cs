@@ -70,6 +70,34 @@ namespace ACB.Controllers
             ViewBag.jobs = JobList(0);
             return View(contractor);
         }
+        //[Bind("NewOrder.Subtotal,NewOrder.SalesTax,NewOrder.Notes")] NewOrder order
+        [HttpPost]
+
+        public IActionResult CreateOrder(int? job, decimal? sub, decimal? tax, string? notes)
+        {
+            var user = User.FindFirstValue(ClaimTypes.Name);
+
+            if (user != null)
+            {
+                ContractorVM contractor = Query.GetContractor(user);
+                NewOrder order = new NewOrder()
+                {
+                    Case_id = job,
+                    Subtotal = sub,
+                    SalesTax = tax,
+                    Notes = notes
+
+                };
+
+                string insertOrder = "Insert into Orders (co_id, case_id, sub_total, tax, notes, created)" +
+                    "\r\nOutput Inserted.Id" +
+                    $"\r\nvalues ({contractor.Id}, {order.Case_id}, {order.Subtotal}, {order.SalesTax}, '{order.Notes}', Getdate())";
+                Query.Insert(insertOrder);
+                return View(contractor);
+            }
+            
+            return View();
+        }
 
         public IActionResult DisplayQuote(int? Id)
         {

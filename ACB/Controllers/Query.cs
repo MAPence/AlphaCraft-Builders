@@ -280,9 +280,9 @@ namespace ACB.Controllers
             return quoteImages;
         }
 
-        public static List<OrdersVM> GetOrders(int? co_id)
+        public static List<NewOrder> GetOrders(int? co_id)
         {
-            List<OrdersVM> orders = new();
+            List<NewOrder> orders = new();
 
             using (SqlConnection sqlconn = new(GetConnectionString()))
             {
@@ -294,13 +294,18 @@ namespace ACB.Controllers
                 using SqlDataReader reader = cmnd.ExecuteReader();
                 while (reader.Read())
                 {
-                    OrdersVM order = new()
+                    NewOrder order = new()
                     {
                         Id = reader.GetInt32(0),
                         Co_id = reader.IsDBNull(1) ? null : (int?)reader.GetInt32(1),
                         Case_id = reader.IsDBNull(2) ? null : (int?)reader.GetInt32(2),
-                        Total = (float?)(reader.IsDBNull(3) ? null : (decimal?)reader.GetDecimal(3)),
+
+                        Subtotal = (decimal?)(reader.IsDBNull(3) ? null : (decimal?)reader.GetDecimal(3)),
+                        SalesTax = (decimal?)(reader.IsDBNull(4) ? null : (decimal?)reader.GetDecimal(4)),
+                        Created = (DateTime?)(reader.IsDBNull(6) ? null : (DateTime?)reader.GetDateTime(6)),
+                        
                     };
+                    order.Total = order.Subtotal + order.SalesTax;
                     orders.Add(order);
                 }
             }
