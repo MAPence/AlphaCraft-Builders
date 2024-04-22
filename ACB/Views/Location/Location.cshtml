@@ -58,7 +58,7 @@
         <div class="col col-lg-6">
             <section class=" alpha-form col-11">
                 <h2>Find Your Contractor</h2>
-                <form asp-action="Index" asp-controller="Location" method="post" onsubmit="return updateMapWithMarker()">
+                <form asp-action="Location" asp-controller="Location" method="post" onsubmit="return updateMapWithMarker()">
                     <div class="col-12 ">
                         Service
                         @Html.DropDownList("Service", ViewBag.Services, "Select Service", new { id = "service", @class = "form-control" })
@@ -83,8 +83,8 @@
                         <input asp-for="Zip" class="form-control" id="Zip" />
                         <span asp-validation-for="Zip" class="text-danger"></span>
                     </div>
-                    <input asp-for="Latitude" class="form-control" type="hidden" />
-                    <input asp-for="Longitude" class="form-control" type="hidden" />
+                    <input name="latitude" asp-for="Latitude" class="form-control" type="hidden" />
+                    <input name="longitude" asp-for="Longitude" class="form-control" type="hidden" />
                     <br>
                     <div class="form-group submit-group">
                         <input type="submit" value="Submit" class="btn btn-primary" />
@@ -123,38 +123,59 @@
    
     <script>
         function updateMapWithMarker() {
-            var address = document.getElementById('Address').value + ', ' +
-                document.getElementById('City').value + ', ' +
-                document.getElementById('State').value + ' ' +
-                document.getElementById('Zip').value;
+    var address = document.getElementById('Address').value + ', ' +
+        document.getElementById('City').value + ', ' +
+        document.getElementById('State').value + ' ' +
+        document.getElementById('Zip').value;
 
-            // Use geocoding service to convert address to coordinates
-            var geocoder = new google.maps.Geocoder();
-            geocoder.geocode({ 'address': address }, function (results, status) {
-                if (status === 'OK') {
-                    var location = results[0].geometry.location;
+    // Use geocoding service to convert address to coordinates
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ 'address': address }, function (results, status) {
+        if (status === 'OK') {
+            var location = results[0].geometry.location;
 
-                    // Update map with new marker
-                    var map = new google.maps.Map(document.getElementById('map'), {
-                        zoom: 12,
-                        center: location
-                    });
-
-                    var marker = new google.maps.Marker({
-                        position: location,
-                        map: map
-                    });
-
-                    // Update hidden inputs with latitude and longitude
-                    document.getElementById('Latitude').value = location.lat();
-                    document.getElementById('Longitude').value = location.lng();
-                } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
-                }
+            // Update map with new marker
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: location
             });
 
-            return false; // Prevent default form submission
+            var marker = new google.maps.Marker({
+                position: location,
+                map: map
+            });
+
+            // Update hidden inputs with latitude and longitude
+            document.getElementById('Latitude').value = location.lat();
+            document.getElementById('Longitude').value = location.lng();
+
+            // Send AJAX request
+            $.ajax({
+                type: "POST",
+                url: "@Url.Action("Location")",
+                traditional: true,
+                dataType: "json",
+                data: {
+                    latitude: location.lat(),
+                    longitude: location.lng()
+
+                },
+                success: function (result) {
+                    console.log(result);
+                    alert("Your service offerings have been updated.");
+                },
+                error: function (req, status, err) {
+                    console.log(status);
+                }
+            });
+        } else {
+            alert('Geocode was not successful for the following reason: ' + status);
         }
+    });
+
+    return false; // Prevent default form submission
+}
+
     </script>
     <script async
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChApDFEzmpCEBP6xfQPCHwucDuC5Z8Bzo&loading=async&callback=initMap">

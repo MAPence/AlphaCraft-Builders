@@ -38,12 +38,13 @@ namespace ACB.Controllers
         {
             return View();
         }
-        //[HttpPost]
-        //public IActionResult LocationQuery(latitude, longitude)
-        //{
-
-        //    return View();
-        //}
+        [HttpPost]
+        public IActionResult Location(decimal? latitude, decimal? longitude)
+        {
+            ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
+            System.Diagnostics.Debug.WriteLine(latitude + " " + longitude);
+            return View();
+        }
 
     }
 }

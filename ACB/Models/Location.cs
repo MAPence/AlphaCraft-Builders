@@ -13,8 +13,8 @@ namespace ACB.Models
         public string? State { get; set; }
         [Range(10000, 99999)] // Causes number input
         public string? Zip { get; set; }
-        public double? Latitude { get; set; }
-        public double? Longitude { get; set; }
+        public decimal? Latitude { get; set; }
+        public decimal? Longitude { get; set; }
         public string? WorkNeeded { get; set; }
     }
 }
