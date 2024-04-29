@@ -1,6 +1,7 @@
 ﻿using ACB.Data;
 using ACB.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using NuGet.ProjectModel;
 
 
@@ -19,6 +20,7 @@ namespace ACB.Controllers
         [HttpGet]
         public IActionResult Location()
         {
+            ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
             return View();
         }
 
@@ -36,5 +38,13 @@ namespace ACB.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public IActionResult Location(decimal? latitude, decimal? longitude)
+        {
+            ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
+            System.Diagnostics.Debug.WriteLine(latitude + " " + longitude);
+            return View();
+        }
+
     }
 }
