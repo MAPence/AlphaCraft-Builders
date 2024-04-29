@@ -46,6 +46,7 @@ namespace ACB.Controllers
                     if (userId != "System.Func`2[System.Security.Claims.ClaimsPrincipal,System.String]")
                     {
                         contractor = Query.GetContractor(userId);
+                        System.Diagnostics.Debug.WriteLine(contractor.Services.Count());
                         return View(contractor);
                     }
                 }

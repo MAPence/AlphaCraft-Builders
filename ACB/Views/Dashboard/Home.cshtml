@@ -5,9 +5,8 @@
     var services = Model.Services;
     var quotes = Model.Quotes;
 }
-<h1>@Model.FirstName @Model.LastName</h1>
 
-<div class="col-9">
+<div class="d-flex justify-content-center">
 
     <div class="container-fluid ">
         <div class="row table-w container">
@@ -30,6 +29,26 @@
                     </div>
                 </div>
                 <div class="container-fluid dash-row">
+                    @if (Model.Quotes.Count() < 1 && Model.Services.Count() > 0)
+                    {
+                        <div class="row">
+                            <div class="col line py-2">
+                                <p> There are currently no new quote requests in your area.</p>
+                            </div>
+
+                        </div>
+
+                    }
+                    @if (Model.Services.Count() < 1)
+                    {
+                        <div class="row">
+                            <div class="col line py-2">
+                                <p> You have not assigned any services to your account, this can be done under Account Settings.</p>
+                            </div>
+
+                        </div>
+
+                    }
 
                     @foreach (var quote in @quotes)
                     {
@@ -46,7 +65,8 @@
                                     <div class="col-3 line">
                                         ASAP
                                     </div>                       
-                        </div>                      
+                        </div>
+
                     }              
                 </div>
             </div>

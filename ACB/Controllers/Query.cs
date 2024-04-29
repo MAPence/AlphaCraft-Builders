@@ -18,6 +18,22 @@ namespace ACB.Controllers
             return connString;
         }
 
+        public static string FormatString(string original)
+        {
+            string corrected = original;
+            int index = 1;
+            for (int i = 0; i < original.Length; i++)
+            {
+                if (original[i] == '\'')
+                {
+                    corrected = corrected.Insert(i + index, "\'");
+                    index++;
+                }
+            }
+
+            return corrected;
+        }
+
         public static DataTable GetDataTable(string query)
         {
             SqlConnection sqlconn = new(GetConnectionString());
@@ -114,6 +130,7 @@ namespace ACB.Controllers
         //insert a new customer generated quote request
         public static int NewQuote(Quote quote)
         {
+            quote.Details = FormatString(quote.Details);    
             //create query statement, insert quote and return new id
             string query = $"insert into quote (client_first_name, client_last_name, client_email, job_address, city, State, job_zip, details, job_type, latitude, longitude) " +
                 $"\r\noutput inserted.id " +
@@ -213,7 +230,7 @@ namespace ACB.Controllers
                     Lastname = (string?)dt.Rows[i][2],
                     Email = (string?)dt.Rows[i][3],
                     Zip = Convert.ToInt32(dt.Rows[i][5]),
-                    //Address = (string?)dt.Rows[i][6],
+                    Address = $"{(string?)dt.Rows[i][6]} {(string?)dt.Rows[i][13]}, {(string?)dt.Rows[i][14]}",
                     Details = (string?)dt.Rows[i][7],
                     Service = (string?)dt.Rows[i][16]
                 };
