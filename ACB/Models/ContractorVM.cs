@@ -25,12 +25,12 @@ namespace ACB.Models
         public ContractorVM()
         {
             Jobs = new List<JobVM>();
-            Orders = new List<OrdersVM>();
+            Orders = new List<NewOrder>();
             Quotes = new List<QuoteVM>();
             Services = new List<int>();
             LatLong = new LatLong();
         }
-        public List<OrdersVM>? Orders { get; set; }
+        public List<NewOrder>? Orders { get; set; }
 
         //User Password Settings
         [DataType(DataType.Password)]

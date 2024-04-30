@@ -7,7 +7,7 @@
 }
 <div class="row d-flex justify-content-center">
     <div class="col alpha-form center mt-4">
-        <h2>Quote <span id="q-id">@Model.Quote.Id</span></h2>
+        <h2>Quote Request <span id="q-id">@Model.Quote.Id</span></h2>
         <div class="row">
             <div id="info-tab" class="col-5 tab-btn mx-3" onclick="return Info()">Info</div>
             <div id="photo-tab" class="col-5 tab-btn" onclick="return Photos()">Photos</div>
@@ -15,15 +15,20 @@
             <div class="align-items-center justify-content-center quote-box">
                 <div id="info-view" >
                     <div class="container q-data">
+                        <div class="col-8 my-3 mt-5">
+                            Client: </br>@Model.Quote.Firstname @Model.Quote.Lastname
+                        </div>
+                        
                         <div class="col-8 my-3">
-                            @Model.Quote.Firstname @Model.Quote.Lastname
+                            Contact: </br>@Model.Quote.Email
+                        </div>
+
+                        <div class="col-8 my-3">
+                            Job Location: </br>@Model.Quote.Address @Model.Quote.Zip
                         </div>
                         <div class="col-8 my-3">
-                            @Model.Quote.Address @Model.Quote.Zip
+                            Job Details: </br>@Model.Quote.Details
                         </div>
-                        <textarea rows="5" class="col-8 my3">
-                            @Model.Quote.Details
-                        </textarea>
                     </div>
                 </div>
                
@@ -44,8 +49,11 @@
                     </div>
                 </div>
 
-                <button onclick="convertQuote()" >Accept Job</button>
-                <a asp-action="NewJob" asp-route-id="@Model.Quote.Id"><input type="button" class="btn btn-primary" value="Accept Job"/></a>                                 
+                @* <button onclick="convertQuote()" >Accept Job</button> *@
+                <div class="d-flex justify-content-center">
+                <a asp-action="NewJob" asp-route-id="@Model.Quote.Id"><input type="button" class="btn btn-primary mb-3 " value="Accept Job" /></a>
+                </div>
+                                                 
             </div>
     </div>
     <script>      

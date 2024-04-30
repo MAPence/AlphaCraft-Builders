@@ -1,6 +1,7 @@
 ﻿using ACB.Models;
 using System.Data;
 using System.Data.SqlClient;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ACB.Controllers
 {
@@ -17,6 +18,22 @@ namespace ACB.Controllers
             return connString;
         }
 
+        public static string FormatString(string original)
+        {
+            string corrected = original;
+            int index = 1;
+            for (int i = 0; i < original.Length; i++)
+            {
+                if (original[i] == '\'')
+                {
+                    corrected = corrected.Insert(i + index, "\'");
+                    index++;
+                }
+            }
+
+            return corrected;
+        }
+
         public static DataTable GetDataTable(string query)
         {
             SqlConnection sqlconn = new(GetConnectionString());
@@ -28,6 +45,33 @@ namespace ACB.Controllers
             adapter.Fill(dt);
 
             return dt;
+        }
+
+        public static List<SelectListItem> GetOptions(string query)
+        {
+            // new list that will be retunred for drop down menu
+            List<SelectListItem> list = new();
+            list.Add(new SelectListItem()
+            {
+                Value = "0",
+                Text = "General Expense"
+            });
+            DataTable dt = GetDataTable(query);
+            
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                // add value to list
+                SelectListItem option = new()
+                {
+                    Value = Convert.ToInt32(dt.Rows[i][0]).ToString(),
+                    Text = $"{dt.Rows[i][1].ToString()} - {Convert.ToInt32(dt.Rows[i][0]).ToString()}"
+                };
+
+                list.Add(option);
+
+            }
+    
+            return list;
         }
 
         //return list of strings from all rows in a table
@@ -86,6 +130,7 @@ namespace ACB.Controllers
         //insert a new customer generated quote request
         public static int NewQuote(Quote quote)
         {
+            quote.Details = FormatString(quote.Details);    
             //create query statement, insert quote and return new id
             string query = $"insert into quote (client_first_name, client_last_name, client_email, job_address, city, State, job_zip, details, job_type, latitude, longitude) " +
                 $"\r\noutput inserted.id " +
@@ -185,7 +230,7 @@ namespace ACB.Controllers
                     Lastname = (string?)dt.Rows[i][2],
                     Email = (string?)dt.Rows[i][3],
                     Zip = Convert.ToInt32(dt.Rows[i][5]),
-                    //Address = (string?)dt.Rows[i][6],
+                    Address = $"{(string?)dt.Rows[i][6]} {(string?)dt.Rows[i][13]}, {(string?)dt.Rows[i][14]}",
                     Details = (string?)dt.Rows[i][7],
                     Service = (string?)dt.Rows[i][16]
                 };
@@ -252,9 +297,9 @@ namespace ACB.Controllers
             return quoteImages;
         }
 
-        public static List<OrdersVM> GetOrders(int? co_id)
+        public static List<NewOrder> GetOrders(int? co_id)
         {
-            List<OrdersVM> orders = new();
+            List<NewOrder> orders = new();
 
             using (SqlConnection sqlconn = new(GetConnectionString()))
             {
@@ -266,13 +311,18 @@ namespace ACB.Controllers
                 using SqlDataReader reader = cmnd.ExecuteReader();
                 while (reader.Read())
                 {
-                    OrdersVM order = new()
+                    NewOrder order = new()
                     {
                         Id = reader.GetInt32(0),
                         Co_id = reader.IsDBNull(1) ? null : (int?)reader.GetInt32(1),
                         Case_id = reader.IsDBNull(2) ? null : (int?)reader.GetInt32(2),
-                        Total = (float?)(reader.IsDBNull(3) ? null : (decimal?)reader.GetDecimal(3)),
+
+                        Subtotal = (decimal?)(reader.IsDBNull(3) ? null : (decimal?)reader.GetDecimal(3)),
+                        SalesTax = (decimal?)(reader.IsDBNull(4) ? null : (decimal?)reader.GetDecimal(4)),
+                        Created = (DateTime?)(reader.IsDBNull(6) ? null : (DateTime?)reader.GetDateTime(6)),
+                        
                     };
+                    order.Total = order.Subtotal + order.SalesTax;
                     orders.Add(order);
                 }
             }

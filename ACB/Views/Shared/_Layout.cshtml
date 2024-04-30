@@ -62,55 +62,65 @@
             js.src = "https://connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+
+     
     </script>
+
+    <style>
+        #nav-custom{
+            position: sticky;
+            
+        }
+    </style>
     <!-- End of FB Script -->
 
 </head>
 <body>
-    <header>
-        <nav id="nav-custom" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom box-shadow  ">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ACB</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Dashboard" asp-action="Home">Dash</a>
-                        </li>
+    <nav id="nav-custom" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow sticky-top" style="position:sticky;">
+        <div class="container-fluid sticky-top">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ACB</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-area="" asp-controller="Dashboard" asp-action="Home">Dash</a>
+                    </li>
 
-                        <li class="nav-item dropdown nav-custom hide">
-                            <a class="nav-link dropdown-toggle text-light" href="#" data-bs-toggle="dropdown" aria-expanded="false">Contractors</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" asp-controller="Location"asp-action="Location">Find Contractors</a></li>
-                                <li><a class="dropdown-item" asp-controller="Quote" asp-action="QuoteForm">Get a Quote</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
-                        </li>
-                    </ul>
-                </div>
+                    <li class="nav-item dropdown nav-custom hide">
+                        <a class="nav-link dropdown-toggle text-light" href="#" data-bs-toggle="dropdown" aria-expanded="false">Contractors</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-controller="Location" asp-action="Location">Find Contractors</a></li>
+                            <li><a class="dropdown-item" asp-controller="Quote" asp-action="QuoteForm">Get a Quote</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="ContactUs">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
 
-                <div class="nav-item text-end nav-buttons d-sm-inline-flex">
+            <div class="nav-item text-end nav-buttons d-sm-inline-flex">
 
-                    <a asp-controller="User" asp-action="Login" style="text-decoration:none">
-                        <button type="button" class="btn btn-secondary me-2" >Login</button>
-                    </a>
-                    
-                    <a asp-controller="User" asp-action="Register">
-                        <button type="button" class="btn btn-primary" >Sign-up</button>
-                    </a>
-                    
-                </div>
+                <a asp-controller="User" asp-action="Login" style="text-decoration:none">
+                    <button type="button" class="btn btn-secondary me-2">Login</button>
+                </a>
+
+                <a asp-controller="User" asp-action="Register">
+                    <button type="button" class="btn btn-primary">Sign-up</button>
+                </a>
 
             </div>
-        </nav>
+
+        </div>
+    </nav>
+    <header>
+        
     </header>
     <div >
         <main role="main" class="pb-3">

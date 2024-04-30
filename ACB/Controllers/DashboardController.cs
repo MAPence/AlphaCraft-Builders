@@ -4,6 +4,7 @@ using ACB.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ACB.Controllers
 {
@@ -17,6 +18,13 @@ namespace ACB.Controllers
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
+        }
+
+        public List<SelectListItem> JobList(int? id)
+        {
+            string q = "select id, concat(client_first_name, ' ', client_last_name) from Job" +
+                $"\r\nwhere contractor_id = {id};";
+            return Query.GetOptions(q);
         }
 
         public IActionResult Index()
@@ -38,6 +46,7 @@ namespace ACB.Controllers
                     if (userId != "System.Func`2[System.Security.Claims.ClaimsPrincipal,System.String]")
                     {
                         contractor = Query.GetContractor(userId);
+                        System.Diagnostics.Debug.WriteLine(contractor.Services.Count());
                         return View(contractor);
                     }
                 }
@@ -47,6 +56,7 @@ namespace ACB.Controllers
 
         public async Task<IActionResult> CreateOrder(ContractorVM contractor)
         {
+            //ViewBag.jobs = JobList(contractor.Id);
             if (contractor.Email == null)
             {
                 var user = await _userManager.GetUserAsync(HttpContext.User);
@@ -54,10 +64,40 @@ namespace ACB.Controllers
                 {
                     string? userId = user.UserName;
                     contractor = Query.GetContractor(userId);
+                    ViewBag.jobs = JobList(contractor.Id);
                     return View(contractor);
                 }
             }
+            ViewBag.jobs = JobList(0);
             return View(contractor);
+        }
+        //[Bind("NewOrder.Subtotal,NewOrder.SalesTax,NewOrder.Notes")] NewOrder order
+        [HttpPost]
+
+        public IActionResult CreateOrder(int? job, decimal? sub, decimal? tax, string? notes)
+        {
+            var user = User.FindFirstValue(ClaimTypes.Name);
+
+            if (user != null)
+            {
+                ContractorVM contractor = Query.GetContractor(user);
+                NewOrder order = new NewOrder()
+                {
+                    Case_id = job,
+                    Subtotal = sub,
+                    SalesTax = tax,
+                    Notes = notes
+
+                };
+
+                string insertOrder = "Insert into Orders (co_id, case_id, sub_total, tax, notes, created)" +
+                    "\r\nOutput Inserted.Id" +
+                    $"\r\nvalues ({contractor.Id}, {order.Case_id}, {order.Subtotal}, {order.SalesTax}, '{order.Notes}', Getdate())";
+                Query.Insert(insertOrder);
+                return View(contractor);
+            }
+            
+            return View();
         }
 
         public IActionResult DisplayQuote(int? Id)
