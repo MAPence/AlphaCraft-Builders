@@ -19,14 +19,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
 
     <style>
+        body{
+            height: 90vh;
+        }
         #nav-custom {
-            position: sticky;
+            
         }
         #bar{
-            position: sticky;
+            margin-bottom: 0px;
             left:25;
         }
         #cont{
+            height: 70vh;
             margin-top: -90vh;
             
         }
@@ -34,7 +38,7 @@
 
 </head>
 <body>
-    <div class="sticky-top">
+    <div class="">
         <nav id="nav-custom" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom box-shadow ">
             <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ACB</a>
@@ -65,10 +69,10 @@
         </nav>
 
      
-                <div id="bar" class="position-sticky dense">
+                <div id="bar" class="dense ">
 
                     <!-- side menu -->
-                    <div class="side-menu position-sticky" id="sb-dash" style="width: 280px;">
+                    <div class="side-menu " id="sb-dash" style="width: 280px;">
 
                         @* display username if logged in *@
                         @if (@User.Identity?.Name! != null)
@@ -179,7 +183,7 @@
             <div class="col-10">
 
                 <div id="cont">
-                    <main role="main" class="pb-3">
+                    <main role="main" class=" ">
                         @RenderBody()
                     </main>
                 </div>
@@ -189,7 +193,7 @@
     </div>
 
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted mt-0">
         <div class="container">
             &copy; 2024 - ACB - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
