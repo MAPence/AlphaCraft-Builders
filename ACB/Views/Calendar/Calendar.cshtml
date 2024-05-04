@@ -83,7 +83,19 @@
             calendar.render();
             console.log('Calendar initialized');
         }
-
+        document.addEventListener('DOMContentLoaded', function () {
+            var holidays = [
+                { title: 'New Year\'s Day', start: '2024-01-01' },
+                { title: 'Independence Day', start: '2024-07-04' },
+                { title: 'Christmas Day', start: '2024-12-25' }
+            ];
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: holidays
+            });
+            calendar.render();
+        });
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
             onload="this.onload=function(){};handleClientLoad()"

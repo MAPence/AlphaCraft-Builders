@@ -1,4 +1,6 @@
-﻿namespace ACB.Models;
+﻿
+
+namespace ACB.Models;
 public class Calendar
     {
         public int Id { get; set; }
