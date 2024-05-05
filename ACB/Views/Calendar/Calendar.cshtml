@@ -8,6 +8,7 @@
         .container3 {
             height: 100%;
             width: 100%; /* Full width of the viewport */
+            margin-left: 10%;
             text-align: center;
             padding: 20px;
             border-radius: 10px;
@@ -18,16 +19,39 @@
             display: block;
             margin-top: 20px; /* Add some space between the title and the calendar */
         }
+
+        form {
+            display: none; /* Hide the form by default */
+            margin-top: 20px;
+        }
+
+            form input {
+                margin-right: 10px;
+            }
+
+            form button {
+                margin-top: 10px;
+            }
     </style>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.css" rel="stylesheet" />
 </head>
 
 <body>
+
     <div class="px-4">
         <div class="container3" >
             <h1>Contractor Calendar</h1>
             <div id="calendar"></div>
+            <form id="eventForm">
+                <label for="eventName">Event Name:</label>
+                <input type="text" id="eventName" name="eventName" required>
+                <label for="eventDate">Event Date:</label>
+                <input type="date" id="eventDate" name="eventDate" required>
+
+                <button type="button" id="addEventButton">Add Event</button>
+            </form>
         </div>
+
 
     </div>
     
@@ -48,9 +72,10 @@
         // Client ID and API key from the Developer Console
         var CLIENT_ID = '809767339812-5tl6bjk2ehj2kl2n8c2jkjafs5388qkv.apps.googleusercontent.com';
         var API_KEY = 'AIzaSyC7VsB75n8Zg92QqQZVJziCz2rlplm9JY0';
-
         var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
         var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
+
+        var calendar;
 
         function handleClientLoad() {
             gapi.load('client:auth2', initClient);
@@ -70,8 +95,13 @@
         function loadCalendar() {
             console.log('Calendar initializing...');
             var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
+            calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
+                editable: true,
+                selectable: true,
+                select: function (info) {
+                    showForm(info);
+                },
                 events: function (info, successCallback, failureCallback) {
                     gapi.client.calendar.events.list({
                         'calendarId': 'primary',
@@ -98,19 +128,56 @@
             calendar.render();
             console.log('Calendar initialized');
         }
-        document.addEventListener('DOMContentLoaded', function () {
+
+        function showForm(info) {
+            var form = document.getElementById('eventForm');
+            form.style.display = 'block';
+            form.dataset.start = info.startStr;
+            form.dataset.end = info.endStr;
+        }
+
+        document.getElementById('addEventButton').addEventListener('click', function (e) {
+            var eventName = document.getElementById('eventName').value;
+            var eventDate = document.getElementById('eventDate').value;
+            var calendarApi = calendar.getApi();
+            calendarApi.addEvent({
+                title: eventName,
+                start: eventDate
+            });
+            document.getElementById('eventName').value = '';
+            document.getElementById('eventDate').value = '';
+            document.getElementById('eventForm').style.display = 'none';
+
+            // Re-render the calendar to show the newly added event
+            calendar.render();
+        });
+
+        function addPredefinedEvents(calendar) {
             var holidays = [
                 { title: 'New Year\'s Day', start: '2024-01-01' },
                 { title: 'Independence Day', start: '2024-07-04' },
                 { title: 'Christmas Day', start: '2024-12-25' }
             ];
+            calendar.addEventSource(holidays);
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            handleClientLoad(); // Load the client API
+
             var calendarEl = document.getElementById('calendar');
-            var calendar = new FullCalendar.Calendar(calendarEl, {
+            calendar = new FullCalendar.Calendar(calendarEl, {
                 initialView: 'dayGridMonth',
-                events: holidays
+                editable: true,
+                selectable: true,
+                select: function (info) {
+                    showForm(info);
+                }
             });
+
+            addPredefinedEvents(calendar); // Add predefined events
             calendar.render();
         });
+
     </script>
     <script async defer src="https://apis.google.com/js/api.js"
             onload="this.onload=function(){};handleClientLoad()"
