@@ -23,13 +23,28 @@
 </head>
 
 <body>
-    <div class="container3">
-        <h1>Contractor Calendar</h1>
-        <div id="calendar"></div>
+    <div class="px-4">
+        <div class="container3" >
+            <h1>Contractor Calendar</h1>
+            <div id="calendar"></div>
+        </div>
+
     </div>
+    
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
     <script>
+
+        var sidebar = document.getElementById("sb-dash");
+        var content = document.getElementById("cont");
+
+        function expandSidebar() {
+            sidebar.style.height = content.style.height;
+            console.log("ello");
+        }
+
+        expandSidebar();
+
         // Client ID and API key from the Developer Console
         var CLIENT_ID = '809767339812-5tl6bjk2ehj2kl2n8c2jkjafs5388qkv.apps.googleusercontent.com';
         var API_KEY = 'AIzaSyC7VsB75n8Zg92QqQZVJziCz2rlplm9JY0';

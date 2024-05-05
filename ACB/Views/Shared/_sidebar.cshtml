@@ -28,6 +28,8 @@
         #bar{
             margin-bottom: 0px;
             left:25;
+            height:100%;
+            
         }
         #cont{
            
@@ -180,10 +182,10 @@
 
             
             <!-- table area -->
-            <div class="col-10">
+            <div class="col">
 
                 <div id="cont">
-                    <main role="main" class=" ">
+                    <main role="main" class="">
                         @RenderBody()
                     </main>
                 </div>
@@ -200,6 +202,16 @@
     </footer>
 
     <script>
+
+        var sidebar = document.getElementById("sb-dash");
+        var content = document.getElementById("cont");
+
+        function expandSidebar(){
+            sidebar.style.height = content.style.height;
+        }
+        
+        expandSidebar();
+
         function openNav() {
 
             var element = document.getElementById("sb-dash");

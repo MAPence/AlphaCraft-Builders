@@ -15,12 +15,15 @@
 
 .side-menu {
     background-color: #176B87;
-    height: 100vh;
+    /*height: 100%;*/
     z-index: 10;
     border: none;
     transition: 0.5s;
 }
 
+#main-content{
+    width: 100vw;
+}
 
 
 
