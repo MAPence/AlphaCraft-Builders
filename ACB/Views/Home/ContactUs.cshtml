@@ -50,23 +50,25 @@
           }
     </style>
     </head>
-    @model ACB.Models.ContactSubmission 
+   @model ACB.Models.ContactSubmission
 <body class="cu-bg">
     <div class="container ">
         <div class="center-form">
-
             <section class="contact-form alpha-form col-10">
                 <h2>Contact Us</h2>
                 <form asp-action="ContactUs" method="POST">
                     <input asp-for="Name" name="name" placeholder="Your Name" required><br>
                     <input asp-for="Email" type="email" name="email" placeholder="Your Email" required><br>
                     <textarea asp-for="Message" name="message" placeholder="Your Message" rows="4" required></textarea><br>
-                    <input type="submit"  value="Send Message">
+                    <input type="submit" value="Send Message" onclick="showRecaptcha(event)">
                 </form>
+                <div id="recaptcha-container" style="display: none;">
+                    <div class="g-recaptcha" data-sitekey="6LcCx9ApAAAAAOKyZGV-O3mdyJPT9_3xMjEvGMAo"></div>
+                    <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+                </div>
             </section>
         </div>
         <div class="center-form">
-
             <section id="about" class="my-5 col-10">
                 <h1>About Us</h1>
                 <p>
@@ -79,7 +81,25 @@
                     Beyond functionality, our purpose extends to creating a community where contractors and users can connect seamlessly, fostering a collaborative ecosystem. AlphaCraft Builders is not just a tool; it's a catalyst for positive change, a driving force behind the modernization of construction practices, and a testament to our dedication to advancing the construction industry into a new era of efficiency, innovation, and excellence.
                 </p>
             </section>
-        </div>       
+        </div>
     </div>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        function showRecaptcha(event) {
+            event.preventDefault();
+            document.getElementById('recaptcha-container').style.display = 'block';
+        }
+
+        function submitForm(event) {
+            event.preventDefault();
+            var response = grecaptcha.getResponse();
+            if (response.length == 0) {
+                alert("Please complete the reCAPTCHA");
+                return false;
+            }
+            document.getElementById('g-recaptcha-response').value = response;
+            document.querySelector('form').submit();
+        }
+    </script>
 </body>
 </html>
