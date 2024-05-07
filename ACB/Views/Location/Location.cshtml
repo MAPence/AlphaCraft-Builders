@@ -128,7 +128,7 @@
     <div class="review-box">
         @foreach (var c in @results)
         {
-            <div>@c.Company</div>
+            <div class="contractor-tile mt-3 px-2">@c.Company</div>
         }
     </div>
    
@@ -139,8 +139,8 @@
         var zip = document.getElementById("Zip");
         var state = document.getElementById("State");
 
-        state.addEventListener("change", (e) => {
-            updateMapWithMaker();
+        zip.addEventListener("input", (e) => {
+            updateMapWithMarker();
         });
 
         function updateMapWithMarker() {
@@ -246,7 +246,7 @@
     {
         Dictionary<string, string> stateNames = new Dictionary<string, string>
         {
-            { "Select State", ""},
+            { "", "Select State"},
             { "AL", "Alabama" },
             { "AK", "Alaska" },
             { "AZ", "Arizona" },
