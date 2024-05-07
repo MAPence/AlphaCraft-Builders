@@ -37,13 +37,13 @@ namespace ACB.Controllers
         public static DataTable GetDataTable(string query)
         {
             SqlConnection sqlconn = new(GetConnectionString());
-            string sqlQuery = query;
-            SqlCommand cmnd = new(sqlQuery, sqlconn);
+            
+            SqlCommand cmnd = new(query, sqlconn);
             sqlconn.Open();
             SqlDataAdapter adapter = new(cmnd);
             DataTable dt = new();
             adapter.Fill(dt);
-
+            sqlconn.Close();
             return dt;
         }
 
@@ -417,6 +417,35 @@ namespace ACB.Controllers
                 Details = (string?)dt.Rows[0][7],
             };
             return job;
+        }
+
+        public static List<ContractorTile> FindContractors(string service, decimal? latitude, decimal? longitude) 
+        { 
+            List<ContractorTile> contractors = new List<ContractorTile>();
+
+            string query = $"Declare @LocStart GEOGRAPHY = GEOGRAPHY::Point({latitude},{longitude}, 4326);" +
+                "\r\nselect contractor_service_offered.contractor_id, Company, Email, latitude, longitude, service_type from contractor_service_offered" +
+                "\r\njoin AspNetUsers on ASPNetUsers.contractor_id = contractor_service_offered.contractor_id" +
+                "\r\njoin contractor_service on contractor_service.Id = service_id" +
+                $"\r\nwhere service_type = '{service}'" +
+                "\r\nand @LocStart.STDistance(GEOGRAPHY::Point(latitude, longitude, 4326))/1609.344 <= 30;";
+
+            DataTable dt = GetDataTable(query); 
+
+            for(int i = 0; i < dt.Rows.Count; i++)
+            {
+                ContractorTile c = new()
+                {
+                    Id = Convert.ToInt32(dt.Rows[i][0]),
+                    Company = (string)dt.Rows[i][1],
+                    Email = (string)dt.Rows[i][2],
+                    
+                };
+                contractors.Add(c);
+            }
+
+            return contractors;
+        
         }
     }
 }

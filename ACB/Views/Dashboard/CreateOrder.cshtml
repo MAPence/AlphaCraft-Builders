@@ -28,13 +28,13 @@
             <div class="row">
                 <div class="form-group col-4">
                     <label asp-for="NewOrder.Subtotal" class="control-label">Sub Total</label>
-                    <input id="subtotal" asp-for="NewOrder.Subtotal" class="form-control" type="number" name="sub"/>
-                    @* <span asp-validation-for="NewOrder.Subtotal" class="text-danger"></span> *@
+                    <input id="subtotal" class="form-control" type="number" step="any" name="sub"/>
+                    <span asp-validation-for="NewOrder.Subtotal" class="text-danger"></span>
                 </div>
                 <div class="form-group col-4">
                     <label asp-for="NewOrder.SalesTax" class="control-label">Sales Tax</label>
-                    <input id="tax" asp-for="NewOrder.SalesTax" class="form-control" type="number" name="tax"/>
-                    @* <span asp-validation-for="NewOrder.SalesTax" class="text-danger"></span> *@
+                    <input id="tax"  class="form-control" type="number" step="any" name="tax"/>
+                    <span asp-validation-for="NewOrder.SalesTax" class="text-danger"></span>
                 </div>
                 <div class="form-group col-4">
                     <label asp-for="NewOrder.Total" class="control-label">Total</label>

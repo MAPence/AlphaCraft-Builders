@@ -20,8 +20,9 @@ namespace ACB.Controllers
         [HttpGet]
         public IActionResult Location()
         {
+            Location user = new Location();
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
-            return View();
+            return View(user);
         }
 
         [HttpPost]
@@ -39,11 +40,14 @@ namespace ACB.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Location(decimal? latitude, decimal? longitude)
-        {
+        public IActionResult Location(string stype, decimal? latitude, decimal? longitude)
+        { 
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
+            Location user = new Location();
+            user.Results = Query.FindContractors(stype, latitude, longitude);
             System.Diagnostics.Debug.WriteLine(latitude + " " + longitude);
-            return View();
+            user.Zip = "75";
+            return View("Location",user);
         }
 
     }

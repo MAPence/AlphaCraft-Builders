@@ -79,16 +79,25 @@ body {
     position: relative;
     padding: 0 15px;
     height: 400px;
-    width: 1800px;
+    width: 93vw;
     margin: 0 15px;
     margin-left: 30px;
     margin-right: 30px;
-    border-radius: 10px;
+    border-radius: 20px;
     color: white;
     display: flex;
     justify-content: center;
     border: 2px solid #04364A;
     padding-bottom: 50px;
+}
+
+.contractor-tile{
+    background-color: white;
+    border-radius: 15px;
+    height: 60px;
+    width:95%;
+    color: black;
+    font-size: 2rem;
 }
 .review-container {
     display: flex;

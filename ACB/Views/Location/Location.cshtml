@@ -51,22 +51,30 @@
         }
     </style>
 </head>
-    @model Location
-<
+
+
+
 <body class="loc-bg">
+
+    @model ACB.Models.Location
+    @{
+        var results = Model.Results;
+    }
+
     <div class="container2 d-flex">
         <div class="col col-lg-6">
             <section class=" alpha-form col-11">
                 <h2>Find Your Contractor</h2>
-                <form asp-action="Location" asp-controller="Location" method="post" onsubmit="return updateMapWithMarker()">
-                    <div class="col-12 ">
-                        Service
-                        @Html.DropDownList("Service", ViewBag.Services, "Select Service", new { id = "service", @class = "form-control" })
-
+                <form asp-action="Location" asp-controller="Location" method="post" >
+                    
+                    <div class="form-group">
+                        <label class="control-label">Service</label>
+                        <select id="stype" name="stype" asp-for="WorkNeeded" class="form-control" asp-items="ViewBag.Services" ></select>
+                        <span class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Address" class="control-label">Your Address</label>
-                        <input asp-for="Address" class="form-control" id="Address" />
+                        <input  asp-for="Address" class="form-control" id="Address" />
                         <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -83,9 +91,10 @@
                         <input asp-for="Zip" class="form-control" id="Zip" />
                         <span asp-validation-for="Zip" class="text-danger"></span>
                     </div>
-                    <input name="latitude" asp-for="Latitude" class="form-control" type="hidden" />
-                    <input name="longitude" asp-for="Longitude" class="form-control" type="hidden" />
+                    <input id="latitude" name="latitude" asp-for="Latitude" class="form-control" type="hidden" />
+                    <input id="longitude" name="longitude" asp-for="Longitude" class="form-control" type="hidden" />
                     <br>
+                    <button onclick="return updateMapWithMarker()">coordinates</button>
                     <div class="form-group submit-group">
                         <input type="submit" value="Submit" class="btn btn-primary" />
                     </div>
@@ -115,72 +124,88 @@
         </div> 
         
     </div>
+    
     <div class="review-box">
-        <div class="review-container">
-            <div id="review-list"></div>
-        </div>
+        @foreach (var c in @results)
+        {
+            <div>@c.Company</div>
+        }
     </div>
    
     <script>
+
+        var add = document.getElementById("Address");
+        var city = document.getElementById("City");
+        var zip = document.getElementById("Zip");
+        var state = document.getElementById("State");
+
+        state.addEventListener("change", (e) => {
+            updateMapWithMaker();
+        });
+
         function updateMapWithMarker() {
-    var address = document.getElementById('Address').value + ', ' +
-        document.getElementById('City').value + ', ' +
-        document.getElementById('State').value + ' ' +
-        document.getElementById('Zip').value;
+            var address = document.getElementById('Address').value + ', ' +
+            document.getElementById('City').value + ', ' +
+            document.getElementById('State').value + ' ' +
+            document.getElementById('Zip').value;
 
-    // Use geocoding service to convert address to coordinates
-    var geocoder = new google.maps.Geocoder();
-    geocoder.geocode({ 'address': address }, function (results, status) {
-        if (status === 'OK') {
-            var location = results[0].geometry.location;
+            // Use geocoding service to convert address to coordinates
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode({ 'address': address }, function (results, status) {
+            if (status === 'OK') {
+                var location = results[0].geometry.location;
 
-            // Update map with new marker
-            var map = new google.maps.Map(document.getElementById('map'), {
-                zoom: 12,
-                center: location
+                // Update map with new marker
+                var map = new google.maps.Map(document.getElementById('map'), {
+                    zoom: 12,
+                    center: location
+                });
+
+                var marker = new google.maps.Marker({
+                    position: location,
+                    map: map
+                });
+
+                // Update hidden inputs with latitude and longitude
+                document.getElementById('latitude').value = location.lat();
+                document.getElementById('longitude').value = location.lng();
+                var service = document.getElementById("stype").value;
+
+                // Send AJAX request
+                // $.ajax({
+                //     type: "POST",
+                //     url: "@Url.Action("Location")",
+                //     traditional: true,
+                //     dataType: "json",
+                //     data: {
+                //         latitude: location.lat(),
+                //         longitude: location.lng(),
+                //         stype: service
+
+                //     },
+                //     success: function (result) {
+                //         console.log(result);
+                //         alert("Your service offerings have been updated.");
+                //     },
+                //     error: function (req, status, err) {
+                //         console.log(status);
+                //     }
+                // });
+            } 
+            else 
+            {
+                alert('Geocode was not successful for the following reason: ' + status);
+            }
             });
 
-            var marker = new google.maps.Marker({
-                position: location,
-                map: map
-            });
-
-            // Update hidden inputs with latitude and longitude
-            document.getElementById('Latitude').value = location.lat();
-            document.getElementById('Longitude').value = location.lng();
-
-            // Send AJAX request
-            $.ajax({
-                type: "POST",
-                url: "@Url.Action("Location")",
-                traditional: true,
-                dataType: "json",
-                data: {
-                    latitude: location.lat(),
-                    longitude: location.lng()
-
-                },
-                success: function (result) {
-                    console.log(result);
-                    alert("Your service offerings have been updated.");
-                },
-                error: function (req, status, err) {
-                    console.log(status);
-                }
-            });
-        } else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            return false; // Prevent default form submission
         }
-    });
-
-    return false; // Prevent default form submission
-}
 
     </script>
     <script async
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChApDFEzmpCEBP6xfQPCHwucDuC5Z8Bzo&loading=async&callback=initMap">
     </script>
-    <script>
+    @* <script>
         function initMaprev() {
             const service = new google.maps.places.PlacesService(document.createElement('div'));
 
@@ -212,7 +237,7 @@
         script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places&callback=initMaprev`;
         script.async = true;
         document.body.appendChild(script);
-    </script>
+    </script> *@
 </body>
 </html>
 
@@ -221,6 +246,7 @@
     {
         Dictionary<string, string> stateNames = new Dictionary<string, string>
         {
+            { "Select State", ""},
             { "AL", "Alabama" },
             { "AK", "Alaska" },
             { "AZ", "Arizona" },
