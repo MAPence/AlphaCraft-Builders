@@ -16,6 +16,7 @@ namespace ACB.Models
         public decimal? Latitude { get; set; }
         public decimal? Longitude { get; set; }
         public string? WorkNeeded { get; set; }
+        public int? Distance { get; set; }
 
         public List<ContractorTile>? Results { get; set; }
 

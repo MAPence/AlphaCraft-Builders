@@ -40,13 +40,19 @@ namespace ACB.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult Location(string stype, decimal? latitude, decimal? longitude)
+        public IActionResult Location(string stype, decimal? latitude, decimal? longitude, string? Address, string? City, int? Zip, string? State, int? distance)
         { 
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
             Location user = new Location();
-            user.Results = Query.FindContractors(stype, latitude, longitude);
-            System.Diagnostics.Debug.WriteLine(latitude + " " + longitude);
-            user.Zip = "75";
+            user.Results = Query.FindContractors(stype, latitude, longitude, distance);
+
+            user.Zip = Zip.ToString();
+            user.State = State;
+            user.Address = Address;
+            user.City = City;
+            user.WorkNeeded = stype;
+            user.Distance = distance;
+
             return View("Location",user);
         }
 

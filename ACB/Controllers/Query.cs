@@ -419,7 +419,7 @@ namespace ACB.Controllers
             return job;
         }
 
-        public static List<ContractorTile> FindContractors(string service, decimal? latitude, decimal? longitude) 
+        public static List<ContractorTile> FindContractors(string service, decimal? latitude, decimal? longitude, int? distance) 
         { 
             List<ContractorTile> contractors = new List<ContractorTile>();
 
@@ -428,7 +428,7 @@ namespace ACB.Controllers
                 "\r\njoin AspNetUsers on ASPNetUsers.contractor_id = contractor_service_offered.contractor_id" +
                 "\r\njoin contractor_service on contractor_service.Id = service_id" +
                 $"\r\nwhere service_type = '{service}'" +
-                "\r\nand @LocStart.STDistance(GEOGRAPHY::Point(latitude, longitude, 4326))/1609.344 <= 30;";
+                $"\r\nand @LocStart.STDistance(GEOGRAPHY::Point(latitude, longitude, 4326))/1609.344 <= {distance};";
 
             DataTable dt = GetDataTable(query); 
 

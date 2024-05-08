@@ -66,12 +66,21 @@
             <section class=" alpha-form col-11">
                 <h2>Find Your Contractor</h2>
                 <form asp-action="Location" asp-controller="Location" method="post" >
-                    
-                    <div class="form-group">
-                        <label class="control-label">Service</label>
-                        <select id="stype" name="stype" asp-for="WorkNeeded" class="form-control" asp-items="ViewBag.Services" ></select>
-                        <span class="text-danger"></span>
+                    <div class="container d-flex justify-content-between">
+
+                        <div class="form-group col-5">
+                            <label class="control-label">Service</label>
+                            <select id="stype" name="stype" asp-for="WorkNeeded" class="form-control" asp-items="ViewBag.Services"></select>
+                            <span class="text-danger"></span>
+                        </div>
+                        <div class="col-5 form-group" >
+                            <label class="control-label">Max distance</label>
+                            <input class="form-control col-3" type="number" value="30" min="1" max="1500" id="distance" name="distance" />
+                        </div>
+                        
+
                     </div>
+                    
                     <div class="form-group">
                         <label asp-for="Address" class="control-label">Your Address</label>
                         <input  asp-for="Address" class="form-control" id="Address" />
@@ -94,7 +103,7 @@
                     <input id="latitude" name="latitude" asp-for="Latitude" class="form-control" type="hidden" />
                     <input id="longitude" name="longitude" asp-for="Longitude" class="form-control" type="hidden" />
                     <br>
-                    <button onclick="return updateMapWithMarker()">coordinates</button>
+                    
                     <div class="form-group submit-group">
                         <input type="submit" value="Submit" class="btn btn-primary" />
                     </div>
@@ -139,8 +148,27 @@
         var zip = document.getElementById("Zip");
         var state = document.getElementById("State");
 
+        
+        function locationOnPageLoad(){
+
+            console.log("The location should be loading");
+            if (zip.value.length > 4) {
+                updateMapWithMarker();
+            }
+
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            locationOnPageLoad();;
+        });
+        
+        locationOnPageLoad();
+
         zip.addEventListener("input", (e) => {
-            updateMapWithMarker();
+            if (zip.value.length > 4) {
+                updateMapWithMarker();
+            }
+            
         });
 
         function updateMapWithMarker() {
