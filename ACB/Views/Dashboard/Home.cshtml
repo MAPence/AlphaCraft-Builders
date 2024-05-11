@@ -6,12 +6,12 @@
     var quotes = Model.Quotes;
 }
 
-<div class="row col container d-flex justify-content-center p-0">
+<div class="row col container d-flex justify-content-center mx-3">
 
-    
-        <div class="row table-w container">
+
+    <div class="row table-w container  d-flex ">
             <div class="col py-3">
-                <div class="dash-header">Quote Requests
+                <div class="dash-header ">Quote Requests
                     <div class="row px-4">
 
                         <div class="col-3 line col-header">
@@ -43,7 +43,7 @@
                     {
                         <div class="row">
                             <div class="col line py-2">
-                                <p> You have not assigned any services to your account, this can be done under Account Settings.</p>
+                            <p> You have not assigned any services to your account, this can be done under <a asp-action="ProfileSettings">Account Settings</a>.</p>
                             </div>
 
                         </div>
