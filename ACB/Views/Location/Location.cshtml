@@ -17,6 +17,12 @@
             box-sizing: border-box;
         }
 
+
+        #map {
+            height: 440px;
+            width: 100%;
+        }
+
         .location-form {
             margin-top: 25px;
         }
@@ -40,15 +46,11 @@
                 cursor: pointer;
             }
 
-        #map {
-            height: 440px;
-            width: 100%;
-        }
 
-        .location-form input[type="submit"]:hover {
-            background-color: #0056b3;
-            padding: 10%;
-        }
+            .location-form input[type="submit"]:hover {
+                background-color: #0056b3;
+                padding: 10%;
+            }
     </style>
 </head>
 
@@ -65,7 +67,7 @@
         <div class="col col-lg-6">
             <section class=" alpha-form col-11">
                 <h2>Find Your Contractor</h2>
-                <form asp-action="Location" asp-controller="Location" method="post" >
+                <form asp-action="Location" asp-controller="Location" method="post" onclick="data()" >
                     <div class="container d-flex justify-content-between">
 
                         <div class="form-group col-5">
@@ -147,6 +149,21 @@
         var city = document.getElementById("City");
         var zip = document.getElementById("Zip");
         var state = document.getElementById("State");
+        var dist = document.getElementById("distance");
+
+        function data(){
+            console.log(
+                add.value + "\n" +
+                city.value + "\n" +
+                zip.value + "\n" +
+                state.value + "\n" +
+                dist.value + "\n" 
+            
+            
+            
+            );
+            
+        }
 
         
         function locationOnPageLoad(){

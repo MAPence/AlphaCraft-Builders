@@ -2,6 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Reflection;
+using MessagePack.Resolvers;
 
 namespace ACB.Controllers
 {
@@ -429,6 +431,15 @@ namespace ACB.Controllers
                 "\r\njoin contractor_service on contractor_service.Id = service_id" +
                 $"\r\nwhere service_type = '{service}'" +
                 $"\r\nand @LocStart.STDistance(GEOGRAPHY::Point(latitude, longitude, 4326))/1609.344 <= {distance};";
+
+            ContractorTile t = new()
+            {
+                Id = 0,
+                Company = query,
+                Email = "Hello"
+            };
+
+            contractors.Add(t);
 
             DataTable dt = GetDataTable(query); 
 
