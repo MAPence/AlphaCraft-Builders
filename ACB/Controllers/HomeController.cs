@@ -19,7 +19,6 @@ namespace ACB.Controllers
             _logger = logger;
             _recaptchaSecretKey = Environment.GetEnvironmentVariable("6LcCx9ApAAAAAGWJ-zKvI6n2YfGXCiSNmIHfTOlL");
         }
-
         public IActionResult Index()
         {
             return View();
