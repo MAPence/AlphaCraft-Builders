@@ -145,7 +145,7 @@
                     <div class="tile-detail">@c.Email</div>
                     <div class="tile-detail">Rating: no ratings yet</div>
                     <a asp-action="QuoteForm" asp-controller="Quote" asp-route-id="@c.Id">
-                        <input type="button" class="btn-primary p-2 my-2 tile-btn" value="Request Quote"  />
+                        <input type="button" class="btn-primary p-2 my-2 tile-btn" value="Request Quote"/>
                     </a>
                 </div>
                 
@@ -192,11 +192,28 @@
         locationOnPageLoad();
 
         zip.addEventListener("input", (e) => {
+            console.log("The location should be loading");
             if (zip.value.length > 4) {
                 updateMapWithMarker();
+                addContractorMarkers();
             }
             
         });
+
+        function addContractorMarkers() {
+            var contractors = [
+                { lat: 37.0902, lng: -95.7129 }, // Example contractor location
+                // Add more contractor locations here...
+            ];
+
+            contractors.forEach(function (contractor) {
+                var marker = new google.maps.Marker({
+                    position: { lat: contractor.lat, lng: contractor.lng },
+                    map: map,
+                    icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png' // Blue marker icon
+                });
+            });
+        }
 
         function updateMapWithMarker() {
             var address = document.getElementById('Address').value + ', ' +
@@ -226,26 +243,7 @@
                 document.getElementById('longitude').value = location.lng();
                 var service = document.getElementById("stype").value;
 
-                // Send AJAX request
-                // $.ajax({
-                //     type: "POST",
-                //     url: "@Url.Action("Location")",
-                //     traditional: true,
-                //     dataType: "json",
-                //     data: {
-                //         latitude: location.lat(),
-                //         longitude: location.lng(),
-                //         stype: service
-
-                //     },
-                //     success: function (result) {
-                //         console.log(result);
-                //         alert("Your service offerings have been updated.");
-                //     },
-                //     error: function (req, status, err) {
-                //         console.log(status);
-                //     }
-                // });
+                
             } 
             else 
             {
