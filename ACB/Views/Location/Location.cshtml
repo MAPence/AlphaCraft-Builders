@@ -77,7 +77,7 @@
                         </div>
                         <div class="col-5 form-group" >
                             <label class="control-label">Max distance</label>
-                            <input class="form-control col-3" type="number" value="30" min="1" max="1500" id="distance" name="distance" />
+                            <input asp-for="Distance" class="form-control col-3" type="number"  min="1" max="1500" id="distance" name="distance" />
                         </div>
                         
 
@@ -144,6 +144,10 @@
                 <div>
                     <div class="tile-detail">@c.Email</div>
                     <div class="tile-detail">Rating: no ratings yet</div>
+                    <div class="tile-detail">Distance: @c.Distance</div>
+                    <input   class="form-control latitude" type="hidden" value="@c.latitude" />
+                    <input   class="form-control longitude" type="hidden" value="@c.longitude"/>
+                    
                     <a asp-action="QuoteForm" asp-controller="Quote" asp-route-id="@c.Id">
                         <input type="button" class="btn-primary p-2 my-2 tile-btn" value="Request Quote"  />
                     </a>
