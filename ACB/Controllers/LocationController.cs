@@ -21,6 +21,7 @@ namespace ACB.Controllers
         public IActionResult Location()
         {
             Location user = new Location();
+            user.Distance = 30;
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
             return View(user);
         }
