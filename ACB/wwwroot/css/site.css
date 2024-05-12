@@ -75,10 +75,11 @@ body {
     border: 2px solid #04364A;
 }
 
-.review-box {
+#review-box {
     position: relative;
     padding: 0 15px;
-    height: 400px;
+    height: auto;
+    overflow-y: auto;
     width: 93vw;
     margin: 0 15px;
     margin-left: 30px;
@@ -94,11 +95,23 @@ body {
 .contractor-tile{
     background-color: white;
     border-radius: 15px;
-    height: 65px;
-    width:96%;
+   
+    width: 96%;
     color: black;
     font-size: 2rem;
+    font-weight: 600;
 }
+
+.tile-detail {
+    font-size: 1rem;
+
+}
+
+.tile-btn{
+    font-size: 1.2rem;
+    border-radius: 12px;
+}
+
 
 .review-container {
     display: flex;

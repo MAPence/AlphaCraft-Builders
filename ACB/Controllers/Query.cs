@@ -450,5 +450,20 @@ namespace ACB.Controllers
             return contractors;
         
         }
+
+        public static string GetCompany(int? id)
+        {
+            string q = $"select company from ASPNetUsers" +
+                $"\b\nwhere contractor_id = {id};";
+
+            DataTable dt = GetDataTable(q);
+
+            if(dt.Rows.Count > 0)
+            {
+                return (string)dt.Rows[0][0];
+            }
+
+            return null;
+        }
     }
 }

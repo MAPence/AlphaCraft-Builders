@@ -19,6 +19,9 @@ namespace ACB.Models
 
         public LatLong? LatLong { get; set; }
 
+        public int? contractor { get; set; }
+        public string? company { get; set; }
+
         public void GenerateLongLat()
         {
 

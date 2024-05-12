@@ -136,10 +136,20 @@
         
     </div>
     
-    <div class="review-box">
+    <div id="review-box" class="container-fluid d-block">
         @foreach (var c in @results)
         {
-            <div class="contractor-tile mt-3 px-2">@c.Company</div>
+            <div class="col-12 contractor-tile mt-3 p-2 px-3">
+                <div>@c.Company</div>
+                <div>
+                    <div class="tile-detail">@c.Email</div>
+                    <div class="tile-detail">Rating: no ratings yet</div>
+                    <a asp-action="QuoteForm" asp-controller="Quote" asp-route-id="@c.Id">
+                        <input type="button" class="btn-primary p-2 my-2 tile-btn" value="Request Quote"  />
+                    </a>
+                </div>
+                
+            </div>
         }
     </div>
    
