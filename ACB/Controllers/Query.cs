@@ -432,14 +432,6 @@ namespace ACB.Controllers
                 $"\r\nwhere service_type = '{service}'" +
                 $"\r\nand @LocStart.STDistance(GEOGRAPHY::Point(latitude, longitude, 4326))/1609.344 <= {distance};";
 
-            ContractorTile t = new()
-            {
-                Id = 0,
-                Company = query,
-                Email = "Hello"
-            };
-
-            contractors.Add(t);
 
             DataTable dt = GetDataTable(query); 
 

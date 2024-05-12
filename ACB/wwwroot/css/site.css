@@ -94,11 +94,12 @@ body {
 .contractor-tile{
     background-color: white;
     border-radius: 15px;
-    height: 60px;
-    width:95%;
+    height: 65px;
+    width:96%;
     color: black;
     font-size: 2rem;
 }
+
 .review-container {
     display: flex;
     justify-content: center;
