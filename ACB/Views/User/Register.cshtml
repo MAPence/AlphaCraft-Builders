@@ -28,6 +28,17 @@
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
+            @*Password Reqs*@
+            <div class="form-group">
+                <h5>Password Requirements:</h5>
+                <ul>
+                    <li>Minimum length: 6 characters</li>
+                    <li>Must contain at least one uppercase letter</li>
+                    <li>Must contain at least one lowercase letter</li>
+                    <li>Must contain at least one digit</li>
+                    <li>Must contain at least one special character</li>
+                </ul>
+            </div>
 
             <div class="row">
                 <div class="form-group col-6">
@@ -80,7 +91,7 @@
                     <span asp-validation-for="Zip" class="text-danger"></span>
                 </div>
             </div>
-           
+
             <div class="form-group" style="text-align: center;">
                 <input type="submit" value="Create my account" class="btn btn-primary my-3" />
             </div>
