@@ -4,8 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0"
     <title> </title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
     <style>
-       
+
         .container {
             max-width: 800px;
             width: 100%;
@@ -28,28 +30,30 @@
         .contact-form input[type="text"],
         .contact-form input[type="email"],
         .contact-form textarea {
-                width: 100%;
-                padding: 10px;
-                margin-bottom: 10px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                box-sizing: border-box;
-         }
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
 
         .contact-form input[type="submit"] {
-                background-color: #007bff;
-                color: #fff;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 5px;
-                cursor: pointer;
-         }
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-         .contact-form input[type="submit"]:hover {
-                    background-color: #0056b3;
-          }
+            .contact-form input[type="submit"]:hover {
+                background-color: #0056b3;
+            }
+
     </style>
-    </head>
+
+</head>
    @model ACB.Models.ContactSubmission
 <body class="cu-bg">
     <div class="container ">
@@ -61,11 +65,12 @@
                     <input asp-for="Email" type="email" name="email" placeholder="Your Email" required><br>
                     <textarea asp-for="Message" name="message" placeholder="Your Message" rows="4" required></textarea><br>
                     <input type="submit" value="Send Message" onclick="showRecaptcha(event)">
+                    <br />
+                    <div id="recaptcha-container" style="display: none;">
+                        <div class="g-recaptcha" data-sitekey="6Ld4htMpAAAAAJbhHBxW9A-xLPXtUpUoPRt24UqB" data-action="Send Message"></div>
+                        <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
+                    </div>
                 </form>
-                <div id="recaptcha-container" style="display: none;">
-                    <div class="g-recaptcha" data-sitekey="6LcCx9ApAAAAAOKyZGV-O3mdyJPT9_3xMjEvGMAo"></div>
-                    <input type="hidden" name="g-recaptcha-response" id="g-recaptcha-response">
-                </div>
             </section>
         </div>
         <div class="center-form">
@@ -83,7 +88,18 @@
             </section>
         </div>
     </div>
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <script>
+        var preconnectGoogle = document.createElement('link');
+        preconnectGoogle.rel = 'preconnect';
+        preconnectGoogle.href = 'https://www.google.com';
+        document.head.appendChild(preconnectGoogle);
+
+        var preconnectGstatic = document.createElement('link');
+        preconnectGstatic.rel = 'preconnect';
+        preconnectGstatic.href = 'https://www.gstatic.com';
+        preconnectGstatic.setAttribute('crossorigin', '');
+        document.head.appendChild(preconnectGstatic);
+    </script>
     <script>
         function showRecaptcha(event) {
             event.preventDefault();
@@ -99,6 +115,27 @@
             }
             document.getElementById('g-recaptcha-response').value = response;
             document.querySelector('form').submit();
+        }
+    </script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.render("container", {
+                sitekey: "6Ld4htMpAAAAAJbhHBxW9A-xLPXtUpUoPRt24UqB"
+            });
+        });
+    </script>
+    <script>
+        if (typeof grecaptcha === 'undefined') {
+            grecaptcha = {};
+        }
+        grecaptcha.ready = function (cb) {
+            if (typeof grecaptcha === 'undefined') {
+                const c = '___grecaptcha_cfg';
+                window[c] = window[c] || {};
+                (window[c]['fns'] = window[c]['fns'] || []).push(cb);
+            } else {
+                cb();
+            }
         }
     </script>
 </body>

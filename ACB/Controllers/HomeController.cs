@@ -14,10 +14,11 @@ namespace ACB.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly string _recaptchaSecretKey;
 
+       
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
-            _recaptchaSecretKey = Environment.GetEnvironmentVariable("6LcCx9ApAAAAAGWJ-zKvI6n2YfGXCiSNmIHfTOlL");
+            _recaptchaSecretKey = Environment.GetEnvironmentVariable("6Ld4htMpAAAAAFaijv5B2sWCpjowLqXo_w7BYacd");
         }
         public IActionResult Index()
         {
