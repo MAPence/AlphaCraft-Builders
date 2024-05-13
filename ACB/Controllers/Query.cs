@@ -2,6 +2,8 @@
 using System.Data;
 using System.Data.SqlClient;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Reflection;
+using MessagePack.Resolvers;
 
 namespace ACB.Controllers
 {
@@ -424,11 +426,13 @@ namespace ACB.Controllers
             List<ContractorTile> contractors = new List<ContractorTile>();
 
             string query = $"Declare @LocStart GEOGRAPHY = GEOGRAPHY::Point({latitude},{longitude}, 4326);" +
-                "\r\nselect contractor_service_offered.contractor_id, Company, Email, latitude, longitude, service_type from contractor_service_offered" +
+                "\r\nselect contractor_service_offered.contractor_id, Company, Email, latitude, longitude, service_type, ROUND(@LocStart.STDistance(GEOGRAPHY::Point(latitude, longitude, 4326))/1609.344, 2)" +
+                "\r\nfrom contractor_service_offered" +
                 "\r\njoin AspNetUsers on ASPNetUsers.contractor_id = contractor_service_offered.contractor_id" +
                 "\r\njoin contractor_service on contractor_service.Id = service_id" +
                 $"\r\nwhere service_type = '{service}'" +
                 $"\r\nand @LocStart.STDistance(GEOGRAPHY::Point(latitude, longitude, 4326))/1609.344 <= {distance};";
+
 
             DataTable dt = GetDataTable(query); 
 
@@ -439,6 +443,9 @@ namespace ACB.Controllers
                     Id = Convert.ToInt32(dt.Rows[i][0]),
                     Company = (string)dt.Rows[i][1],
                     Email = (string)dt.Rows[i][2],
+                    Distance = (double?)dt.Rows[i][6],
+                    latitude = (decimal?)dt.Rows[i][3],
+                    longitude = (decimal?)dt.Rows[i][4],
                     
                 };
                 contractors.Add(c);
@@ -446,6 +453,21 @@ namespace ACB.Controllers
 
             return contractors;
         
+        }
+
+        public static string GetCompany(int? id)
+        {
+            string q = $"select company from ASPNetUsers" +
+                $"\b\nwhere contractor_id = {id};";
+
+            DataTable dt = GetDataTable(q);
+
+            if(dt.Rows.Count > 0)
+            {
+                return (string)dt.Rows[0][0];
+            }
+
+            return null;
         }
     }
 }
