@@ -4,8 +4,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NuGet.ProjectModel;
 
-
-
 namespace ACB.Controllers
 {
     public class LocationController : Controller
