@@ -64,12 +64,9 @@ namespace ACB.Controllers
             };
             return States;
         }
-        
-        public IActionResult QuoteForm(int id)
+
+        public IActionResult QuoteForm(int? id)
         {
-            
-
-
             Quote q = new Quote();
 
             if (id != null)
@@ -77,14 +74,15 @@ namespace ACB.Controllers
                 q.contractor = id;
                 q.company = Query.GetCompany(id);
             }
-            
+
             ViewBag.StateOptions = PopulateStates();
 
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
             return View(q);
+
         }
-        
-        
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create
