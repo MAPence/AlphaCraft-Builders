@@ -175,28 +175,28 @@
         function zoomSetter(distance) {
 
             if (distance > 0 && distance < 50) {
-                return 12;
+                return 8.5;
             }
             if (distance >= 50 && distance < 100) {
-                return 11;
+                return 7.5;
             }
             if (distance >= 100 && distance < 150) {
-                return 10;
+                return 6.5;
             }
             if (distance >= 150 && distance < 200) {
-                return 9;
-            }
-            if (distance >= 200 && distance < 300) {
-                return 8;
-            }
-            if (distance >= 300 && distance < 500) {
-                return 7;
-            }
-            if (distance >= 500 && distance < 750) {
                 return 6;
             }
-            if (distance >= 750 && distance < 1000) {
+            if (distance >= 200 && distance < 300) {
+                return 5.5;
+            }
+            if (distance >= 300 && distance < 500) {
                 return 5;
+            }
+            if (distance >= 500 && distance < 750) {
+                return 4.5;
+            }
+            if (distance >= 750 && distance < 1000) {
+                return 4.25;
             }
             else {
                 return 4;
