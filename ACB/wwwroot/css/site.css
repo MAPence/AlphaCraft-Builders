@@ -48,8 +48,8 @@ body {
 .loc-bg {
     background-image: url("../resources/images/BlueUS.jpg");
     /* background-color: #A7D7C5;*/
-    width: 100vw;/*
-    background-position: center;*/
+    width: 100vw;
+    background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -64,9 +64,9 @@ body {
 }
 
 .geo-box {
-    width: 45vw;
+    /*width: 45vw;*/
     background-color: cadetblue;
-    border-radius: 10px;
+    border-radius: 15px;
     border-color: #04364A;
     padding: 20px;
     color: white;
@@ -76,27 +76,28 @@ body {
 }
 
 #review-box {
-    position: relative;
-    padding: 0 15px;
-    height: auto;
+    /*position: relative;*/
+    /*padding: 0 15px;*/
+    height: 500px;
     overflow-y: auto;
+    overflow-x: hidden;
     width: 93vw;
-    margin: 0 15px;
-    margin-left: 30px;
-    margin-right: 30px;
+   /* margin: 0 15px;*/
+    margin-left: -50px;
+   /* margin-right: 30px;*/
     border-radius: 20px;
     color: white;
-    display: flex;
-    justify-content: center;
+    /*display: flex;*/
+    /*justify-content: center;*/
     border: 2px solid #04364A;
-    padding-bottom: 50px;
+    /*padding-bottom: 50px;*/
 }
 
 .contractor-tile{
     background-color: white;
     border-radius: 15px;
    
-    width: 96%;
+    /*width: 96%;*/
     color: black;
     font-size: 2rem;
     font-weight: 600;

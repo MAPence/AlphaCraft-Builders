@@ -8,18 +8,18 @@
 
         .container2 {
             display: none;
-            width: 100%; /* Full width of the viewport */
+            /* width: 100%; /* Full width of the viewport */ */
             text-align: center;
             padding: 20px;
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
+            /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
+            /* overflow: hidden; */
             box-sizing: border-box;
         }
 
 
         #map {
-            height: 440px;
+            height: 600px;
             width: 100%;
         }
 
@@ -64,80 +64,128 @@
         var results = Model.Results;
     }
 
-    <div class="container2 d-flex">
-        <div class="col col-lg-6">
-            <section class=" alpha-form col-11">
-                <h2>Find Your Contractor</h2>
-                <form asp-action="Location" asp-controller="Location" method="post" onclick="data()">
-                    <div class="container d-flex justify-content-between">
+    
+        <div class="container  d-lg-flex justify-content-center justify-content-lg-between py-5">
 
-                        <div class="form-group col-5">
-                            <label class="control-label">Service</label>
-                            <select id="stype" name="stype" asp-for="WorkNeeded" class="form-control" asp-items="ViewBag.Services"></select>
-                            <span class="text-danger"></span>
+            <div class="row col-12 col-lg-6 d-flex justify-content-center">
+                <section class=" alpha-form col-12">
+                    <h2>Find Your Contractor</h2>
+                    <form asp-action="Location" asp-controller="Location" method="post" onclick="data()">
+                        <div class="container d-flex justify-content-between">
+
+                            <div class="form-group col-5">
+                                <label class="control-label">Service</label>
+                                <select id="stype" name="stype" asp-for="WorkNeeded" class="form-control" asp-items="ViewBag.Services"></select>
+                                <span class="text-danger"></span>
+                            </div>
+                            <div class="col-5 form-group">
+                                <label class="control-label">Max distance</label>
+                                <input asp-for="Distance" class="form-control col-3" type="number" min="1" max="1500" id="distance" name="distance" />
+                            </div>
+
+
                         </div>
-                        <div class="col-5 form-group">
-                            <label class="control-label">Max distance</label>
-                            <input asp-for="Distance" class="form-control col-3" type="number" min="1" max="1500" id="distance" name="distance" />
+
+                        <div class="form-group">
+                            <label asp-for="Address" class="control-label">Your Address</label>
+                            <input asp-for="Address" class="form-control" id="Address" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
                         </div>
+                        <div class="form-group">
+                            <label asp-for="City" class="control-label">City</label>
+                            <input asp-for="City" class="form-control" id="City" />
+                            <span asp-validation-for="City" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label>State:</label>
+                            @Html.DropDownListFor(model => model.State, GetStates(), new { @class = "form-control", id = "State" })
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Zip" class="control-label">Zip Code</label>
+                            <input asp-for="Zip" class="form-control" id="Zip" />
+                            <span asp-validation-for="Zip" class="text-danger"></span>
+                        </div>
+                        <input id="latitude" name="latitude" asp-for="Latitude" class="form-control" type="hidden" />
+                        <input id="longitude" name="longitude" asp-for="Longitude" class="form-control" type="hidden" />
+                        <br>
 
+                        <div class="form-group submit-group">
+                            <input type="submit" value="Submit" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </section>
+            </div>
+            <div class="geo-box row col-12 col-lg-6 ">
+                <div id="map"></div>
+                <section class="mapname-container">
 
-                    </div>
+                    <script>
+                        function initMap() {
+                            var options = {
+                                zoom: 4,
+                                center: { lat: 37.0902, lng: -95.7129 }
+                            }
+                            var map = new google.maps.Map(document.getElementById('map'), options);
 
-                    <div class="form-group">
-                        <label asp-for="Address" class="control-label">Your Address</label>
-                        <input asp-for="Address" class="form-control" id="Address" />
-                        <span asp-validation-for="Address" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="City" class="control-label">City</label>
-                        <input asp-for="City" class="form-control" id="City" />
-                        <span asp-validation-for="City" class="text-danger"></span>
-                    </div>
-                    <div class="form-group">
-                        <label>State:</label>
-                        @Html.DropDownListFor(model => model.State, GetStates(), new { @class = "form-control", id = "State" })
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Zip" class="control-label">Zip Code</label>
-                        <input asp-for="Zip" class="form-control" id="Zip" />
-                        <span asp-validation-for="Zip" class="text-danger"></span>
-                    </div>
-                    <input id="latitude" name="latitude" asp-for="Latitude" class="form-control" type="hidden" />
-                    <input id="longitude" name="longitude" asp-for="Longitude" class="form-control" type="hidden" />
-                    <br>
-
-                    <div class="form-group submit-group">
-                        <input type="submit" value="Submit" class="btn btn-primary" />
-                    </div>
-                </form>
-            </section>
-        </div>
-        <div class="geo-box col col-lg-6">
-            <div id="map"></div>
-            <section class="mapname-container">
-
-                <script>
-                    function initMap() {
-                        var options = {
-                            zoom: 4,
-                            center: { lat: 37.0902, lng: -95.7129 }
+                            var marker = new google.maps.Marker({
+                                position: null,
+                                map: map
+                            });
                         }
-                        var map = new google.maps.Map(document.getElementById('map'), options);
 
-                        var marker = new google.maps.Marker({
-                            position: null,
-                            map: map
-                        });
+                    </script>
+                </section>
+            </div>
+
+        </div>
+
+        
+        
+
+    
+    <div class="container">
+
+        <div class="p-3 mx-4 col-12 d-flex justify-content-center">
+
+            @if (Model.Results.Count > 0)
+            {
+
+                <div id="review-box" class="row d-flex justify-content-center justify-content-lg-between ">
+                    @foreach (var c in @results)
+                    {
+                        <div class="col-12 col-lg-5 contractor-tile m-4 my-3 p-2 px-3">
+                            <div>@c.Company</div>
+                            <div>
+                                <div class="tile-detail">@c.Email</div>
+                                <div class="tile-detail">Rating: no ratings yet</div>
+                                <div class="tile-detail">Distance: @c.Distance miles away</div>
+
+                                <div class="cont-loc">
+                                    <input class="form-control latitude" type="hidden" value="@c.latitude" />
+                                    <input class="form-control longitude" type="hidden" value="@c.longitude" />
+                                    <input class="form-control company" type="hidden" value="@c.Company" />
+                                </div>
+
+                                <a asp-action="QuoteForm" asp-controller="Quote" asp-route-id="@c">
+                                    <input type="button" class="btn-primary p-2 my-2 tile-btn" value="Request Quote" />
+                                </a>
+                            </div>
+
+                        </div>
                     }
+                </div>
 
-                </script>
-            </section>
+            }
+
         </div>
 
     </div>
+    
 
-    <div id="review-box" class="container-fluid d-block">
+    
+    
+
+    @* <div id="review-box" class="container-fluid d-block">
         @foreach (var c in @results)
         {
             <div class="col-12 contractor-tile mt-3 p-2 px-3">
@@ -161,7 +209,7 @@
 
             </div>
         }
-    </div>
+    </div> *@
 
     <script>
 
@@ -174,7 +222,19 @@
 
         function zoomSetter(distance) {
 
-            if (distance > 0 && distance < 50) {
+            if (distance > 0 && distance < 4) {
+                return 13;
+            }
+            if (distance >= 4 && distance < 16) {
+                return 11;
+            }
+            if (distance >= 16 && distance < 30) {
+                return 10;
+            }
+            if (distance >= 30 && distance < 40) {
+                return 9.5;
+            }
+            if (distance >= 40 && distance < 50) {
                 return 8.5;
             }
             if (distance >= 50 && distance < 100) {
