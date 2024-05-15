@@ -88,7 +88,7 @@
 
                         <div class="form-group">
                             <label asp-for="Address" class="control-label fs-2">Your Address</label>
-                            <input asp-for="Address" class="form-control  fs-2" id="Address" />
+                            <input asp-for="Address" class="form-control  fs-2" id="Address" name="Address"/>
                             <span asp-validation-for="Address" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -166,7 +166,7 @@
                                     <input class="form-control company" type="hidden" value="@c.Company" />
                                 </div>
 
-                                <a asp-action="QuoteForm" asp-controller="Quote" asp-route-id="@c">
+                                <a asp-action="QuoteForm" asp-controller="Quote" asp-route-id="@c.Id">
                                     <input type="button" class="btn-primary p-2 my-2 tile-btn" value="Request Quote" />
                                 </a>
                             </div>
