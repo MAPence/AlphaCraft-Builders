@@ -41,32 +41,24 @@
 </head>
 <body>
     <div class="">
-        <nav id="nav-custom" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom box-shadow ">
+        <nav id="nav-custom" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light  border-bottom box-shadow mx-0">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ACB</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><img id="banner" src="~/resources/logos/logo.png" /></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
 
-                        <li class="nav-item dropdown nav-custom hide">
-                            <a class="nav-link dropdown-toggle text-light" href="#" data-bs-toggle="dropdown" aria-expanded="false">Contractors</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="./search.html">Find Contractors</a></li>
-                                <li><a class="dropdown-item" asp-controller="Quote" asp-action="QuoteForm">Get a Quote</a></li>
-                            </ul>
-                        </li>
 
-                    </ul>
+                <div class="nav-item text-end nav-buttons d-sm-inline-flex">
+
+                    <a class="nav-link text-light" asp-area="" asp-controller="Dashboard" asp-action="ProfileSettings">Settings</a>
+                    <span class="nav-link text-light mx-2">|</span>
+
+                    <a class="nav-link text-light" asp-area="" asp-controller="Dashbaord" asp-action="Logout">Log Out</a>
+
                 </div>
+
             </div>
         </nav>
 
@@ -105,7 +97,7 @@
 
                             <li class="mb-1 ">
                                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed menu-txt sb-list-item" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-                                    Cases +
+                                    Jobs +
                                 </button>
                                 <div class="collapse sb-list-item" id="dashboard-collapse" style="">
                                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
