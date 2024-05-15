@@ -33,6 +33,7 @@ body {
 
 #nav-custom {
     background-color: #04364A;
+    
     /*display: none;*/
 }
 
@@ -48,7 +49,7 @@ body {
 .loc-bg {
     background-image: url("../resources/images/BlueUS.jpg");
     /* background-color: #A7D7C5;*/
-    width: 100vw;
+    width: 100%;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
