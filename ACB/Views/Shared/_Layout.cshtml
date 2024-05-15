@@ -44,7 +44,7 @@
         FB.getLoginStatus(function (response) {   // Called after the JS SDK has been initialized.
             statusChangeCallback(response);        // Returns the login status.
         });
-          };
+          
 
         function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
             console.log('Welcome!  Fetching your information.... ');
@@ -76,7 +76,7 @@
 
 </head>
 <body>
-    <nav id="nav-custom" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow sticky-top" style="position:sticky;">
+    <nav id="nav-custom" class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow sticky-top mx-0" style="position:sticky;">
         <div class="container-fluid sticky-top">
             <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ACB</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
