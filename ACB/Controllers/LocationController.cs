@@ -2,8 +2,9 @@
 using ACB.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.Threading.Tasks;
 using NuGet.ProjectModel;
+
+
 
 namespace ACB.Controllers
 {
@@ -20,7 +21,7 @@ namespace ACB.Controllers
         public IActionResult Location()
         {
             Location user = new Location();
-            user.Distance = 30;
+            
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
             return View(user);
         }
@@ -30,12 +31,9 @@ namespace ACB.Controllers
         {
             if (ModelState.IsValid)
             {
-                ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
-                location.Results = Query.FindContractors(location.WorkNeeded, location.Latitude, location.Longitude, location.Distance);
-
                 return RedirectToAction("Location");
             }
-            return View("../Location/Location", location);
+            return View("../Location/Location");
         }
 
         public IActionResult Confirmation()
@@ -44,7 +42,7 @@ namespace ACB.Controllers
         }
         [HttpPost]
         public IActionResult Location(string stype, decimal? latitude, decimal? longitude, string? Address, string? City, int? Zip, string? State, int? distance)
-        {
+        { 
             ViewBag.Services = new SelectList(Query.PopulateDropDown("contractor_service", 1));
             Location user = new Location();
             user.Results = Query.FindContractors(stype, latitude, longitude, distance);
@@ -56,7 +54,7 @@ namespace ACB.Controllers
             user.WorkNeeded = stype;
             user.Distance = distance;
 
-            return View("Location", user);
+            return View("Location",user);
         }
 
     }

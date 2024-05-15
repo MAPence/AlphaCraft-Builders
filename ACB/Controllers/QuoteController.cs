@@ -65,7 +65,7 @@ namespace ACB.Controllers
             return States;
         }
 
-        public IActionResult QuoteForm(int? id)
+        public IActionResult QuoteForm(int id)
         {
             Quote q = new Quote();
 
