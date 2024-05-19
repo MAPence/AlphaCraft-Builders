@@ -14,10 +14,11 @@ namespace ACB.Controllers
         private readonly UserManager<ACBUser> _userManager;
         private readonly SignInManager<ACBUser> _signInManager;
 
-        public DashboardController(UserManager<ACBUser> userManager, SignInManager<ACBUser> signInManager)
+        public DashboardController(UserManager<ACBUser> userManager, SignInManager<ACBUser> signInManager, ACBContext context)
         {
             this._userManager = userManager;
             this._signInManager = signInManager;
+            this._context = context;
         }
 
         public List<SelectListItem> JobList(int? id)
@@ -71,7 +72,6 @@ namespace ACB.Controllers
             ViewBag.jobs = JobList(0);
             return View(contractor);
         }
-        //[Bind("NewOrder.Subtotal,NewOrder.SalesTax,NewOrder.Notes")] NewOrder order
         [HttpPost]
 
         public IActionResult CreateOrder(int? job, decimal? sub, decimal? tax, string? notes)
@@ -122,6 +122,37 @@ namespace ACB.Controllers
             }
             return View("../User/Login");
         }
+
+        public IActionResult DisplayOrders(int? Id)
+        {
+            var user = User.FindFirstValue(ClaimTypes.Name);
+
+            if (user != null)
+            {
+                ContractorVM contractor = Query.GetContractor(user);
+
+                if (contractor.Orders != null)
+                {
+                    foreach (var order in contractor.Orders)
+                    {
+                        if (order.Id == Id)
+                        {
+                            contractor.NewOrder = order;
+                            break;
+                        }
+                    }
+                }
+                // Ensure NewOrder is not null
+                if (contractor.NewOrder == null && contractor.Orders != null && contractor.Orders.Any())
+                {
+                    contractor.NewOrder = contractor.Orders.First();
+                }
+
+                return View(contractor);
+            }
+            return View("../User/Login");
+        }
+
 
         public async Task<IActionResult> AllOrders(ContractorVM contractor)
         {
@@ -237,9 +268,7 @@ namespace ACB.Controllers
                 return View("AllJobs", contractor);
 
             }
-
-            return View();
-			
+            return View();			
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ACB.Areas.Identity.Data;
+using ACB.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,6 +13,8 @@ public class ACBContext : IdentityDbContext<ACBUser>
     }
 
     public DbSet<ACB.Areas.Identity.Data.ACBUser>? ACBUsers { get; set; }
+
+    public DbSet<NewOrder> Orders { get; set; }
 
     protected override void OnModelCreating(ModelBuilder builder)
     {

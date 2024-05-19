@@ -1,0 +1,34 @@
+﻿@model ACB.Models.ContractorVM
+@{
+    ViewData["Title"] = "displayorders";
+
+    var orders = Model.Orders;
+}
+<div class="row d-flex justify-content-center">
+    <div class="col alpha-form center mt-4">
+        <h2>Current Order <span id="q-id">@Model.NewOrder?.Id</span></h2>
+        <div class="row">
+            <div id="info-tab" class="col-5 tab-btn mx-3" onclick="return Info()">Info</div>
+        </div>
+        <div class="align-items-center justify-content-center quote-box">
+            <div id="info-view">
+                <div class="container q-data">
+                    <div class="col-8 my-3 mt-5">
+                        Case ID: </br>@Model.NewOrder?.Co_id @Model.NewOrder?.Case_id
+                    </div>
+
+                    <div class="col-8 my-3">
+                        Subtotal: </br>@Model.NewOrder?.Subtotal
+                    </div>
+
+                    <div class="col-8 my-3">
+                        Total and Tax: </br>@Model.NewOrder?.Total @Model.NewOrder?.SalesTax
+                    </div>
+                    <div class="col-8 my-3">
+                        Notes: </br>@Model.NewOrder?.Notes
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
