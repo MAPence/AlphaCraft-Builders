@@ -254,7 +254,6 @@
 .calendar-container {
     height: 85%;
     width: 85%; /* Full width of the viewport */
-
     text-align: center;
     padding: 20px;
     margin-left: 10vw;
@@ -291,14 +290,8 @@
 
 
 form {
-    display: none; /* Hide the form by default */
+    display: block; 
     margin-top: 20px;
 }
 
-    form input {
-        margin-right: 10px;
-    }
-
-    form button {
-        margin-top: 10px;
-    }
+    

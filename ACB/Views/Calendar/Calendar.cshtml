@@ -18,7 +18,7 @@
 
 @model ACB.Models.ContractorVM
 @{
-    var jobs = Model.Job;
+    var jobs = Model.Jobs;
 }
 
 <body>
@@ -36,7 +36,23 @@
             </form>
         </div>
     </div>
-    
+
+    @foreach(var job in jobs)
+    {
+        <div class="event">
+            
+            <input class="startDate" value="@job.CalendarStart"/>
+            
+            
+            <input class="endDate" value="@job.CalendarEnd" />
+            
+
+            <input class="client" value="@job.Firstname @job.Lastname" />
+
+
+        </div>
+    }
+
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.js"></script>
     <script src="https://apis.google.com/js/api.js"></script>
     <script>
@@ -141,6 +157,39 @@
                 { title: 'Christmas Day', start: '2024-12-25' }
             ];
             calendar.addEventSource(holidays);
+            
+            const NodeList = document.querySelectorAll(".event");
+
+
+
+            for (let i = 0; i < NodeList.length; i++) {
+
+                var startNode = NodeList[i].querySelectorAll('.startDate');
+                var endNode = NodeList[i].querySelectorAll('.endDate');
+                var clientNode = NodeList[i].querySelectorAll('.client');
+                var start = startNode[0].value;
+                var end = endNode[0].value;
+                var client = clientNode[0].value;
+
+                console.log(start);
+                console.log(i);
+                console.log(client);
+
+
+
+                
+                var job = [
+                    { title: client, start: start, end: end }
+                    
+                    
+                ];
+                calendar.addEventSource(job);
+                
+                
+
+            }
+
+
         }
 
         document.addEventListener('DOMContentLoaded', function () {

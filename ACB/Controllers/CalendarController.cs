@@ -1,15 +1,44 @@
-﻿using ACB.Models;
+﻿using ACB.Areas.Identity.Data;
+using ACB.Data;
+using ACB.Models;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics.Contracts;
 
 namespace ACB.Controllers
 {
     public class CalendarController : Controller
     {
-        public ActionResult Calendar()
+
+        private readonly ACBContext _context;
+        private readonly UserManager<ACBUser> _userManager;
+        private readonly SignInManager<ACBUser> _signInManager;
+
+        public CalendarController(UserManager<ACBUser> userManager, SignInManager<ACBUser> signInManager)
         {
-            ContractorVM contractorVM = new ContractorVM();
-            return View(contractorVM);
+            this._userManager = userManager;
+            this._signInManager = signInManager;
+        }
+
+        public async Task<IActionResult> Calendar(ContractorVM contractor)
+        {
+            // Retrieve the current authenticated user
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            if(user != null)
+            {
+
+                // Retrieve the orders from the database using the user's username
+                contractor = Query.GetContractor(user.UserName);
+                contractor.Jobs = Query.GetJobs(contractor.Id);
+
+            }
+            
+
+            return View(contractor);
+
+            
         }
 
         public ActionResult Details(int id)

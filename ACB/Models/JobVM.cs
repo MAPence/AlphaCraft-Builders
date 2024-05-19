@@ -17,6 +17,8 @@ namespace ACB.Models
         public string? Details { get; set; }
         public DateTime? Start { get; set; }
         public DateTime? End { get; set; }
+        public string? CalendarStart { get; set; }
+        public string? CalendarEnd { get; set; }
         public Decimal? Amount { get; set; }
         public IList<JobVM>? Jobs { get; set; }
         public ACBUser CurrentUser { get; set; }

@@ -336,7 +336,7 @@ namespace ACB.Controllers
 
             using (SqlConnection sqlconn = new(GetConnectionString()))
             {
-                string sqlQuery = "SELECT * FROM Job WHERE contractor_id = @co_id";
+                string sqlQuery = "SELECT *, FORMAT (job_start, 'yyyy-MM-dd'), FORMAT (job_end, 'yyyy-MM-dd') FROM Job WHERE contractor_id = @co_id";
                 SqlCommand cmnd = new(sqlQuery, sqlconn);
                 cmnd.Parameters.AddWithValue("@co_id", co_id);
 
@@ -351,7 +351,10 @@ namespace ACB.Controllers
                         Lastname = reader.IsDBNull(4) ? null : reader.GetString(4),
                         Address = reader.IsDBNull(8) ? null : reader.GetString(8),    
                         Start = reader.IsDBNull(12) ? null : (DateTime?)reader.GetDateTime(12),
-                        Amount = reader.IsDBNull(11) ? null : (decimal?)reader.GetDecimal(11)
+                        End = reader.IsDBNull(13) ? null : (DateTime?)reader.GetDateTime(13),
+                        Amount = reader.IsDBNull(11) ? null : (decimal?)reader.GetDecimal(11),
+                        CalendarStart = reader.IsDBNull(14) ? null : (string?)reader.GetString(14),
+                        CalendarEnd = reader.IsDBNull(15) ? null : (string?)reader.GetString(15)
                     };
                     jobs.Add(job);
                 }
