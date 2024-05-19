@@ -330,6 +330,31 @@ namespace ACB.Controllers
             }
             return orders;
         }
+
+        public static NewOrder GetSingleOrder(int? co_id)
+        { 
+            NewOrder order = new();
+            using (SqlConnection sqlconn = new(GetConnectionString()))
+            {
+                string sqlQuery = "SELECT * FROM Orders WHERE co_id = @co_id";
+                SqlCommand cmnd = new(sqlQuery, sqlconn);
+                cmnd.Parameters.AddWithValue("@co_id", co_id);
+
+                sqlconn.Open();
+                using SqlDataReader reader = cmnd.ExecuteReader();
+                while (reader.Read())
+                {
+                    order.Id = reader.GetInt32(0);
+                    order.Co_id = reader.IsDBNull(1) ? null : (int?)reader.GetInt32(1);
+                    order.Case_id = reader.IsDBNull(2) ? null : (int?)reader.GetInt32(2);
+                    order.Subtotal = (decimal?)(reader.IsDBNull(3) ? null : (decimal?)reader.GetDecimal(3));
+                    order.SalesTax = (decimal?)(reader.IsDBNull(4) ? null : (decimal?)reader.GetDecimal(4));
+                    order.Created = (DateTime?)(reader.IsDBNull(6) ? null : (DateTime?)reader.GetDateTime(6));
+                    order.Total = order.Subtotal + order.SalesTax;
+                }
+            }
+            return order;
+        }
         public static List<JobVM> GetJobs(int? co_id)
         {
             List<JobVM> jobs = new();
