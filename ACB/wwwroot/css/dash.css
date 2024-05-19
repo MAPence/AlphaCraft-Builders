@@ -81,7 +81,8 @@
 
 
 
-#sb-dash{
+#sb-dash {
+
     height: 100vh;
     padding: 5px;
 }
@@ -223,7 +224,13 @@
    
 }
 
+
+
+
+
+
 @media (max-width: 1300px) {
+    
 
     .alpha-form {
         width: 95vw;
@@ -240,3 +247,58 @@
         padding: 0px;
     }
 }
+
+
+
+
+.calendar-container {
+    height: 85%;
+    width: 85%; /* Full width of the viewport */
+
+    text-align: center;
+    padding: 20px;
+    margin-left: 10vw;
+    margin-bottom: 15vh;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+#calendar {
+    display: block;
+    margin-top: 20px; /* Add some space between the title and the calendar */
+}
+
+@media (max-width: 1300px) {
+
+    .calendar-container {
+        margin: 0;
+        height: 100%;
+        width: 100%; /* Full width of the viewport */
+    }
+}
+
+@media (max-width: 1000px) {
+
+    .calendar-container {
+        margin: 0;
+        height: 1200px;
+        width: 1200px; /* Full width of the viewport */
+    }
+}
+
+
+
+
+form {
+    display: none; /* Hide the form by default */
+    margin-top: 20px;
+}
+
+    form input {
+        margin-right: 10px;
+    }
+
+    form button {
+        margin-top: 10px;
+    }
