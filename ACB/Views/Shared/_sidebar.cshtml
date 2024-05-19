@@ -26,6 +26,7 @@
             
         }
         #bar{
+            
             margin-bottom: 0px;
             left:25;
             height:100%;
@@ -34,7 +35,9 @@
         #cont{
            
             margin-top: -90vh;
-            
+            overflow-y: auto;
+            height: 100vh;
+            position: fixed;
         }
     </style>
 
@@ -48,6 +51,18 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item d-sm-none">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Dashboard" asp-action="ProfileSettings">Settings</a>
+                        </li>
+                        <li class="nav-item d-sm-none">
+                            <a class="nav-link text-light" asp-area="" asp-controller="Dashbaord" asp-action="Logout">Log Out</a>
+                        </li>
+
+                    </ul>
+                </div>
 
 
                 <div class="nav-item text-end nav-buttons d-sm-inline-flex">
@@ -77,7 +92,7 @@
 
                         }
 
-                        <ul class="list-unstyled ps-0">
+                        <ul class="list-unstyled ps-0 mt-5">
 
                             <li class="mb-1 ">
                                 <a asp-action="Home" asp-controller="Dashboard">
@@ -186,16 +201,30 @@
     </div>
 
 
-    <footer class="border-top footer text-muted mt-0">
+    @* <footer class="border-top footer text-muted mt-0">
         <div class="container">
             &copy; 2024 - ACB - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer> *@
 
     <script>
 
         var sidebar = document.getElementById("sb-dash");
         var content = document.getElementById("cont");
+        var side = document.getElementById("bar");
+        var topNav = document.getElementById("nav-custom");
+
+        function positionSideBar(){
+            let offSet = topNav.offsetHeight;
+            console.log(offSet);
+            side.style.marginTop =  '-' + offSet + 'px';
+            topNav.style.zIndex = '99';
+            side.style.zIndex = '4';
+            
+            console.log(side.style.marginTop);
+        }
+
+        positionSideBar();
 
         function expandSidebar(){
             sidebar.style.height = content.style.height;

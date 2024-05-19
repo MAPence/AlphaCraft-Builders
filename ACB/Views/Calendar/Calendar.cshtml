@@ -5,42 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contractor Calendar</title>
     <style>
-        .calendar-container {
-            height: 100%;
-            width: 100%; /* Full width of the viewport */
-            
-            text-align: center;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
 
-        #calendar {
-            display: block;
-            margin-top: 20px; /* Add some space between the title and the calendar */
-        }
 
-        form {
-            display: none; /* Hide the form by default */
-            margin-top: 20px;
-        }
+        
 
-            form input {
-                margin-right: 10px;
-            }
 
-            form button {
-                margin-top: 10px;
-            }
+
     </style>
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/dash.css" />
 </head>
+
+@model ACB.Models.ContractorVM
+@{
+    var jobs = Model.Job;
+}
 
 <body>
 
     <div class="px-4">
         <div class="calendar-container" >
-            <h1>Contractor Calendar</h1>
+            <h1>Work Schedule</h1>
             <div id="calendar"></div>
             <form id="eventForm">
                 <label for="eventName">Event Name:</label>
