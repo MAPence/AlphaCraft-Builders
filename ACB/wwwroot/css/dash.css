@@ -260,10 +260,12 @@
     margin-bottom: 15vh;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
 }
 
 
 #calendar {
+    
     display: block;
     margin-top: 20px; /* Add some space between the title and the calendar */
 }
