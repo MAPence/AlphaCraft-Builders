@@ -43,13 +43,13 @@
     {
         <div class="event">
             
-            <input class="startDate" value="@job.CalendarStart"/>
-            
-            
-            <input class="endDate" value="@job.CalendarEnd" />
-            
+            <input class="startDate" value="@job.CalendarStart" type="hidden"/>
 
-            <input class="client" value="@job.Firstname @job.Lastname" />
+
+            <input class="endDate" value="@job.CalendarEnd" type="hidden" />
+
+
+            <input class="client" value="@job.Firstname @job.Lastname" type="hidden" />
 
 
         </div>
@@ -172,6 +172,8 @@
                 var start = startNode[0].value;
                 var end = endNode[0].value;
                 var client = clientNode[0].value;
+
+
 
                 console.log(start);
                 console.log(i);

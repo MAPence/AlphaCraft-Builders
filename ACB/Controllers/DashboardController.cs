@@ -131,28 +131,16 @@ namespace ACB.Controllers
             {
                 ContractorVM contractor = Query.GetContractor(user);
 
-                if (contractor.Orders != null)
+                // Retrieve the single order based on the provided Id
+                if (Id.HasValue)
                 {
-                    foreach (var order in contractor.Orders)
-                    {
-                        if (order.Id == Id)
-                        {
-                            contractor.NewOrder = order;
-                            break;
-                        }
-                    }
+                    contractor.NewOrder = Query.GetSingleOrder(Id.Value);
                 }
-                // Ensure NewOrder is not null
-                if (contractor.NewOrder == null && contractor.Orders != null && contractor.Orders.Any())
-                {
-                    contractor.NewOrder = contractor.Orders.First();
-                }
-
                 return View(contractor);
             }
+
             return View("../User/Login");
         }
-
 
         public async Task<IActionResult> AllOrders(ContractorVM contractor)
         {
