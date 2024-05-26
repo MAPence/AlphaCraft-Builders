@@ -23,10 +23,17 @@
 
 #main-content{
     width: 100vw;
+    overflow-y: auto;
+    padding-bottom: 100px;
+    padding-right: 0;
 }
 
 #quote{
    
+}
+
+#settings-form{
+    padding: 7vw;
 }
 
 
@@ -134,7 +141,6 @@
 }
 
 .dash-header {
-    
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
     background-color: #04364A;
@@ -143,7 +149,7 @@
     text-align: center;
     font-size: 2rem;
     width: 80vw;
-    
+    box-shadow: -2px 2px 10px black;
 }
 
 .col-header {
@@ -158,8 +164,8 @@
     border-bottom-right-radius: 10px;
     width: 80vw;
     text-align: center;
-    background-color : white;
-    
+    background-color: white;
+    box-shadow: -2px 2px 10px black;
 }
 
 .line {
@@ -307,4 +313,7 @@ form {
     margin-top: 20px;
 }
 
+.m-left{
+    margin-left: 5vw;
+}
     

@@ -9,60 +9,65 @@
         height: 100vh;
     }
 </style>
-<div class="row d-flex justify-content-center">
-    <div class="col-10 col-lg-6  alpha-form center mt-4 ">
-        <form asp-action="CreateOrder" enctype="multipart/form-data" AllowMultiple="true" runat="server" class="align-items-center justify-content-center">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div id="main-content" class="row d-flex justify-content-center">
+    
 
-            <h2 class="text-center mb-2">Save your Reciepts Here!</h2>
+        <div class="col-6 col-md-6  alpha-form center mt-4 ">
+            <form asp-action="CreateOrder" enctype="multipart/form-data" AllowMultiple="true" runat="server" class="align-items-center justify-content-center">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="row">              
-                <div class="form-group col-12">
-                    <label asp-for="NewOrder.Case_id" class="control-label" >Associated Job</label>
-                    <select asp-for="NewOrder.Case_id" class="form-control" asp-items="ViewBag.jobs" name="job" ></select>
-                    <span asp-validation-for="NewOrder.Case_id" class="text-danger"></span>
+                <h2 class="text-center mb-2">Save your Reciepts Here!</h2>
+
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label asp-for="NewOrder.Case_id" class="control-label">Associated Job</label>
+                        <select asp-for="NewOrder.Case_id" class="form-control" asp-items="ViewBag.jobs" name="job"></select>
+                        <span asp-validation-for="NewOrder.Case_id" class="text-danger"></span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="form-group col-4">
-                    <label asp-for="NewOrder.Subtotal" class="control-label">Sub Total</label>
-                    <input id="subtotal" class="form-control" type="number" step="any" name="sub"/>
-                    <span asp-validation-for="NewOrder.Subtotal" class="text-danger"></span>
+                <div class="row">
+                    <div class="form-group col-4">
+                        <label asp-for="NewOrder.Subtotal" class="control-label">Sub Total</label>
+                        <input id="subtotal" class="form-control" type="number" step="any" name="sub" />
+                        <span asp-validation-for="NewOrder.Subtotal" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="NewOrder.SalesTax" class="control-label">Sales Tax</label>
+                        <input id="tax" class="form-control" type="number" step="any" name="tax" />
+                        <span asp-validation-for="NewOrder.SalesTax" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-4">
+                        <label asp-for="NewOrder.Total" class="control-label">Total</label>
+                        <input id="total" type="number" class="form-control" readonly="readonly" />
+
+                    </div>
                 </div>
-                <div class="form-group col-4">
-                    <label asp-for="NewOrder.SalesTax" class="control-label">Sales Tax</label>
-                    <input id="tax"  class="form-control" type="number" step="any" name="tax"/>
-                    <span asp-validation-for="NewOrder.SalesTax" class="text-danger"></span>
+
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label asp-for="NewOrder.Notes" class="control-label">Order Notes</label>
+                        <textarea asp-for="NewOrder.Notes" class="form-control" rows="3" name="notes"></textarea>
+                        <span asp-validation-for="NewOrder.Notes" class="text-danger"></span>
+                    </div>
                 </div>
-                <div class="form-group col-4">
-                    <label asp-for="NewOrder.Total" class="control-label">Total</label>
-                    <input id="total" type="number" class="form-control" readonly="readonly" />
-                    
+
+
+
+                <div class="mb-3">
+                    <label class="form-label">Reciept Pictures</label>
+                    <input type="file" name="imageFile" class="form-control" multiple="multiple" AllowMultiple="true" />
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="form-group col-12">
-                    <label asp-for="NewOrder.Notes" class="control-label">Order Notes</label>
-                    <textarea asp-for="NewOrder.Notes" class="form-control" rows="3" name="notes"></textarea>
-                    <span asp-validation-for="NewOrder.Notes" class="text-danger"></span>
+                <div class="form-group">
+                    (6 images maximum, files accepted: .jpg, .jpeg, .png)
+                    <input type="submit" value="Submit" class="btn btn-primary mt-3 form-btn " onclick="SuccessPrompt()" />
                 </div>
-            </div>
+            </form>
+        </div>
 
-            
-
-            <div class="mb-3">
-                <label class="form-label">Reciept Pictures</label>
-                <input type="file" name="imageFile" class="form-control" multiple="multiple" AllowMultiple="true" />
-            </div>
-
-            <div class="form-group">
-                (6 images maximum, files accepted: .jpg, .jpeg, .png)
-                <input type="submit" value="Submit" class="btn btn-primary mt-3 form-btn " onclick="SuccessPrompt()" />
-            </div>
-        </form>
-    </div>
+    
+    
 </div>
 
 <script>
