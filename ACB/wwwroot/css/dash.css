@@ -143,10 +143,13 @@
     text-align: center;
     font-size: 2rem;
     width: 80vw;
+    
 }
 
 .col-header {
     font-size: 1rem;
+    z-index: 9;
+    background-color: #04364A;
 }
 
 .dash-row {
@@ -155,9 +158,12 @@
     border-bottom-right-radius: 10px;
     width: 80vw;
     text-align: center;
+    background-color : white;
+    
 }
 
 .line {
+    
     border-top: 1px solid lightgrey;
 }
 
