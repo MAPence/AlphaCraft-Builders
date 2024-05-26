@@ -267,7 +267,7 @@ namespace ACB.Controllers
             contractor.Services = GetServicesoffered(contractor.Id);
             foreach (var service in contractor.Services)
             {
-                List<QuoteVM> quotes = GetQuotes(service, contractor.LatLong, 25);
+                List<QuoteVM> quotes = GetQuotes(service, contractor.LatLong, 50);
                 if (quotes != null && quotes.Count > 0)
                 {
                     //contractor.Quotes = new List<QuoteVM>();
