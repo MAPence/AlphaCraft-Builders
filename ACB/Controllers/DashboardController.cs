@@ -134,7 +134,7 @@ namespace ACB.Controllers
                 // Retrieve the single order based on the provided Id
                 if (Id.HasValue)
                 {
-                    contractor.NewOrder = Query.GetSingleOrder(Id.Value);
+                    contractor.NewOrder = Query.GetSingleOrder(contractor.Id, Id);
                 }
                 return View(contractor);
             }

@@ -331,12 +331,12 @@ namespace ACB.Controllers
             return orders;
         }
 
-        public static NewOrder GetSingleOrder(int? co_id)
+        public static NewOrder GetSingleOrder(int? co_id, int? orderId)
         { 
             NewOrder order = new();
             using (SqlConnection sqlconn = new(GetConnectionString()))
             {
-                string sqlQuery = "SELECT * FROM Orders WHERE co_id = @co_id";
+                string sqlQuery = $"SELECT * FROM Orders WHERE co_id = @co_id and Id = {orderId}";
                 SqlCommand cmnd = new(sqlQuery, sqlconn);
                 cmnd.Parameters.AddWithValue("@co_id", co_id);
 
